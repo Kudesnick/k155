@@ -1,0 +1,62 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "chipinfo",
+            "type": "python",
+            "request": "launch",
+            "program": "../chipinfo_scrap.py",
+            "cwd": "${workspaceFolder}/chipinfo",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "chipinfo_arg",
+            "type": "python",
+            "request": "launch",
+            "program": "../chipinfo_scrap.py",
+            "cwd": "${workspaceFolder}/chipinfo",
+            "args": ["id8.html", "id9.html", "tv15.html", "tm2.html", "ru5.html", "ru7.html", "id9.html", "pr7.html"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "kiloom",
+            "type": "python",
+            "request": "launch",
+            "program": "../kiloom_scrap.py",
+            "cwd": "${workspaceFolder}/kiloom",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "kiloom_arg",
+            "type": "python",
+            "request": "launch",
+            "program": "../kiloom_scrap.py",
+            "cwd": "${workspaceFolder}/kiloom",
+            "args": ["k155la1-km155la1-kb155la1-4.html", "k155la2-km155la2-kb155la2-4.html", "k155la3-km155la3-kb155la3-4.html"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "microshemca",
+            "type": "python",
+            "request": "launch",
+            "program": "../microshemca_scrap.py",
+            "cwd": "${workspaceFolder}/microshemca",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "microshemca_arg",
+            "type": "python",
+            "request": "launch",
+            "program": "../microshemca_scrap.py",
+            "cwd": "${workspaceFolder}/microshemca",
+            "args": ["index", "AG1", "AG3", "IE6", "IR17", "RE3"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
