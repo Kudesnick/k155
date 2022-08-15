@@ -16,7 +16,7 @@
             "request": "launch",
             "program": "../chipinfo_scrap.py",
             "cwd": "${workspaceFolder}/chipinfo",
-            "args": ["id8.html", "id9.html", "tv15.html", "tm2.html", "ru5.html", "ru7.html", "id9.html", "pr7.html"],
+            "args": ["pp5.html", "tv1.html", "tv15.html", "tm2.html", "ru5.html", "ru7.html", "id9.html", "pr7.html"],
             "console": "integratedTerminal",
             "justMyCode": true
         },

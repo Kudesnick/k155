@@ -89,6 +89,7 @@ def repl_section(section, repl_soup, url):
     if repl_section:
         del_tag = BeautifulSoup().new_tag('del')
         del_tag.extend(section.find_all(recursive = False))
+        del_tag.extend(section.find_all(string = True, recursive = False))
         repl_section.name = 'ins'
         del repl_section.attrs['id']
         del repl_section.attrs['name']
@@ -165,6 +166,8 @@ def scrap(url: str):
         patterns.append(('lp10.gif', 'lp11.gif'))
     if 'pr7.' in url:
         patterns.append(('двоично-десятичного кода в\nдвоичный', '<del>двоично-десятичного кода в двоичный</del><ins>двоичного кода в двоично-десятичный</ins>'))
+    if 'tv1.' in url:
+        patterns.append(('Микросхема представляет собой два независимых тактируемых J-K триггера с\nустановкой в 0 и 1.', 'Микросхема представляет собой <del>два независимых тактируемых J-K триггера с установкой в 0 и 1.</del><ins>универсальный многоцелевой JK-триггер с элементами 3-И по входам J и K.</ins>'))
     htm = mrep(htm, patterns)
     ss = BeautifulSoup(htm, parser)
     soup = ss.find('div', {'id': 'content'})

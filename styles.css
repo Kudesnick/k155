@@ -4,7 +4,8 @@
     --color-text-a-not-visited: #1818A8;
     --color-text-a-hover: black;
     --color-menu-border: gray;
-    --color-border: lightgray;
+    --color-menu-bg: lightgray;
+    --color-border: #f0f0f0;
     --color-hover-light: lightgray;
     --color-text-note: gray;
 }
@@ -84,7 +85,7 @@ th, td {
     padding: 0.5em 0.2em;
 }
 
-section:not(#index, #scheme, #cscheme1, #cscheme2) td:last-child {
+section:not(#index, #cscheme, #cscheme1, #cscheme2) td:last-child {
     white-space: nowrap;
 }
 
@@ -109,7 +110,7 @@ section {
 
 figure {
     margin: auto;
-    margin-bottom: 1em;
+    padding: 1em;
 }
 figure:not([class]) {
     width: min-content;
@@ -132,9 +133,9 @@ figcaption::before {
     clear: none;
 }
 
-#cscheme > table,
-#cscheme1 > table,
-#cscheme2 > table {
+#cscheme  table,
+#cscheme1 table,
+#cscheme2 table {
     width: auto;
 }
 
