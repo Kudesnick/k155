@@ -116,6 +116,9 @@ def scrap(url: str, alt_name = None):
 
     [i.extract() for i in soup.find_all(attrs = {'class', 'entry-meta'})]
     [i.extract() for i in soup.find_all('noscript')]
+    [i.extract() for i in soup.find_all('div', id = 'crp_related')]
+    [i.extract() for i in soup.find_all(attrs = {'class', 'code-block'})]
+    [i.extract() for i in soup.find_all(attrs = {'class', 'clearfix'})]
 
     # предварительное форматирование текста
     soup.smooth()
