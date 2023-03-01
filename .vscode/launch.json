@@ -54,7 +54,7 @@
             "request": "launch",
             "program": "../microshemca_scrap.py",
             "cwd": "${workspaceFolder}/microshemca",
-            "args": ["index", "AG1", "AG3", "IE6", "IR17", "RE3"],
+            "args": ["index", "AP1"],
             "console": "integratedTerminal",
             "justMyCode": true
         }

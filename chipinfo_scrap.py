@@ -153,6 +153,7 @@ def scrap(url: str):
     patterns.append(('&nbsp;', ''))
     patterns.append(('итнегральных', 'интегральных'))
     patterns.append(('коллктор', 'коллектор'))
+    patterns.append(('Приорететный', 'Приоритетный'))
     if 'ie' in url:
         patterns.append(('К155ИД4', 'К155ИЕ1'))
         patterns.append(('КМ155ИД', 'КМ155ИЕ'))

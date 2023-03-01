@@ -67,6 +67,12 @@ glob_nav = None
 def short_name(s: str):
     return f'{s.lower()}.html'
 
+def try_int(s: str) -> int:
+    try:
+        return int(s)
+    except:
+        None
+
 # скраппинг
 def scrap(url: str, alt_name = None):
     global glob_nav
@@ -78,6 +84,19 @@ def scrap(url: str, alt_name = None):
 
     # удаляем комментарии
     htm = re.sub(r'<!.*?>','', htm)
+
+    # чиним сломанный HTML (незакрытые ссылки)
+    patterns = [
+                # AG1
+                ('<span class=q>Q.</span>', '<span class=q>Q</span>.'),
+                ('(или <span class=q>А2)</span>', '(или <span class=q>А2</span>)'),
+                ('пяти строкам <a><a href', 'пяти строкам <a href'),
+                # AG3
+                ('c6poea', 'сброса'),
+                # AP1
+                ('<u>+</u>', '&plusmn;')
+                ]
+    htm = mrep(htm, patterns)
 
     # парсим HTML файл
     soup = BeautifulSoup(htm, 'html.parser').find('div', {'class': 'b5a'})
@@ -108,20 +127,34 @@ def scrap(url: str, alt_name = None):
             img.decompose()
         elif not img_to_symb(img):
             img['src'] = get_img(img['src'])
-            if img.parent.name == 'td':
-                del_attr([img.parent], ['width'])
-                img.parent.name = 'figure'
-            else:
-                img.wrap(BeautifulSoup().new_tag('figure'))
+            for prnt in ['td', 'tr', 'tbody', 'table', 'h4']:
+                if img.parent.name == prnt:
+                    img.parent.unwrap()
+            img.wrap(BeautifulSoup().new_tag('figure'))
             fig = img.parent
-            for p in ['tr', 'tbody', 'table', 'h4']:
-                if fig.parent.name == p:
-                    fig.parent.unwrap()
             fig.append(BeautifulSoup().new_tag('figcaption'))
             if img.get('alt'):
                 fig.figcaption.append(img['alt'])
 
-    
+    # Убираем вложенность таблиц
+    for tbl in soup.find_all('table'):
+        for prnt in ['p', 'td', 'tr', 'tbody', 'table']:
+            if tbl.parent.name == prnt:
+                tbl.parent.unwrap()
+
+    # Убираем столбец с порядковыми номерами строк
+    for tbl in soup.find_all('table'):
+        if len(tbl.find('tr').find_all(['td', 'th'])) > 2:
+            cnt = 0
+            for tr in tbl.find_all('tr'):
+                if not tr.find('td') and cnt == 0: continue # таблица с заголовком
+                if (cnt + 1) != try_int(tr.find('td').string):
+                    break
+                cnt += 1
+            else:
+                for tr in tbl.find_all('tr'):
+                    tr.find(['td', 'th']).extract()
+
     for a in soup.find_all('a'):
         if a.get('target'): del a.attrs['target']
         # пустые ссылки
