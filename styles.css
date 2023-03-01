@@ -109,6 +109,10 @@ section {
     display: flow-root;
 }
 
+figure>img {
+    max-width: 50em;
+}
+
 figure {
     margin: auto;
     padding: 1em;

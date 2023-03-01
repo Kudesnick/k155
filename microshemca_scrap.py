@@ -94,8 +94,19 @@ def scrap(url: str, alt_name = None):
                 # AG3
                 ('c6poea', 'сброса'),
                 # AP1
-                ('<u>+</u>', '&plusmn;')
+                ('<u>+</u>', '&plusmn;'),
+                # TM2
+                ('<table/>', '</table>'),
+                # ID1
+                ('выхода отключены', 'выходы отключены'),
+                # ID3
+                ('alt="Детские товары"></a>', 'alt="Детские товары"/></a>'),
+                ('cartion>', 'caption>'),
+                # ID8
+                ('<br>', '<br/>')
                 ]
+    if url == 'ID9':
+        patterns.append(('<table', '</p><table'))
     htm = mrep(htm, patterns)
 
     # парсим HTML файл
