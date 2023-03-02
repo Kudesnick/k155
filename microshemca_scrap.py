@@ -48,7 +48,7 @@ def get_img(url: str):
 
 # замена изображений на спецсимволы
 def img_to_symb(img: BeautifulSoup) -> bool:
-    repl_imgs = {'fr': '&#8593;', 'sp': '&#8595;', 'imp': '&#8645;', '-imp': '&#8693;'}
+    repl_imgs = {'fr': '&#8593;', 'sp': '&#8595;', 'imp': '&#8645;', '-imp': '&#8693;', 'kr': ' &#8853; '}
     
     stem = Path(img['src']).stem
     if stem in repl_imgs.keys():
@@ -103,10 +103,39 @@ def scrap(url: str, alt_name = None):
                 ('alt="Детские товары"></a>', 'alt="Детские товары"/></a>'),
                 ('cartion>', 'caption>'),
                 # ID8
-                ('<br>', '<br/>')
+                ('<br>', '<br/>'),
+                # IE9
+                ('&bull; ', '</li><li>'),
+                ('QO', 'Q0'),
+                # IE14
+                ('1. Входной ток низкого уровня	не более -1,6 мА,', '<ol><li>Входной ток низкого уровня не более -1,6 мА,</li>'),
+                ('2. Входной ток высокого уровня	не более 0,04 мА,', '<li>Входной ток высокого уровня не более 0,04 мА,</li>'),
+                ('3. Потребляемая статическая мощность &le; 310 мВт.', '<li>Потребляемая статическая мощность &le; 310 мВт.</li></ol>'),
+                # IM1
+                ('С<sub>n</sub></p>.', 'С<sub>n</sub>&nbsp;.</p>'),
+                # IP3
+                ('(+)', '&#8853;')
                 ]
     if url == 'ID9':
         patterns.append(('<table', '</p><table'))
+    if url == '74181':
+        patterns.append(('<th>Арифметические (M = L, C<sub>n</sub> = L)</th>','<th>Арифметические <nobr>(M = L, C<sub>n</sub> = L)</nobr></th>'))
+        patterns.append(('<th>Логические (M = H)</th>','<th>Логические <nobr>(M = H)</nobr></th>'))
+        patterns.append(('<th>Арифметические (M = L, <span class=q>C<sub>n</sub></span> = L)</th>','<th>Арифметические <nobr>(M = L, <span class=q>C<sub>n</sub></span> = L)</nobr></th>'))
+        patterns.append(('<th>Логические (M = H)</th></tr>','<th>Логические <nobr>(M = H)</th></nobr></tr>'))
+
+        patterns.append(('(А + <span class=q>В</span></td>', '(А + <span class=q>В</span>)</td>'))
+        patterns.append(('<span class=q>В)</span>', '<span class=q>В</span>)'))
+        patterns.append(('Логич. 1', 'Лог. "1"'))
+        patterns.append(('Логич. 0', 'Лог. "0"'))
+        patterns.append(('(доп. до 2</td>', '(доп. до 2)</td>'))
+        patterns.append(('А(2хА)', 'А (2&#10005;А)'))
+
+        patterns.append(('Минус', '-'))
+        patterns.append(('минус', '-'))
+        patterns.append(('Плюс', '+'))
+        patterns.append(('плюс', '+'))
+    
     htm = mrep(htm, patterns)
 
     # парсим HTML файл
@@ -128,8 +157,12 @@ def scrap(url: str, alt_name = None):
     for capt in soup.find_all('caption'):
         if capt.find('h4'): capt.h4.unwrap()
         [br.decompose() for br in capt.find_all('br')]
-    del_attr(soup.find_all(['table', 'caption', 'tbody', 'tr', 'th', 'td']),
-                           ['align', 'border', 'cellpadding', 'cellspacing', 'width'])
+    del_attr(soup.find_all(['table', 'caption', 'tbody', 'tr', 'th', 'td', 'ul']),
+                           ['align', 'border', 'cellpadding', 'cellspacing', 'width', 'tupe'])
+    
+    # удаляем лишнее форматирование у прочих элементов
+    del_attr(soup.find_all(['ul']),
+                           ['compact','tupe'])
 
     # загружаем изображения
     del_attr(soup.find_all('img'), ["align", "hspace", "vspace", "width"])
@@ -152,6 +185,11 @@ def scrap(url: str, alt_name = None):
         for prnt in ['p', 'td', 'tr', 'tbody', 'table']:
             if tbl.parent.name == prnt:
                 tbl.parent.unwrap()
+
+    # Убираем декорацию текста в таблицах
+    for td in soup.find_all(['td', 'th']):
+        for b in td.find_all(['b', 'i']):
+            b.unwrap()
 
     # Убираем столбец с порядковыми номерами строк
     for tbl in soup.find_all('table'):
