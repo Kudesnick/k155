@@ -114,7 +114,15 @@ def scrap(url: str, alt_name = None):
                 # IM1
                 ('С<sub>n</sub></p>.', 'С<sub>n</sub>&nbsp;.</p>'),
                 # IP3
-                ('(+)', '&#8853;')
+                ('(+)', '&#8853;'),
+                # KP1
+                ('(О — 15)', '(0 — 15)'),
+                ('(АО — А3)', '(А0 — А3)'),
+                # KP5
+                ('(DO — D7)', '(D0 — D7)'),
+                ('(АО — А2)', '(А0 — А2)'),
+                # LD1
+                ('</p>.', '.</p>'),
                 ]
     if url == 'ID9':
         patterns.append(('<table', '</p><table'))
@@ -135,7 +143,31 @@ def scrap(url: str, alt_name = None):
         patterns.append(('минус', '-'))
         patterns.append(('Плюс', '+'))
         patterns.append(('плюс', '+'))
-    
+    if url == '7430':
+        patterns.append(('<th colspan=2>Входы</th>', '<th>Входы</th>'))
+    if url == 'LA6':
+        patterns.append(('<td align=center> 15 </td>', '<td align=center> 14 </td>'))
+    if url == 'LA10':
+        patterns.append(('<td align=center> 10 </td>', '<tr>'))
+        patterns.append(('<td> 7 </td>', ''))
+    if url in ['LA10', 'LA11', 'LA13']:
+        patterns.extend([(f'<td align=center> {i} </td>', '') for i in range(1, 16)])
+    if url == 'LA18':
+        patterns.append(('<td align=center> 10 </td>', '<tr><td align=center> 10 </td>'))
+    if url == 'LE1':
+        patterns.append(('(B4)</th></tr>', '(B4)</th>'))
+        patterns.append(('<span class=q>(A4B4)</span></th>', '<span class=q>(A4B4)</span></th></tr>'))
+    if url == 'LE2':
+        patterns.append(('<td align=center> 6 </td>', '<tr><td align=center> 6 </td>'))
+        patterns.append(('2Q=<span class=q>', '</p><p align=center>2Q=<span class=q>'))
+    if url == 'LI4':
+        patterns.append(('(С3)</th></tr>', '(С3)</th>'))
+        patterns.append(('<span class=q>(A3B3С3)</span></th>', '<span class=q>(A3B3С3)</span></th></tr>'))
+    if url == 'LP9':
+        patterns.append(('<td align=center> 7 </td>', '<tr><td align=center> 7 </td>'))
+    if url == 'LR4':
+        patterns.append(('<td align=center> 2 </td>', '<tr><td align=center> 2 </td>'))
+
     htm = mrep(htm, patterns)
 
     # парсим HTML файл

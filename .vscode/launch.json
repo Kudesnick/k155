@@ -54,7 +54,7 @@
             "request": "launch",
             "program": "../microshemca_scrap.py",
             "cwd": "${workspaceFolder}/microshemca",
-            "args": ["index","IR32"],
+            "args": ["index","RE21"],
             "console": "integratedTerminal",
             "justMyCode": true
         }
