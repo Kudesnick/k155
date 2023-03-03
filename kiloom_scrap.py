@@ -202,6 +202,7 @@ def scrap(url: str, alt_name = None):
 
 if __name__ == '__main__':
     childs = [i for i in scrap('mikrosxemy-serii-k155.html', 'index.html')]
+    childs.append('k155lr4-km155lr4-kb155lr4-4.html')
     if len(sys.argv) > 1:
         childs = [i for i in childs if i in sys.argv[1:]]
     for i in childs: scrap(i)

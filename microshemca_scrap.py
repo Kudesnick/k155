@@ -65,7 +65,7 @@ def del_attr(tags: list, at: list):
 glob_nav = None
 
 def short_name(s: str):
-    return f'{s.lower()}.html'
+    return f'{s.lower().replace("w", "v")}.html'
 
 def try_int(s: str) -> int:
     try:
@@ -73,20 +73,29 @@ def try_int(s: str) -> int:
     except:
         None
 
+def menu_generator(id: str, hor_menu: dict, name: str = ''):
+    menu = ''.join([f'<li><a href="{k}">{v}</a></li>' if k != name else f'<li>{v}</li>' for k, v in hor_menu.items()])
+    return BeautifulSoup(f'<nav id="{id}"><ul>{menu}</ul></nav>' if len(hor_menu) > 1 else '', 'html.parser')
+
 # скраппинг
-def scrap(url: str, alt_name = None):
+def scrap(url: str, alt_name = None, hor_menu = None):
     global glob_nav
     htm = get_htm(url)
     if htm == None: return None
+    if not hor_menu: hor_menu = dict()
 
     if not alt_name:
         alt_name = short_name(url)
+
+    hor_menu[alt_name] = alt_name[:-5]
 
     # удаляем комментарии
     htm = re.sub(r'<!.*?>','', htm)
 
     # чиним сломанный HTML (незакрытые ссылки)
     patterns = [
+                ('<strong>', ' '),
+                ('</strong>', ' '),
                 # AG1
                 ('<span class=q>Q.</span>', '<span class=q>Q</span>.'),
                 ('(или <span class=q>А2)</span>', '(или <span class=q>А2</span>)'),
@@ -167,6 +176,20 @@ def scrap(url: str, alt_name = None):
         patterns.append(('<td align=center> 7 </td>', '<tr><td align=center> 7 </td>'))
     if url == 'LR4':
         patterns.append(('<td align=center> 2 </td>', '<tr><td align=center> 2 </td>'))
+    if url == 'RU1-3':
+        patterns.append(('записи 1 и О', 'записи лог. "1" и лог. "0"'))
+    if url == 'TW1':
+        patterns.append(('<td><u>&nbsp;&nbsp;</u>&prod;<u>&nbsp;&nbsp;</u></td>', '<td>&#8645;</td>'))
+    if url == 'a1':
+        patterns.append(('<a href="https://engars.ru/catalog/tsepi/">Цепь круглозвенная</a>', ''))
+        patterns.extend([('22О', '220'), ('ЗООО','3000'), ('ЗОО','300'), ('О,З','0,3'), ('0СТ','ОСТ'),
+                         ('К555 5,5','К555 — 5,5'), ('К1533 6','К1533 — 6'),
+                         ('градусов С','&#8451;'), ('градусов.','&#8451;.'), ('20...30\' С','20...30 &#8451;'),  ('40\' С','40 &#8451;'),
+                         ('(— 5,2 В)','(-5,2 В)'), ('(— 2 или —2,4 В)','(-2 или -2,4 В)'), ('—4,5 и —2 В','-4,5 и -2 В'),
+                         ('K531, KI533','К531, К1533')])
+    if url == 'a2':
+        patterns.append(('Р = 1/(2&pi;&radic;<span class=q>LC<sub>э</sub></span>', 'Р = 1/(2&pi;&radic;(LC<sub>э</sub>))'))
+
 
     htm = mrep(htm, patterns)
 
@@ -203,7 +226,7 @@ def scrap(url: str, alt_name = None):
             img.decompose()
         elif not img_to_symb(img):
             img['src'] = get_img(img['src'])
-            for prnt in ['td', 'tr', 'tbody', 'table', 'h4']:
+            for prnt in ['h4', 'th', 'td', 'tr', 'tbody', 'table', 'h4']:
                 if img.parent.name == prnt:
                     img.parent.unwrap()
             img.wrap(BeautifulSoup().new_tag('figure'))
@@ -218,10 +241,8 @@ def scrap(url: str, alt_name = None):
             if tbl.parent.name == prnt:
                 tbl.parent.unwrap()
 
-    # Убираем декорацию текста в таблицах
-    for td in soup.find_all(['td', 'th']):
-        for b in td.find_all(['b', 'i']):
-            b.unwrap()
+    # Убираем декорацию текста
+    [b.unwrap() for b in soup.find_all(['b', 'i', 'strong'])]
 
     # Убираем столбец с порядковыми номерами строк
     for tbl in soup.find_all('table'):
@@ -247,7 +268,13 @@ def scrap(url: str, alt_name = None):
             a['href'] = get_img(a['href'])
         # поиск ссылок на другие страницы сайта
         elif 'microshemca.ru' in a['href']:
-            a['href'] = scrap(Path(a['href']).name)
+            a['href'] = scrap(Path(a['href']).name, hor_menu = hor_menu)
+
+    # нормализация заголовков
+    for h in soup.find_all('h2'): h.name = 'h1'
+    for h in soup.find_all('h4'): h.name = 'h2'
+
+    soup.find('h1').insert_after(menu_generator('hor', hor_menu, alt_name))
 
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), 'html.parser')
@@ -283,9 +310,11 @@ if __name__ == '__main__':
     # IM3 отсутствует
     # KP2 отсутствует
     childs = [i for i in childs if i not in 'IE7.IM3.KP2'.split('.')]
+    # дополнительные статьи
+    childs.extend(['a1', 'a2'])
     if len(sys.argv) > 1:
-        childs = [i for i in childs if i in sys.argv[1:]]
+        childs = [i for i in sys.argv[1:]]
 
-    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">к155{i.lower()}</a></li>', 'html.parser').li for i in childs]
+    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">к155{short_name(i)[:-5]}</a></li>', 'html.parser').li for i in childs]
 
     for i in childs: scrap(i)
