@@ -77,6 +77,11 @@ def menu_generator(id: str, hor_menu: dict, name: str = ''):
     menu = ''.join([f'<li><a href="{k}">{v}</a></li>' if k != name else f'<li>{v}</li>' for k, v in hor_menu.items()])
     return BeautifulSoup(f'<nav id="{id}"><ul>{menu}</ul></nav>' if len(hor_menu) > 1 else '', 'html.parser')
 
+# копирование пользовательских картинок
+def img_copy(patterns: list):
+    for i in [f for f_ in [Path('..').glob(e) for e in patterns] for f in f_]:
+        Path(i.name).write_bytes(i.read_bytes())
+
 # скраппинг
 def scrap(url: str, alt_name = None, hor_menu = None):
     global glob_nav
@@ -310,8 +315,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         map.ul.append(li)
     
     # добавляем информацию об источниках
-    new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник microshemca.ru: {content.h1.text}</a></li>', parser)
-    template.find(id = 'source').append(new_link)
+    new_link = BeautifulSoup(f'<section id="literature"><h2>Литература</h2><ul><li><a href="{base_url}{url}">Онлайн справочник microshemca.ru: {content.h1.text}</a></li></ul></section>', parser)
+    template.find(id = 'content').append(new_link)
 
     # сохраняем результат в файл
     template.smooth()
@@ -338,3 +343,6 @@ if __name__ == '__main__':
     glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', 'html.parser').li for i in childs]
 
     for i in childs: scrap(i)
+
+    # подгружаем пользовательские картинки
+    img_copy(['styles.css'])

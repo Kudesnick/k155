@@ -394,21 +394,19 @@ def scrap(url: str):
                 i.name = 'li'
             section.dir.name = 'ul'
             [b.unwrap() for b in section.ul.find_all('b')]
-    
-    # добавляем информацию об источниках
-    src_links = template.find(id = 'source')
 
-    new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник chipinfo.ru: {content.h1.text}</a></li>', parser)
-    src_links.append(new_link)
-    
-    if alt_content:
-        new_link = BeautifulSoup(f'<li><a href="https://kiloom.ru/spravochnik-radiodetalej/microsxema/{alt_content.body["href"]}">Онлайн справочник kiloom.ru: {alt_content.body["name"]}</a></li>', parser)
-    src_links.append(new_link)
+            # добавляем информацию об источниках
+            new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник chipinfo.ru: {content.h1.text}</a></li>', parser)
+            section.ul.append(new_link)
 
-    # добавляем пользовательские элементы в информацию об источниках
-    for li in [i for i in replace_soup.find('ul', id = 'source_append').find_all('li') if url in i['name'].split(' ')]:
-        del li.attrs['name']
-        src_links.append(li)
+            if alt_content:
+                new_link = BeautifulSoup(f'<li><a href="{alt_content.body["href"]}">Онлайн справочник kiloom.ru: {alt_content.body["name"]}</a></li>', parser)
+            section.ul.append(new_link)
+
+            # добавляем пользовательские элементы в информацию об источниках
+            for li in [i for i in replace_soup.find('ul', id = 'source_append').find_all('li') if url in i['name'].split(' ')]:
+                del li.attrs['name']
+                section.ul.append(li)
 
     # добавляем целые разделы
     insert_section(template, replace_soup, url)
