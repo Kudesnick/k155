@@ -35,7 +35,7 @@ def get_htm(url: str):
 
 def get_img(url: str):
     global base_url
-    cache = Path(url).name
+    cache = Path(url).name.replace('(2)', '')
     if not Path(cache).is_file():
         req = requests.get(url, headers = {'User-Agent': 'Chrome'})
         if req.status_code != 200:
@@ -87,12 +87,12 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     if not alt_name:
         alt_name = short_name(url)
 
-    hor_menu[alt_name] = alt_name[:-5]
+    hor_menu[alt_name] = Path(alt_name).stem
 
     # удаляем комментарии
     htm = re.sub(r'<!.*?>','', htm)
 
-    # чиним сломанный HTML (незакрытые ссылки)
+    # чиним сломанный HTML (незакрытые ссылки, опечатки и пр.)
     patterns = [
                 ('<strong>', ' '),
                 ('</strong>', ' '),
@@ -133,6 +133,15 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                 # LD1
                 ('</p>.', '.</p>'),
                 ]
+    # забытые аналоги
+    patterns.extend([
+                    ('Зарубежным аналогом микросхемы К155ИД24 соответствует дешифратор 7445.'  , 'Зарубежным аналогом микросхемы К155ИД24 является дешифратор <a href="https://microshemca.ru/7445">7445</a>.'),
+                    ('Зарубежным аналогом микросхемы КМ155ИЕ2 является микросхема 7490.'       , 'Зарубежным аналогом микросхемы КМ155ИЕ2 является микросхема <a href="https://microshemca.ru/7490">7490</a>.'),
+                    ('Зарубежным аналогом микросхемы К155ЛП10 является микросхема 74365.'      , 'Зарубежным аналогом микросхемы К155ЛП10 является микросхема <a href="https://microshemca.ru/74365">74365</a>.'),
+                    ('Зарубежным аналогом микросхемы К55ЛП11 является микросхема 74367.'       , 'Зарубежным аналогом микросхемы К55ЛП11 является микросхема <a href="https://microshemca.ru/74367">74367</a>.'),
+                    ('Зарубежным аналогом микросхем К155ТМ5, КМ155ТМ5 являются микросхемы 7477', 'Зарубежным аналогом микросхем К155ТМ5, КМ155ТМ5 являются микросхемы <a href="https://microshemca.ru/7477">7477</a>'),
+                    ('Зарубежным аналогом микросхемы К155ТВ15 являются микросхемы 74109'       , 'Зарубежным аналогом микросхемы К155ТВ15 являются микросхемы <a href="https://microshemca.ru/74109">74109</a>'),
+                    ])
     if url == 'ID9':
         patterns.append(('<table', '</p><table'))
     if url == '74181':
@@ -188,7 +197,13 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                          ('(— 5,2 В)','(-5,2 В)'), ('(— 2 или —2,4 В)','(-2 или -2,4 В)'), ('—4,5 и —2 В','-4,5 и -2 В'),
                          ('K531, KI533','К531, К1533')])
     if url == 'a2':
-        patterns.append(('Р = 1/(2&pi;&radic;<span class=q>LC<sub>э</sub></span>', 'Р = 1/(2&pi;&radic;(LC<sub>э</sub>))'))
+        patterns.append(('Р = 1/(2&pi;&radic;<span class=q>LC<sub>э</sub></span>', 'Р = 1/(2&pi;&radic;(LC<sub>э</sub>))')),
+    if url == '74366':
+        patterns.append(('<a href="https://www.microshemca.ru/74365"', '<a href="74365.html"')),
+    if url == '74367':
+        patterns.append(('<th colspan=3>Входы</th>', '<th colspan=2>Входы</th>')),    
+    if url == '74368':
+        patterns.append(('<a href="https://www.microshemca.ru/74367"', '<a href="74367.html"')),
 
 
     htm = mrep(htm, patterns)
@@ -278,7 +293,6 @@ def scrap(url: str, alt_name = None, hor_menu = None):
 
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), 'html.parser')
-    template.footer.clear()
 
     content = template.find('div', id = "content")
 
@@ -294,6 +308,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     map.append(template.new_tag('ul'))
     for li in glob_nav:
         map.ul.append(li)
+    
+    # добавляем информацию об источниках
+    new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник microshemca.ru: {content.h1.text}</a></li>', parser)
+    template.find(id = 'source').append(new_link)
 
     # сохраняем результат в файл
     template.smooth()
@@ -312,9 +330,11 @@ if __name__ == '__main__':
     childs = [i for i in childs if i not in 'IE7.IM3.KP2'.split('.')]
     # дополнительные статьи
     childs.extend(['a1', 'a2'])
+    # статьи
+    articles = 'index.re3a.a1.a2'.split('.')
     if len(sys.argv) > 1:
         childs = [i for i in sys.argv[1:]]
 
-    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">к155{short_name(i)[:-5]}</a></li>', 'html.parser').li for i in childs]
+    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', 'html.parser').li for i in childs]
 
     for i in childs: scrap(i)

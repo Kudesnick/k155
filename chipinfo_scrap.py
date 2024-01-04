@@ -154,6 +154,7 @@ def scrap(url: str):
     patterns.append(('итнегральных', 'интегральных'))
     patterns.append(('коллктор', 'коллектор'))
     patterns.append(('Приорететный', 'Приоритетный'))
+    patterns.append(('</b> Справочник', '</b>: Справочник'))
     if 'ie' in url:
         patterns.append(('К155ИД4', 'К155ИЕ1'))
         patterns.append(('КМ155ИД', 'КМ155ИЕ'))
@@ -392,18 +393,22 @@ def scrap(url: str):
             for i in section.dir.find_all('p'):
                 i.name = 'li'
             section.dir.name = 'ul'
-            
-            new_link = BeautifulSoup(f'<li><b>Онлайн справочник chipinfo.ru</b> : <a href="{base_url}{url}">{content.h1.text}</a></li>', parser)
-            section.ul.append(new_link)
-            
-            if alt_content:
-                new_link = BeautifulSoup(f'<li><b>Онлайн справочник kiloom.ru</b> : <a href="https://kiloom.ru/spravochnik-radiodetalej/microsxema/{alt_content.body["href"]}">{alt_content.body["name"]}</a></li>', parser)
-            section.ul.append(new_link)
+            [b.unwrap() for b in section.ul.find_all('b')]
+    
+    # добавляем информацию об источниках
+    src_links = template.find(id = 'source')
 
-            # добавляем пользовательские элементы в список литературы
-            for li in [i for i in replace_soup.find('ul', id = 'literature_append').find_all('li') if url in i['name'].split(' ')]:
-                del li.attrs['name']
-                section.ul.append(li)
+    new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник chipinfo.ru: {content.h1.text}</a></li>', parser)
+    src_links.append(new_link)
+    
+    if alt_content:
+        new_link = BeautifulSoup(f'<li><a href="https://kiloom.ru/spravochnik-radiodetalej/microsxema/{alt_content.body["href"]}">Онлайн справочник kiloom.ru: {alt_content.body["name"]}</a></li>', parser)
+    src_links.append(new_link)
+
+    # добавляем пользовательские элементы в информацию об источниках
+    for li in [i for i in replace_soup.find('ul', id = 'source_append').find_all('li') if url in i['name'].split(' ')]:
+        del li.attrs['name']
+        src_links.append(li)
 
     # добавляем целые разделы
     insert_section(template, replace_soup, url)
@@ -411,7 +416,7 @@ def scrap(url: str):
     # подгружаем пользовательские картинки
     img_copy(['*.jpg', '*.png', '*.gif', 'styles.css'])
 
-    # заменяем картинки на заранеее набранные фрагменты
+    # заменяем картинки на заранее набранные фрагменты
     for i in template.find_all('img'):
         pattern = replace_soup.find('div', id = i['src'])
         if pattern:

@@ -150,7 +150,7 @@ figcaption::before {
     white-space: nowrap;
 }
 
-footer p {
+footer {
     font-size: 70%;
     color: var(--color-text-note);
 }

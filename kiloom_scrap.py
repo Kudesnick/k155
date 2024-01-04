@@ -133,12 +133,6 @@ def scrap(url: str, alt_name = None):
     template.body['href'] = f'{base_url}{url}'
     template.body['name'] = title
 
-    # замена данных об источнике
-    src = template.find('a', id = 'source')
-    src['href'] = 'https://kiloom.ru/spravochnik-radiodetalej/microsxema/mikrosxemy-serii-k155.html'
-    src.clear()
-    src.append('kiloom.ru')
-
     content = template.find('div', id = "content")
 
     # чистим таблицу главной страницы, если она найдена
