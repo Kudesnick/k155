@@ -1,0 +1,708 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>К155ТВ15 - два J-K триггера.</title>
+<meta name="description" content="Параметры интегральных микросхем К155ТВ15. Data sheets for K155TV15 integrated circuit" />
+<meta name="keywords" content="микросхемы, микросхема, интегральная, триггер, J-K, 155, серия, логические, интегральные, серии, параметры, российские, российская, integrated, circuit, circuits, analog, russian, data, sheet, sheets" />
+<meta http-equiv="Content-Type" content="text/html; charset=koi8-r" />
+<link rel="shortcut icon" href="../../../favicon.ico">
+<link rel="stylesheet" type="text/css" media="all and (min-width:1400px)" href="../../../common/main.css">
+<link rel="stylesheet" type="text/css" media="(max-width:1399px) and (min-width:1184px)" href="../../../common/1024.css"/>
+<link rel="stylesheet" type="text/css" media="(max-width:1183px) and (min-width:640px)" href="../../../common/800.css"/>
+
+<link rel="stylesheet" type="text/css" href="/common/css/style.css"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/common/js/script.js"></script>
+<script language="JavaScript1.2" type="text/javascript" src="/common/main.js"></script>
+<script type="text/javascript" src="http://vk.com/js/api/share.js?11" charset="windows-1251"></script>
+
+<script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+
+<script type='text/javascript'>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/20993445/chipinfo_top_728x90', [728, 90], 'div-gpt-ad-1437212734687-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+</head>
+
+<body onload="PreloadImages('/common/img/menub.gif','/common/img/menug.gif');">
+<div id="header">
+<div id="rus-data">Четверг, 04 января 2024г.</div>
+<!-- /20993445/chipinfo_top_728x90 -->
+<div id='div-gpt-ad-1437212734687-0' style='height:90px; width:728px; float:right;'>
+<script type='text/javascript'>
+ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1437212734687-0'); });
+</script>
+</div>
+</div>
+
+<div id="menu-top">
+
+<table width="1000" border="0" cellspacing="0" cellpadding="0" id="menu">
+<tr><td style="width:60px;">
+
+<img src="/common/img/menuf.gif" width="10" height="29"></td>
+
+<td><a href="/feedback.html" title="Обратная связь"><img style="padding:0 0 0 0;background-color:#fff;" src="/common/img/p3.png"></a></td>
+<td><a href="/"><img style="padding:0 6px 0 0;background-color:#fff;" src="/common/img/d3.png"></a></td>
+
+<td id="menu_/dsheets/index.html" onMouseOver="Menug('menu_/dsheets/index.html');" onMouseOut="Menub('menu_/dsheets/index.html');"><a href="/dsheets/index.html" title="PDFs"><div>PDFs</div></a></td><td id="menu_/news/index.html" onMouseOver="Menug('menu_/news/index.html');" onMouseOut="Menub('menu_/news/index.html');"><a href="/news/index.html" title="Новости"><div>Новости</div></a></td><td id="menu_/literature/index.html" onMouseOver="Menug('menu_/literature/index.html');" onMouseOut="Menub('menu_/literature/index.html');"><a href="/literature/index.html" title="Литература"><div>Литература</div></a></td><td id="menu_/schems/index.html" onMouseOver="Menug('menu_/schems/index.html');" onMouseOut="Menub('menu_/schems/index.html');"><a href="/schems/index.html" title="Схемы"><div>Схемы</div></a></td><td id="menu_http://forum.chipinfo.ru/" onMouseOver="Menug('menu_http://forum.chipinfo.ru/');" onMouseOut="Menub('menu_http://forum.chipinfo.ru/');"><a href="http://forum.chipinfo.ru/" title="Форум"><div>Форум</div></a></td><td id="menu_http://blogs.chipinfo.ru/" onMouseOver="Menug('menu_http://blogs.chipinfo.ru/');" onMouseOut="Menub('menu_http://blogs.chipinfo.ru/');"><a href="http://blogs.chipinfo.ru/" title="Блоги"><div>Блоги</div></a></td><td id="menu_/prices.html" onMouseOver="Menug('menu_/prices.html');" onMouseOut="Menub('menu_/prices.html');"><a href="/prices.html" title="Реклама"><div>Реклама</div></a></td><td style="width:233;background-image:url(/common/img/menuf.gif);background-repeat:repeat-x;"><img src="/common/img/menuf.gif" width="233"height="29"></td>
+</tr>
+</table>
+
+
+
+<div id="menu-link">
+<div class="menu-link-text">
+<a href="/" title="Чипинфо - электронные компоненты">Чипинфо</a>
+<img src="/common/img/breadcrumb_arrow.png">К155ТВ15 - два J-K триггера.</div></div>
+
+<div id="search">
+<div class="searchContainer_rdr">
+<form action="../../../vstock/search.html" method="get">
+<input id="search_q" name="keyword" value="" height="25" maxlength="100" onclick="this.style.backgroundImage = 'none';" onblur="if(this.value == '') {this.style.backgroundImage = 'url(/common/img/search_bg.png)';}" onkeypress="return submitSearchBoxLanding(event);" />
+<input class="searchButton_fmt" type="submit" value="Искать" alt="Search" onclick="return DoSearch();" />
+</form>
+</div>
+</div>
+
+</div>
+
+<div id="banner-left"></div>
+<div id="banner-right"></div>
+
+<div id="left-col">
+
+
+<div class="LftNews_rdr_orang"><div class="News_list_top_orang"><h3>Распродажа</h3></div>
+<div class="News_list_box_orang"><div class="news-block"><div id="block-orang">
+<p style="font-size:16px;">Электронные компоненты со склада по низким ценам, <a href="/sales.html">подробнее &gt;&gt;&gt;</a></p>
+</div></div></div><div class="News_list_bot_orang"></div></div>
+
+
+<div style="padding:0 0 5px 5px;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5641234415012337";
+google_ad_slot = "1766190400";
+google_ad_width = 200;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+
+
+
+
+
+<div id="block-orang">
+<div class="LftNews_rdr_orang">
+<div class="News_list_top_orang"><h3>Отечественные, серии:</h3></div>
+<div class="News_list_box_orang">
+
+<div class="micro">
+<a href="/dsheets/ic/140/index.html">140</a>,
+<a href="/dsheets/ic/143/index.html">143</a>,
+<a href="/dsheets/ic/148/index.html">148</a>,
+<a href="/dsheets/ic/153/index.html">153</a>,
+<a href="/dsheets/ic/154/index.html">154</a>,
+<a href="/dsheets/ic/155/index.html">155</a>,
+<a href="/dsheets/ic/157/index.html">157</a>,
+<a href="/dsheets/ic/159/index.html">159</a>,
+<a href="/dsheets/ic/174/index.html">174</a>,
+<a href="/dsheets/ic/538/index.html">538</a>,
+<a href="/dsheets/ic/544/index.html">544</a>,
+<a href="/dsheets/ic/548/index.html">548</a>,
+<a href="/dsheets/ic/554/index.html">554</a>,
+<a href="/dsheets/ic/574/index.html">574</a>,
+<a href="/dsheets/ic/1006/index.html">1006</a>,
+<a href="/dsheets/ic/1008/index.html">1008</a>,
+<a href="/dsheets/ic/1016/index.html">1016</a>,
+<a href="/dsheets/ic/1022/index.html">1022</a>,
+<a href="/dsheets/ic/1025/index.html">1025</a>,
+<a href="/dsheets/ic/1032/index.html">1032</a>,
+<a href="/dsheets/ic/1103/index.html">1103</a>,
+<a href="/dsheets/ic/1107/index.html">1107</a>,
+<a href="/dsheets/ic/1113/index.html">1113</a>,
+<a href="/dsheets/ic/1114/index.html">1114</a>,
+<a href="/dsheets/ic/1446/index.html">1446</a>,
+<a href="/dsheets/ic/1554/index.html">1554</a>
+</div>
+</div><div class="News_list_bot_orang"></div></div>
+</div>
+
+
+<div id="block-yellow">
+<div class="LftNews_rdr_yellow">
+<div class="News_list_top_yellow"><h3>Документация</h3></div>
+<div class="News_list_box_yellow">
+<ul><li><a href="/dsheets/ic/" title="Микросхемы">Микросхемы</a></li><li><a href="/dsheets/transistors/" title="Транзисторы">Транзисторы</a></li><li><a href="/dsheets/diodes/" title="Диоды">Диоды</a></li><li><a href="/dsheets/thyristors/" title="Тиристоры">Тиристоры</a></li><li><a href="/dsheets/irons/" title="Паяльное оборудование">Паяльное оборудование</a></li><li><a href="/dsheets/equipment/" title="Приборы">Приборы</a></li><li><a href="/dsheets/lamps/" title="Лампы">Лампы</a></li><li><a href="/dsheets/analogs/" title="Аналоги и замены">Аналоги и замены</a></li></ul>
+</div><div class="News_list_bot_yellow"></div></div>
+</div>
+
+
+
+
+<div id="block-blue">
+<div class="LftNews_rdr_blue">
+<div class="News_list_top_blue"><h3>Полезная информация</h3></div>
+<div class="News_list_box_blue">
+<ul><li><a href="/rus.distrib.html" title="Где купить">Где купить</a></li><li><a href="/dsheets/manufacturers/" title="Кто и что производит">Кто и что производит</a></li><li><a href="/dsheets/proelectron.html" title="Система обозначенией Pro Electron">Система обозначенией Pro Electron</a></li><li><a href="/dsheets/abbr.html" title="Сокращения в электронике">Сокращения в электронике</a></li><li><a href="/dsheets/analogs/index.html" title="Аналоги и замены">Аналоги и замены</a></li></ul>
+</div><div class="News_list_bot_blue"></div></div>
+</div>
+
+
+<div id="banner-left-240"><script type='text/javascript'><!--//<![CDATA[
+var m3_u = (location.protocol=='https:'?'https://ad.n50.ru/www/delivery/ajs.php':'http://ad.n50.ru/www/delivery/ajs.php');
+var m3_r = Math.floor(Math.random()*99999999999);
+if (!document.MAX_used) document.MAX_used = ',';
+document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+document.write ("?zoneid=50");
+document.write ('&amp;cb=' + m3_r);
+if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+document.write ("&amp;loc=" + escape(window.location));
+if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+if (document.context) document.write ("&context=" + escape(document.context));
+if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+document.write ("'><\/scr"+"ipt>");
+//]]>--></script><noscript><a href='http://ad.n50.ru/www/delivery/ck.php?n=a6c42c07&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ad.n50.ru/www/delivery/avw.php?zoneid=50&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a6c42c07' border='0' alt='' /></a></noscript>
+</div>
+
+<div class="LftNews_rdr_blue">
+<div class="News_list_top_blue"><h3>Новости электроники</h3></div>
+<div class="News_list_box_blue">
+<div class="news-block">
+
+<div id="block-blue">
+
+
+
+</div>
+
+</div>
+</div><div class="News_list_bot_blue"></div></div>
+
+</div>
+
+
+<div id="right-col">
+<table border="0" cellspacing="0" cellpadding="0" width="240">
+<tr><td colspan="2" width="240" class="mail_ru"><a href="https://twitter.com/chipinforu" class="twitter-follow-button" data-show-count="true" data-lang="ru" data-size="medium" data-width="240px">Читать @chipinforu</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td></tr>
+<tr><td width="140" class="vk">
+<script type="text/javascript"><!--
+document.write(VK.Share.button(false,{type: "round", text: "Нравится"}));
+--></script>
+</td>
+<td width="100" class="fb"><div class="fb-like" data-send="false" data-layout="button_count" data-width="" data-show-faces="true" data-font="arial"></div>
+</td></tr>
+<tr><td colspan="2" width="240" class="mail_ru">
+<a target="_blank" class="mrc__plugin_uber_like_button" href="http://connect.mail.ru/share" 
+data-mrc-config="{'type' : 'button', 'caption-mm' : '1', 'caption-ok' : '1', 'counter' : 'true', 'text' : 'true', 'width' : '240px'}">Мне нравится</a>
+<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+
+</td></tr>
+</table>
+
+ 
+
+<div id="block-blue">
+<div class="LftNews_rdr_blue">
+
+
+<div class="News_list_top_blue"><h3>Популярные&nbsp;материалы</h3></div>
+<div class="News_list_box_blue"><div class="show_topfile_content"><a href="/literature/radio/199808/p19.html">Журнал Радио 8 номер 1998 год. ЗВУКОТЕХНИКА </a></div></div><div class="News_list_box_blue"><div class="show_topfile_content"><a href="/literature/chipnews/200010/11.html">&quot;Транэлектрик-Свет&quot; рвется в лидеры по созданию новых изделий светотехники</a></div></div><div class="News_list_box_blue"><div class="show_topfile_content"><a href="/literature/radio/200208/p20-21.html">Журнал Радио 8 номер 2002 год. РАДИОПРИЕМ</a></div></div>
+
+<div class="News_list_bot_blue"></div></div>
+</div>
+
+<div id="banner-right-240">
+<!-- Яндекс.Директ -->
+<div id="yandex_ad"></div>
+<script type="text/javascript">
+(function(w, d, n, s, t) {
+w[n] = w[n] || [];
+w[n].push(function() {
+Ya.Direct.insertInto(4017, "yandex_ad", {
+site_charset: "windows-1251",
+ad_format: "direct",
+type: "240x400",
+header_position: "bottom",
+site_bg_color: "FFFFFF",
+header_bg_color: "FFFFFF",
+title_color: "005FB8",
+url_color: "000000",
+all_color: "0000CC",
+text_color: "000000",
+hover_color: "0066FF",
+favicon: true
+});
+});
+t = d.documentElement.firstChild;
+s = d.createElement("script");
+s.type = "text/javascript";
+s.src = "http://an.yandex.ru/system/context.js";
+s.setAttribute("async", "true");
+t.insertBefore(s, t.firstChild);
+})(window, document, "yandex_context_callbacks");
+</script>
+</div>
+
+<div class="LftNews_rdr_yellow"><div class="News_list_top_yellow"><h3>Комментарии</h3></div>
+<div class="News_list_box_yellow"><div class="news-block"><div id="block-yellow">
+ <div class="block-news" style="padding-bottom:15px;">
+  <strong>дима</strong> пишет в теме <a href="/dsheets/transistors/1827.html">Параметры биполярных транзисторов серии КТ827</a>:
+  <p style="max-height:60px; overflow:hidden;"><i>люди куплю транзистар кт 827А 0688759652</i></p>
+ </div>
+ <div class="block-news" style="padding-bottom:15px;">
+  <strong>тамара плохова</strong> пишет в теме <a href="/literature/radio/197109/p6-7.html">Журнал Радио 9 номер 1971 год. </a>:
+  <p style="max-height:60px; overflow:hidden;"><i> как молоды мы были и как быстро пробежали годы кулотино самое счастливое мое время</i></p>
+ </div>
+ <div class="block-news" style="padding-bottom:15px;">
+  <strong>Ивашка</strong> пишет в теме <a href="/dsheets/diodes/irdiodes.html">Параметры отечественных излучающих диодов ИК диапазона</a>:
+  <p style="max-height:60px; overflow:hidden;"><i>Светодиод - это диод который излучает свет. А если диод имеет ИК излучение, то это ИК диод, а не "ИК светодиод" и "Светодиод инфракрасный", как указано на сайте.</i></p>
+ </div>
+ <div class="block-news" style="padding-bottom:15px;">
+  <strong>Владимир </strong> пишет в теме <a href="/shop/sales/RUS/2T963A-2.html">2Т963А-2 (RUS) со склада в Москве. Транзистор биполярный отечественный</a>:
+  <p style="max-height:60px; overflow:hidden;"><i>Подскажите 2т963а-2 гарантийный срок</i></p>
+ </div>
+ <div class="block-news" style="padding-bottom:15px;">
+  <strong>Владимир II пишет...</strong> пишет в теме <a href="/dsheets/transistors/1372.html">Параметры биполярных транзисторов серии КТ372</a>:
+  <p style="max-height:60px; overflow:hidden;"><i>Спасибо!</i></p>
+ </div></div></div></div><div class="News_list_bot_yellow"></div></div>
+
+
+
+
+
+<div id="counter">
+
+<div class="counter_mail">
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">//<![CDATA[
+var a='',js=10;try{a+=';r='+escape(document.referrer);}catch(e){}try{a+=';j='+navigator.javaEnabled();js=11;}catch(e){}
+try{s=screen;a+=';s='+s.width+'*'+s.height;a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth);js=12;}catch(e){}
+try{if(typeof((new Array).push('t'))==="number")js=13;}catch(e){}
+try{document.write('<a href="http://top.mail.ru/jump?from=2192068">'+
+'<img src="http://d2.c7.b1.a2.top.mail.ru/counter?id=2192068;t=57;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru" style="border:0;" height="31" width="88" \/><\/a>');}catch(e){}//]]></script>
+<noscript><p><a href="http://top.mail.ru/jump?from=2192068">
+<img src="http://d2.c7.b1.a2.top.mail.ru/counter?js=na;id=2192068;t=57"
+style="border:0;" height="31" width="88" alt="Рейтинг@Mail.ru" /></a></p></noscript>
+<!-- //Rating@Mail.ru counter -->
+</div>
+
+<div class="counter_rambler">
+<!-- begin of Top100 code -->
+<script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2698592"></script>
+<noscript>
+<a href="http://top100.rambler.ru/navi/2698592/">
+<img src="http://counter.rambler.ru/top100.cnt?2698592" alt="Rambler's Top100" border="0" />
+</a></noscript>
+<!-- end of Top100 code -->
+</div>
+
+</div>
+
+</div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="content">
+
+
+
+<B>
+<a href="#package1">Корпус ИМС К155ТВ15</a><br>
+<a href="#cscheme">Условное графическое обозначение</a><br>
+<a href="#elp">Электрические параметры</a><br>
+<a href="#analog">Зарубежные аналоги</a><br>
+<a href="#literature">Литература</a><br>
+</B><br><br>
+
+<p>
+Микросхема представляет собой два тактируемых J-K триггера с установкой
+в 0 и 1. Считывание информации с входов J и K происходит во время
+положительного перепада на входе С, а на выходы она передается во время
+отрицательного перепада. Логические уровни на J и K не
+должны изменяться, пока на С высокий уровень. Если соеденить выводы J и K
+триггер будет работать как обычный счетный (делить частоту на 2).<br><br>
+<img src="img/tv15-2.gif" width=376 height=197 ALT="таблица" border=0 hspace=10 align="left">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+Корпус К155ТВ15 типа 238.16-1, масса не более 2 г.
+</p>
+
+<a name="package1">
+<font size="+1"><I>Корпус ИМС К155ТВ1</I></font><br><br>
+<img src="../packages/238.16-1.gif" width=370 height=260 ALT="238.16-1 package view" border=0 hspace=10 align="left">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<a name="cscheme">
+<font size="+1" align="left"><I>Условное графическое обозначение</I></font><br><br>
+<img src="img/tv15-1.gif" width=201 height=219 ALT="Условное графическое обозначение" border=0 hspace=10 align="left"> 
+
+1,15 - вход установки "0";<br>
+2 - вход J1;<br>
+3 - вход K1;<br>
+4,12 - вход синхронизации;<br>
+5,11 - вход установки "1";<br>
+6,7,9,10 - выходы;<br>
+8 - общий;<br>
+13 - вход K2;<br>
+14 - вход J2;<br>
+16 - напряжение питания;
+
+<br><br><br><br><br><br><br><br>
+
+<a name="elp">
+<I><font size="+1">Электрические параметры</font></I><br><br>
+<table border=3 cellpadding=3 cellspacing=3 >
+
+<tr>
+<td> 1 </td>
+<td>Номинальное напряжение питания</td>
+<td>5 В
+<img src="img/pem2.gif" width=7 height=10 ALT="plus minus" border=0 hspace=5 valign="middle">
+5 %</td>
+</tr>
+
+<tr>
+<td> 2 </td>  
+<td>Выходное напряжение низкого уровня</td>
+<td>не более 0,4 В</td>
+</tr>
+
+<tr>
+<td> 3 </td>
+<td>Выходное напряжение высокого уровня</td>
+<td>не менее 2,4 В</td>
+</tr>
+
+<tr>
+<td> 4 </td>
+<td>Входной ток низкого уровня<br>
+&nbsp &nbsp по входам J,K<br>
+&nbsp &nbsp по входам С,S<br>
+&nbsp &nbsp по входу R</td>
+<td> &nbsp <br>
+не более -1,6 мА<br>
+не более -3,2 мА<br>
+не более -4,8 мА</td>
+</tr>
+
+<tr>
+<td> 5 </td>
+<td>Входной ток высокого уровня<br>
+&nbsp &nbsp по входам J,K<br>
+&nbsp &nbsp по входам С,S<br>
+&nbsp &nbsp по входу R</td>
+<td> &nbsp <br>
+не более 0,04 мА<br>
+не более 0,08 мА<br>
+не более 0,16 мА</td>
+</tr>
+
+<tr>
+<td> 6 </td>
+<td>Ток потребления</td>
+<td>не более 30 мА</td>
+</tr>
+
+<tr>
+<td> 7 </td>
+<td>Потребляемая статическая мощность</td>
+<td>не более 157,5 мВт</td>
+</tr>
+
+</table>
+<br><br>
+
+<a name="analog">
+<I><font size="+1">Зарубежные аналоги</font></I><br><br>
+<dir><p><b>SN74109N</p></b></dir><br><br>
+
+<a name="literature">
+<I><font size="+1">Литература</font></I><br><br>
+<dir>
+<p><b>Интегральные микросхемы и их зарубежные аналоги</b>: Справочник. 
+Том 2./А. В. Нефедов. - М.:ИП РадиоСофт, 1998г. - 640с.:ил.</p>
+<p><b>Отечественные микросхемы и зарубежные аналоги</b> Справочник.
+Перельман Б.Л.,Шевелев В.И. "НТЦ Микротех", 1998г.,376 с. -
+ISBN-5-85823-006-7
+</p>
+
+</dir>
+
+<br>
+<div id="smo_line">
+<div class="vk_line">
+
+<script type="text/javascript"><!--
+document.write(VK.Share.button(false,{type: "round", text: "Нравится"}));
+--></script>
+</div><div class="fb_line">
+<div class="fb-like" data-send="false" data-layout="button_count" data-width="" data-show-faces="true" data-font="arial"></div>
+</div><div class="mail_ru_line">
+
+<a target="_blank" class="mrc__plugin_uber_like_button" href="http://connect.mail.ru/share" 
+data-mrc-config="{'type' : 'button', 'caption-mm' : '1', 'caption-ok' : '1', 'counter' : 'true', 'text' : 'true', 'width' : '240px'}">Мне нравится</a>
+<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+
+</div>
+</div>
+<br><br><br>
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#ffffff; padding:5px; margin:5px;">
+     <p><b>GeraldCanny пишет...</b></p>
+     <p>Мы являемся одной из лидирующих компаний в производстве металлорукава для прокладки кабеля. В нашем каталоге представлен металлорукав герметичный, металлорукав негерметичный, в ПВХ изоляции и негорючей ПВХ изоляции (нг), широкий ассортимент аксессуаров для металлорукава и прочая кабельная арматура и материалы для прокладки и изоляции кабельных линий.  <br><a href=<a href="http://kabelmontag.ru/gilzy-mednye-pod-opressovku-gm.html" rel="nofollow">http://kabelmontag.ru/gilzy-mednye-pod-opressovku-gm.html</a>><a href="http://kabelmontag.ru/gilzy-mednye-pod-opressovku-gm.html" rel="nofollow">http://kabelmontag.ru/gilzy-mednye-pod-opressovku-gm.html</a></a> Как производитель имеем неоспоримые преимущества перед другими поставщиками схожей продукции, предлагая изделия разной длины, диаметра и цвета по таблице RAL по доступным ценам. Цены в руб./за метр с НДС. На мелкий и крупный опт предоставляем скидку. Приобрести рукав металлический можно оптом и в розницу. <br> <br>Диаметры металлорукавов - 6 мм, 8 мм, 10 мм, 12 мм, 15 мм., 16 мм., 18 мм., 22 мм., 20 мм., 25 мм., 32 мм., 38 мм., 40 мм., 50 мм., 60 мм., 63 мм., 75 мм., 80 мм., 100 мм. <br> <br>Современное производство, использование качественных материалов для изготовления металлического рукава гарантируют, что качество и цена рукава будут соответствовать ожиданиям клиента.</p>
+     <p align="right">08/10/2020&nbsp;13:31:26</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#e8e8e8; padding:5px; margin:5px;">
+     <p><b>Timothypairm пишет...</b></p>
+     <p>Уважаемые заказчики!!! Мы рады что Вы обратились именно к нам! <br> <br>Наше производство располагается в г. Сергиев Посад . Мы не посредники как это сейчас модно,  у нас собственная производственная база оснащённая современным отечественным и импортным оборудованием (HAAS, DMTG, KME)!  Вы всегда можете приехать к нам на производство и познакомиться с нами! БЕСПЛАТНО рассмотрим Ваши чертежи или образцы, предложим менее затратное,  самое качественное и самое оптимальное решение по изготовлению Ваших деталей по чертежам!  Будем работать как одна команда   мы Вас не подведём!  <br><a href=<a href="https://www.shpismett.ru/" rel="nofollow">https://www.shpismett.ru/</a>><a href="https://www.shpismett.ru/" rel="nofollow">https://www.shpismett.ru/</a></a> Металлообработка на заказ  основная специализация нашей компании. Осуществляем токарные работы которые представляют собой обработку металла при помощи резки. Основа для детали вырезается из цельного куска, прута или листа металла, а затем обрабатывается до придания изделию необходимой формы. Для того, чтобы продукт полностью соответствовал заданным характеристикам, следует подходить к процессу производства наиболее скрупулезно и использовать качественное оборудование. <br>Токарные работы по металлу в компании Совсантех выполняются при помощи современной техники, которая полностью автоматизирована и работает посредством числового программного управления (ЧПУ).</p>
+     <p align="right">09/10/2020&nbsp;10:22:05</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#ffffff; padding:5px; margin:5px;">
+     <p><b>Floydpseum пишет...</b></p>
+     <p>Подобные устройства с успехом используются в самых областях, например: <br> <br>добывающая промышленность; <br>машиностроение; <br>судостроение; <br>авиационная промышленность; <br>мостостроение; <br>строительство; <br>сельское хозяйство; <br>химическая промышленность и т.д.  <br><a href=<a href="https://vneshgidromash.ru/products/filtri-i-akcicyari/filtri-clivn/filtry-omtf/" rel="nofollow">https://vneshgidromash.ru/products/filtri-i-akcicyari/filtri-clivn/filtry-omtf/</a>><a href="https://vneshgidromash.ru/products/filtri-i-akcicyari/filtri-clivn/filtry-omtf/" rel="nofollow">https://vneshgidromash.ru/products/filtri-i-akcicyari/filtri-clivn/filtry-omtf/</a></a> Мы сотрудничаем как с крупными компаниями, так и частными лицами. Клиенты обращаются к нам по многим причинам, мы перечислим только некоторые из них: <br> <br>отличное качество гидравлического оборудования, представленного в каталоге на сайте; <br>большой опыт работы в этой сфере; <br>штат квалифицированных сотрудников, отлично разбирающихся во всех имеющихся товарах; <br>широкий ассортимент насосов и аккумуляторов OMT, насосов Marzocch; <br>обеспечиваем индивидуальный подход к каждому заказу; <br>можем организовать изготовление гидравлической станции даже высокой сложности; <br>доставка оборудования в удобное вам место и время; <br>100% гарантия качества; <br>на станции и комплектующие предоставляется гарантия 18 месяцев.</p>
+     <p align="right">09/10/2020&nbsp;12:49:16</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#e8e8e8; padding:5px; margin:5px;">
+     <p><b>Justinabirm пишет...</b></p>
+     <p>Вода из скважин имеет сильно завышенные показатели железа. Показатель железа колеблется в Москве и Московской области от 3-х - 5-ти мг/л до 20-ти - 30-ти мг/л и это при ПДК в 0,3 мг/л. Даже природная родниковая вода уже утратила во многом свою первозданную чистоту. Наши коммунальные службы до сих пор используют дедовский способ очистки  хлорирование. Назвать такую воду полезной для здоровья нельзя, да и запах не слишком приятный. В Европе от этой практики давно отказались. Выход один  чтобы сохранить здоровье, долголетие, улучшить качество жизни -  необходим высокий современный уровень очистки воды, обеспечить который могут только высокотехнологичные фильтры.  <br><a href=<a href="https://www.vodofilter.ru/tseny" rel="nofollow">https://www.vodofilter.ru/tseny</a>><a href="https://www.vodofilter.ru/tseny" rel="nofollow">https://www.vodofilter.ru/tseny</a></a> Именно такие  современные фильтры для воды, обеспечивающие европейский стандарт питьевой воды предлагаем мы. <br> <br>Почему Мы? <br>Мы ценим надежность и работаем только с проверенными поставщиками, имеющими многолетний опыт. <br>Наши цены  едины для всех. Мы не завышаем стоимость, оценив отделку Вашего дома и марку автомобиля. <br>У нас всегда есть все необходимое. Действует бесплатная доставка и разгрузка. И даже чуть больше. <br>Мы работаем так, чтобы Вам было удобно!</p>
+     <p align="right">09/10/2020&nbsp;13:39:35</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#ffffff; padding:5px; margin:5px;">
+     <p><b>Michealinano пишет...</b></p>
+     <p>Компания быстро росла, и сегодня, занимая одну из ведущих позиции на этом рынке, мы не стоим на месте. В основе проекта ООО ЛАБ-Медика: самые современные лабораторные технологии, накопленные за годы работы аналитической и статистической информации по рынку. <br> <br> <br> <br>В 2020 году ООО ЛАБ-Медика исполнилось 13 лет. Несомненно, главное достояние компании  это высококвалифицированный коллектив, богатый опыт работы с самыми крупными производителями лабораторной диагностики. Благодаря этому компания всегда остается на шаг впереди конкурентов обеспечивая своим клиентам самый лучший подход, чтобы они были довольны нашей работой. <br> <br>Наши специалисты  это профессиональные менеджеры, постоянно повышающие свою квалификацию. Наши сотрудники являются действующими членами института профессиональных менеджеров. <br> <br>Наши клиенты  это организации и индивидуальные предприниматели с различными направлениями медицинской деятельности. Мы гарантируем внимание и индивидуальный подход каждому клиенту. <br> <br>Наши основные принципы  профессионализм, качество, ответственность, индивидуальный подход, конфиденциальность, доброжелательность. <br> <br>Наши клиенты рекомендуют нас своим друзьям, партнерам  это лучшая реклама нашей компании!!!  <br><a href=<a href="https://lab-medica.ru/raskhodnyye-materialy/test-poloski/fan-erba-lachema" rel="nofollow">https://lab-medica.ru/raskhodnyye-materialy/test-poloski/fan-erba-lachema</a>><a href="https://lab-medica.ru/raskhodnyye-materialy/test-poloski/fan-erba-lachema" rel="nofollow">https://lab-medica.ru/raskhodnyye-materialy/test-poloski/fan-erba-lachema</a></a> Одним из исследований, имеющих особую значимость для постановки верного диагноза, является анализ мочи, благодаря которому возможно определить патологию функционирования мочевыводящей системы, а также ряд других отклонений в работе организма. И только специалист, прочитав результаты анализа, может дать верную оценку этой работе, подтвердив или опровергнув наличие того или иного заболевания. <br> <br>Общий анализ сдают для определения физического, химического и микробиологического состава мочи с целью выявить наличие компонентов, нехарактерных для здорового организма, - сахара, алкоголя, лекарств и иных химических веществ. <br> <br>Автоматизация анализов мочи: преимущества <br> <br>Максимальную точность и оперативность обеспечивает микроскопия мочи на анализаторах. Современный рынок диагностического оборудования полон предложений о продаже различных модификаций анализаторов российских и иностранных производителей. Следует отметить, что блестящие результаты их труда пользуются одинаково высоким спросом. Компания ЛАБ-Медика поможет сделать достойный выбор. <br> <br>Сегодня можно насчитать целый ряд критериев, которые определяют выбор современных лабораторий в пользу автоматических анализаторов. В нашей компании  анализатор мочи купить можно по более выгодной цене, избегая необоснованных торговых надбавок. <br> <br>Биохимические исследования, которые проводят при помощи современных анализаторов, дают возможность для верной постановки диагноза и выявления даже малейших отклонений от нормы. <br> <br>Автоматический анализатор мочи, цена которого вполне соответствует заявленному качеству, позволяет производить микроскопию осадка мочи в условиях, когда отсутствует полноценное лабораторное оборудование.  Это становится определяющим фактором для медицинских учреждений, где взятие анализов постановлено на поток.</p>
+     <p align="right">24/10/2020&nbsp;07:00:00</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#e8e8e8; padding:5px; margin:5px;">
+     <p><b>RichardKenny пишет...</b></p>
+     <p>Производство мебели из массива дерева <br>Древесина: особенности создания изделий <br>Производство и изготовление мебельных конструкций, лестниц, дверей и других предметов  ключевое направление деятельности компании LegnoStyle. Наши мастера вкладывают душу в каждое изделие. В процессе работы используются только массивы натуральной древесины: дуба, березы, бука, ясеня, ольхи, сосны. <br> <br>Такие изделия станут роскошным украшением любого интерьера, подчеркнув его презентабельность и стиль. Изготовлением гардеробных, детских, шкафов и прочих предметов на заказ мы занимаемся на высоком профессиональном уровне.  <br><a href=<a href="https://www.legnostyle.ru/magazin-elitnoy-mebeli-v-moskve.html" rel="nofollow">https://www.legnostyle.ru/magazin-elitnoy-mebeli-v-moskve.html</a>><a href="https://www.legnostyle.ru/magazin-elitnoy-mebeli-v-moskve.html" rel="nofollow">https://www.legnostyle.ru/magazin-elitnoy-mebeli-v-moskve.html</a></a> Мы изготовим Ваш заказ по уникальной итальянской технологии, используя также детали и узлы итальянского производства, а также произведем качественный монтаж. <br> <br>Основным направлением нашей деятельности было и остается проектирование и изготовление мебели, дверей, а также лестниц по индивидуальным заказам. Собственное производство LegnoStyle - гарантия качества производимой продукции.</p>
+     <p align="right">30/01/2021&nbsp;12:29:54</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#ffffff; padding:5px; margin:5px;">
+     <p><b>Brandengaw пишет...</b></p>
+     <p>Использования трех основных натуральных экологически чистых, очень прочных природных материалов: металл, дерево и стекло позволяют использовать мебель в любом интерьере вашего дома: для детской комнаты и спальни, кухни и гостиной, и даже на даче в саду.  <br><a href=<a href="https://lozard.ru/krovati_kovanye_odnospalniye_i_dietskiye" rel="nofollow">https://lozard.ru/krovati_kovanye_odnospalniye_i_dietskiye</a>><a href="https://lozard.ru/krovati_kovanye_odnospalniye_i_dietskiye" rel="nofollow">https://lozard.ru/krovati_kovanye_odnospalniye_i_dietskiye</a></a> Сейчас практически каждый может позволить себе купить кованую мебель. Ведь, чтобы прикоснуться к прекрасному, добавить в интерьер изюминку или сделать прекрасный и нужный подарок достаточно совсем немного. Различные подставки, брелоки, подсвечники и многие другие нужные функциональные вещи могут стать началом вашего знакомства с миром кованых изделий. Сделайте заказ кованого изделия на нашем сайте и результат не оставит вас равнодушным.</p>
+     <p align="right">30/01/2021&nbsp;13:18:36</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#e8e8e8; padding:5px; margin:5px;">
+     <p><b>MarvinPab пишет...</b></p>
+     <p>Мебельный Двор-Двор Мебельный - это большой выбор  корпусной мебели для дома, <br>выполненной в различных стилях, направлениях и декорах. <br> <br>Прихожие и Гостиные,  Спальни и мебель для подростков и молодежи  стильные коллекции от Мебельный Двор-Двор Мебельный и наш современный взгляд на идею совершенства вашего дома!  <br><a href=<a href="https://md-dm.ru/kukhnya-boston" rel="nofollow">https://md-dm.ru/kukhnya-boston</a>><a href="https://md-dm.ru/kukhnya-boston" rel="nofollow">https://md-dm.ru/kukhnya-boston</a></a> Все это модно и ультрасовременно, в комнате нет ничего лишнего. Производитель позаботился о том, чтобы светлые глянцевые поверхности мебели были защищены от незначительных повреждений и прилипания пыли благодаря специальной обработке. <br> <br>Здесь не только красиво  все продумано до мелочей, кровати оснащены ортопедическими основаниями и матрасами, а тумбы и комоды имеют скругленные углы. Фурнитура не хлопает и не скрипит, она работает плавно.</p>
+     <p align="right">30/01/2021&nbsp;14:42:20</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#ffffff; padding:5px; margin:5px;">
+     <p><b>Ralphpusia пишет...</b></p>
+     <p>С 2017 года ООО ДЭКА начала производство битумных эмульсий. Приобретая нашу продукцию, вы будете уверены в её высоком качестве, т. к. все выпускаемые типы продукции сертифицированы, соответствуют СНиПам и ГОСТам. Отсутствие посредников при продаже позволяет устанавливать лучшие цены на производимые материалы.  <br><a href=<a href="http://дэкастрой.рф/sertifikaty" rel="nofollow">http://дэкастрой.рф/sertifikaty</a>><a href="http://дэкастрой.рф/sertifikaty" rel="nofollow">http://дэкастрой.рф/sertifikaty</a></a> При заключении договора используется персональный подход к каждому клиенту, подтверждением чего является долгое и успешное сотрудничество с ведущими фирмами, работающими в области дорожного строительства, такими как: ООО ДОРСТРОЙСЕРВИС, ООО ТРАСССТРОЙ, ООО АСФАЛЬТТРАНССТРОЙ, ООО СК НЕОН, ООО ТЦ НИКА, АО МСУ-1 и др. <br> <br>Современное техническое оснащение, высококвалифицированный кадровый состав и отлаженная логистика позволяют нашей компании с высоким качеством и в нормативные сроки выполнять для вас свои договорные обязательства.</p>
+     <p align="right">01/02/2021&nbsp;14:14:51</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#e8e8e8; padding:5px; margin:5px;">
+     <p><b>Williammog пишет...</b></p>
+     <p>Очень понравился Ваш сайт. Может обменяемся ссылками ?</p>
+     <p align="right">28/11/2023&nbsp;04:34:13</p></div>
+</td></tr>
+</table>     
+     
+     
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+     <div style="background-color:#ffffff; padding:5px; margin:5px;">
+     <p><b>Williammog пишет...</b></p>
+     <p>Очень понравился Ваш сайт. Может обменяемся ссылками ?</p>
+     <p align="right">29/11/2023&nbsp;22:31:00</p></div>
+</td></tr>
+</table>     
+     
+     <br><br>
+<a name="discuss"></a>
+  
+
+<div class="comm-table">  
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td colspan="2" background="/common/img/top-left.png" width="21" height="21"></td>
+<td class="top-comm"><i>Ваш комментарий к статье</i></td>
+<td colspan="2" background="/common/img/top-right.png" width="21" height="21"></td></tr>
+
+<tr><td width="1" class="comm-one"></td>
+<td width="20" class="comm-twenty"></td>
+
+<td class="comm">
+<form action="#discuss" method="POST" name="discuss_form">
+<table class="comm-center" border="0" cellspacing="5" cellpadding="0">
+<input type="hidden" name="spot_id" value="/dsheets/ic/155/tv15.html">
+<tr><td colspan="3" class="comm-title">К155ТВ15 - два J-K триггера. :</td></tr>
+<tr><td align="right" class="comm-text"><b>Ваше&nbsp;имя:</b></td><td colspan="2"><input name="3ffe6c73ae0cfeff70e51775d2e574b7_name" type="text" maxlength="63" size="32" value=""></td></tr>
+<tr><td align="right" valign="top" rowspan="2" class="comm-text"><b>Отзыв:</b></td>
+<td rowspan="2"><textarea name="3ffe6c73ae0cfeff70e51775d2e574b7_comment" rows="7" cols="37"></textarea></td>
+<td valign="top" class="comm-minitext">Разрешено использование тэгов:<br>
+&lt;b&gt;<b>жирный текст</b>&lt;/b&gt;<br>
+&lt;i&gt;<i>курсив</i>&lt;/i&gt;<br>
+&lt;a&nbsp;href=&quot;http://site.ru&quot;&gt; ссылка&lt;/a&gt;<br>
+</td></tr>
+<tr><td valign="bottom"><input class="post-comm" type="submit" value="Оставить отзыв"></td></tr>
+</table>
+</form>
+</td>
+<td width="20" class="comm-twenty"></td>
+<td width="1" class="comm-one"></td></tr>
+
+<tr><td colspan="2" background="/common/img/bottom-left.png" width="21" height="11"></td>
+<td class="bottom-comm"></td>
+<td colspan="2" background="/common/img/bottom-right.png" width="21" height="11"></td></tr>
+</table>
+
+
+  
+
+</div></div>
+
+<div id="footer">
+
+<div id="footer-text">Copyright 1997-2024 CHIPINFO<br><br>
+<a href="http://www.chipinfo.ru/prices.html">Реклама на сайте &gt;&gt;</a><br><br>
+<a href="http://www.chipinfo.ru/feedback.html">Обратная связь &gt;&gt;</a>
+</div>
+<div style="position:absolute;top:5px;right:5px;width:728;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5641234415012337";
+/* Chipinfo 728x90 bottom image */
+google_ad_slot = "6418071004";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div id="footer-site">
+<b>Наши сайты:</b>&nbsp;<a href="http://www.izme.ru/" title="Измерительные приборы и оборудование">
+<img src="http://www.chipinfo.ru/common/img/logo_izme.ru.16x16.png" width="16" height="16" border="0" 
+alt="www.izme.ru - измерительные приборы и оборудование" style="padding-left:2px; padding-right:2px" align="absmiddle">
+</a> <a href="http://www.izme.ru/" title="Измерительные приборы и оборудование" style="text-decoration:none;">Приборы
+</a>&nbsp; <a href="http://gete.ru/" title="Блог по радиоэлектронике">
+<img src="http://www.chipinfo.ru/common/img/logo_gete.ru.16x16.png" width="16" height="16" border="0" 
+alt="gete.ru - блог по радиоэлектронике" align="absmiddle"></a><a href="http://gete.ru/" title="Блог по радиоэлектронике" 
+style="text-decoration:none;"> Блог </a>&nbsp;<a href="http://www.chipdocs.ru/" title="Справочник по импортным 
+микросхемам">
+<img src="http://www.chipinfo.ru/common/img/logo_chipdocs.ru.16x16.png" width="16" height="16" border="0" 
+alt="www.chipdocs.ru - справочник по импортным микросхемам" align="absmiddle"></a><a href="http://www.chipdocs.ru/" 
+title="Справочник по импортным микросхемам" style="text-decoration:none;"> Справочник </a>&nbsp; 
+<a href="http://www.seminews.ru/" title="Новости электроники">
+<img src="http://www.chipinfo.ru/common/img/logo_seminews.ru.16x16.png" width="16" height="16" border="0" 
+alt="www.seminews.ru - новости электроники" align="absmiddle"></a><a href="http://www.seminews.ru/" 
+title="Новости электроники" style="text-decoration:none;"> Новости </a>&nbsp;<a href="http://forum.chipinfo.ru/" 
+title="Форум по современной электронике">
+<img src="http://www.chipinfo.ru/common/img/logo_forum.chipinfo.ru.16x16.png" width="16" height="16" border="0" 
+alt="forum.chipinfo.ru - форум по современной электронике" style="padding-left:2px; padding-right:2px;" 
+align="absmiddle"></a><a href="http://forum.chipinfo.ru/" title="Форум по современной электронике" 
+style="text-decoration:none;"> Форум </a>&nbsp;<a href="http://www.chipdocs.com/" title="Electronic Component Datasheets">
+<img src="http://www.chipinfo.ru/common/img/logo_chipdocs.com.16x16.png" width="16" height="16" border="0" 
+alt="www.chipdocs.com - electronic component datasheets" style="padding-left:2px; padding-right:2px;" 
+align="absmiddle"> </a><a href="http://www.chipdocs.com/" title="Electronic Component Datasheets" 
+style="text-decoration:none;">Datasheets </a>&nbsp;<a href="http://www.eedigest.com/" 
+title="Electronic Engineering News Digest"><img src=" http://www.chipinfo.ru/common/img/logo_eedigest.16x16.png" 
+width="16" height="16x" border="0" alt="www.eedigest.com - electronic engineering news" 
+style="padding-left:2px; padding-right:2px;" align="absmiddle"></a> <a href="http://www.eedigest.com/" 
+title="Electronic Engineering News Digest" style="text-decoration:none;">News</a>
+</div>
+
+
+
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11837762-3"); 
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<script type="text/javascript" src="/common/js/b2b.js"></script>
+<script type="text/javascript" src="/common/js/openx.js"></script>
+</body>
+</html>
