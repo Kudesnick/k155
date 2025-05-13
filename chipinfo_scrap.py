@@ -467,8 +467,6 @@ if __name__ == '__main__':
     childs = [i['href'] for i in scrap('index.html').find_all('a')]
     if len(sys.argv) > 1:
         childs = [i for i in childs if i in sys.argv[1:]]
-    else:
-        childs.append('lr4.html')
 
     # подгружаем пользовательские картинки
     img_copy(['*.jpg', '*.png', '*.gif', 'styles.css', '*.html.htm'])
