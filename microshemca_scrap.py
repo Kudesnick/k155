@@ -65,7 +65,7 @@ def del_attr(tags: list, at: list):
 glob_nav = None
 
 def short_name(s: str):
-    return f'{s.lower().replace("w", "v")}.html'
+    return f'{s.lower().replace("w", "v")}.html'.replace('statii/', '')
 
 def try_int(s: str) -> int:
     try:
@@ -194,14 +194,14 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('записи 1 и О', 'записи лог. "1" и лог. "0"'))
     if url == 'TW1':
         patterns.append(('<td><u>&nbsp;&nbsp;</u>&prod;<u>&nbsp;&nbsp;</u></td>', '<td>&#8645;</td>'))
-    if url == 'a1':
+    if url == 'statii/a1':
         patterns.append(('<a href="https://engars.ru/catalog/tsepi/">Цепь круглозвенная</a>', ''))
         patterns.extend([('22О', '220'), ('ЗООО','3000'), ('ЗОО','300'), ('О,З','0,3'), ('0СТ','ОСТ'),
                          ('К555 5,5','К555 — 5,5'), ('К1533 6','К1533 — 6'),
                          ('градусов С','&#8451;'), ('градусов.','&#8451;.'), ('20...30\' С','20...30 &#8451;'),  ('40\' С','40 &#8451;'),
                          ('(— 5,2 В)','(-5,2 В)'), ('(— 2 или —2,4 В)','(-2 или -2,4 В)'), ('—4,5 и —2 В','-4,5 и -2 В'),
                          ('K531, KI533','К531, К1533')])
-    if url == 'a2':
+    if url == 'statii/a2':
         patterns.append(('Р = 1/(2&pi;&radic;<span class=q>LC<sub>э</sub></span>', 'Р = 1/(2&pi;&radic;(LC<sub>э</sub>))')),
     if url == '74366':
         patterns.append(('<a href="https://www.microshemca.ru/74365"', '<a href="74365.html"')),
@@ -334,9 +334,9 @@ if __name__ == '__main__':
     # KP2 отсутствует
     childs = [i for i in childs if i not in 'IE7.IM3.KP2'.split('.')]
     # дополнительные статьи
-    childs.extend(['a1', 'a2'])
+    childs.extend(['statii/a1', 'statii/a2'])
     # статьи
-    articles = 'index.re3a.a1.a2'.split('.')
+    articles = 'index.re3a.statii/a1.statii/a2'.split('.')
     if len(sys.argv) > 1:
         childs = [i for i in sys.argv[1:]]
 
