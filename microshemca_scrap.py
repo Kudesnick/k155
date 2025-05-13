@@ -63,9 +63,12 @@ def del_attr(tags: list, at: list):
             if a in i.attrs: del i.attrs[a]
 
 glob_nav = None
+articles = {}
 
 def short_name(s: str):
-    return f'{s.lower().replace("w", "v")}.html'.replace('statii/', '')
+    sn = s.lower().replace("w", "v")
+    sn = articles.get(sn, sn)
+    return f'{sn}.html'
 
 def try_int(s: str) -> int:
     try:
@@ -209,6 +212,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('<th colspan=3>Входы</th>', '<th colspan=2>Входы</th>')),    
     if url == '74368':
         patterns.append(('<a href="https://www.microshemca.ru/74367"', '<a href="74367.html"')),
+    if url == 're3a':
+        patterns.append(('микросхемы <b>К155РЕ3</b> её', 'микросхемы К155РЕ3 её')),
 
 
     htm = mrep(htm, patterns)
@@ -309,11 +314,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     [i.replace_with(' ') for i in template.find_all('br')]
 
     # глобальная навигация
-    map = template.find(id = 'map')
-    map.append(template.new_tag('ul'))
+    chip_ul = template.find(id = 'map').ul
     for li in glob_nav:
-        map.ul.append(li)
-    
+        chip_ul.insert(-2, li)
+
     # добавляем информацию об источниках
     new_link = BeautifulSoup(f'<section id="literature"><h2>Литература</h2><ul><li><a href="{base_url}{url}">Онлайн справочник microshemca.ru: {content.h1.text}</a></li></ul></section>', parser)
     template.find(id = 'content').append(new_link)
@@ -327,20 +331,27 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     return alt_name
 
 if __name__ == '__main__':
-    childs = 'index.AG1.AG3.AP1.ID1.ID3.ID4.ID7.ID8.ID9.ID10.ID11.ID12.ID13.ID15.ID24.IE1.IE2.IE4.IE5.IE6.IE7.IE8.IE9.IE14.IM1.IM2.IM3.IP2.IP3.IP4.IP6-7.IR1.IR13.IR15.IR17.IR32.IW1.IW3.KP1.KP2.KP5.KP7.LA1.LA2.LA3.LA4.LA6.LA7.LA8.LA10.LA11.LA12.LA13.LA18.LD1.LD3.LE1.LE2.LE3.LE4.LE5.LE6.LI1.LI4.LI5.LL1.LL2.LN1.LN2.LN3.LN4.LN5.LN6.LP4.LP5.LP7.LP8.LP9.LP10.LP11.LR1.LR3.LR4.PP5.PR6.PR7.RE3.RE21.RE22.RE23.RE24.RP1.RP3.RU1-3.RU2.RU5.RU7.TL1.TL2.TL3.TM2.TM5.TM7.TM8.TW1.TW15.XL1'.split('.')
+    childs = 'AG1.AG3.AP1.ID1.ID3.ID4.ID7.ID8.ID9.ID10.ID11.ID12.ID13.ID15.ID24.IE1.IE2.IE4.IE5.IE6.IE7.IE8.IE9.IE14.IM1.IM2.IM3.IP2.IP3.IP4.IP6-7.IR1.IR13.IR15.IR17.IR32.IW1.IW3.KP1.KP2.KP5.KP7.LA1.LA2.LA3.LA4.LA6.LA7.LA8.LA10.LA11.LA12.LA13.LA18.LD1.LD3.LE1.LE2.LE3.LE4.LE5.LE6.LI1.LI4.LI5.LL1.LL2.LN1.LN2.LN3.LN4.LN5.LN6.LP4.LP5.LP7.LP8.LP9.LP10.LP11.LR1.LR3.LR4.PP5.PR6.PR7.RE3.RE21.RE22.RE23.RE24.RP1.RP3.RU1-3.RU2.RU5.RU7.TL1.TL2.TL3.TM2.TM5.TM7.TM8.TW1.TW15.XL1'.split('.')
     # фактически отсутствующие страницы
     # IE7 объединена с IE6
     # IM3 отсутствует
     # KP2 отсутствует
     childs = [i for i in childs if i not in 'IE7.IM3.KP2'.split('.')]
+    
     # дополнительные статьи
-    childs.extend(['statii/a1', 'statii/a2'])
-    # статьи
-    articles = 'index.re3a.statii/a1.statii/a2'.split('.')
+    articles = {
+        'index'    : 'ttl',
+        're3a'     : 're3a',
+        'statii/a1': 'appl',
+        'statii/a2': 'gen'
+        }
+
+    childs.extend(articles.keys())
+    
     if len(sys.argv) > 1:
         childs = [i for i in sys.argv[1:]]
 
-    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', 'html.parser').li for i in childs]
+    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', 'html.parser').li for i in childs if not i in articles.keys()]
 
     for i in childs: scrap(i)
 
