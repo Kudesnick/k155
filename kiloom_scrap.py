@@ -134,6 +134,7 @@ def scrap(url: str, alt_name = None):
     template.body['name'] = title
 
     content = template.find('div', id = "content")
+    content.clear()
 
     # чистим таблицу главной страницы, если она найдена
     center = soup.find('table')

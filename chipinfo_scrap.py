@@ -226,6 +226,7 @@ def scrap(url: str):
         alt_content = BeautifulSoup(alt_file.read_text(enc), parser)
 
     content = template.find(id = "content")
+    content.clear()
 
     # добавляем краткое описание
     content.append(template.new_tag('h1'))

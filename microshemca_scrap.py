@@ -11,6 +11,7 @@ enc = 'utf-8'
 parser = 'html.parser'
 
 base_url = 'https://microshemca.ru/'
+alt_content_path = Path('..').joinpath('chipinfo')
 
 # Пакетная замена подстрок 
 def mrep(s: str, p):
@@ -76,9 +77,9 @@ def try_int(s: str) -> int:
     except:
         None
 
-def menu_generator(id: str, hor_menu: dict, name: str = ''):
-    menu = ''.join([f'<li><a href="{k}">{v}</a></li>' if k != name else f'<li>{v}</li>' for k, v in hor_menu.items()])
-    return BeautifulSoup(f'<nav id="{id}"><ul>{menu}</ul></nav>' if len(hor_menu) > 1 else '', 'html.parser')
+def menu_generator(id: str, menu: dict, name: str = ''):
+    menu_list = ''.join([f'<li><a href="{k}">{v}</a></li>' if k != name else f'<li>{v}</li>' for k, v in menu.items()])
+    return BeautifulSoup(f'<nav id="{id}"><ul>{menu_list}</ul></nav>' if len(menu) > 1 else '', parser)
 
 # копирование пользовательских картинок
 def img_copy(patterns: list):
@@ -219,7 +220,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     htm = mrep(htm, patterns)
 
     # парсим HTML файл
-    soup = BeautifulSoup(htm, 'html.parser').find('div', {'class': 'b5a'})
+    soup = BeautifulSoup(htm, parser).find('div', {'class': 'b5a'})
 
     # предварительное форматирование текста
     soup.smooth()
@@ -302,11 +303,13 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     soup.find('h1').insert_after(menu_generator('hor', hor_menu, alt_name))
 
     # подгружаем шаблон
-    template = BeautifulSoup(Path('../template.html').read_text(enc), 'html.parser')
+    template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
 
     content = template.find('div', id = "content")
+    content.clear()
 
     # добавляем содержимое
+
     content.extend(soup)
     soup.unwrap()
 
@@ -351,7 +354,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         childs = [i for i in sys.argv[1:]]
 
-    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', 'html.parser').li for i in childs if not i in articles.keys()]
+    glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', parser).li for i in childs if not i in articles.keys()]
 
     for i in childs: scrap(i)
 
