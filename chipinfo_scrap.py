@@ -273,9 +273,13 @@ def scrap(url: str):
         center.name = 'section'
         center['id'] = 'index'
         del_attr(center.find_all('table'), ['border', 'cellpadding', 'cellspacing'])
+
+        # Добавляем информацию о к155лр4
+        center.next.insert(77, BeautifulSoup('<tr><td><a href="lr4.html">К155ЛР4<br> КМ155ЛР4</a></td><td>Логический элемент 4-4И-2ИЛИ-НЕ с возможностью расширения по ИЛИ</td></tr>', parser))
+
         content.append(center)
 
-        glob_nav = [BeautifulSoup('<li><a href = "/">&lt;&lt; Домой</a></li>', parser).li]
+        glob_nav = [BeautifulSoup('<li><a href = "index.html">&lt;&lt; Домой</a></li>', parser).li]
         glob_nav.extend([BeautifulSoup(f'<li><a href = "{tr.td.a["href"]}" title = "{str(tr.td.next_sibling.text)}">{tr.td.a.find(string = True)}</a></li>', parser).li for tr in center.find_all('tr') if tr.td])
 
         # добавляем к таблице <thead>, <caption>, <body>
@@ -396,8 +400,9 @@ def scrap(url: str):
             [b.unwrap() for b in section.ul.find_all('b')]
 
             # добавляем информацию об источниках
-            new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник chipinfo.ru: {content.h1.text}</a></li>', parser)
-            section.ul.append(new_link)
+            if url != 'lr4.html':
+                new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник chipinfo.ru: {content.h1.text}</a></li>', parser)
+                section.ul.append(new_link)
 
             if alt_content:
                 new_link = BeautifulSoup(f'<li><a href="{alt_content.body["href"]}">Онлайн справочник kiloom.ru: {alt_content.body["name"]}</a></li>', parser)
@@ -410,9 +415,6 @@ def scrap(url: str):
 
     # добавляем целые разделы
     insert_section(template, replace_soup, url)
-
-    # подгружаем пользовательские картинки
-    img_copy(['*.jpg', '*.png', '*.gif', 'styles.css'])
 
     # заменяем картинки на заранее набранные фрагменты
     for i in template.find_all('img'):
@@ -465,4 +467,10 @@ if __name__ == '__main__':
     childs = [i['href'] for i in scrap('index.html').find_all('a')]
     if len(sys.argv) > 1:
         childs = [i for i in childs if i in sys.argv[1:]]
+    else:
+        childs.append('lr4.html')
+
+    # подгружаем пользовательские картинки
+    img_copy(['*.jpg', '*.png', '*.gif', 'styles.css', '*.html.htm'])
+
     for i in childs: scrap(i)
