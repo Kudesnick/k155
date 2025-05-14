@@ -57,6 +57,15 @@
             "args": ["index", "a1", "a2"],
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "junradio",
+            "type": "python",
+            "request": "launch",
+            "program": "../junradio_scrap.py",
+            "cwd": "${workspaceFolder}/junradio",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
