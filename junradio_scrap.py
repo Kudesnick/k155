@@ -102,7 +102,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     htm = re.sub(r'<!.*?>','', htm)
 
     # чиним сломанный HTML
-    patterns = [('</font>', '</font></p>')]
+    patterns = [('</font>', '</font></p>'),
+                ('<font face="Arial" size=2>', '<font face="Arial" size=2>&nbsp;')]
     htm = mrep(htm, patterns)
 
     # парсим HTML файл
@@ -128,12 +129,35 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                     img.parent.unwrap()
             img.wrap(BeautifulSoup().new_tag('figure'))
             fig = img.parent
-            fig.append(BeautifulSoup().new_tag('figcaption'))
-            if img.get('alt'):
-                fig.figcaption.append(img['alt'])
+            # if img.get('alt'):
+            #     fig.append(BeautifulSoup().new_tag('figcaption'))
+            #     fig.figcaption.append(img['alt'])
 
     # Убираем декорацию текста
     [b.unwrap() for b in soup.find_all(['b', 'i', 'strong', 'font', 'br', 'script', 'noscript', 'center'])]
+    
+    # Убираем лишние атрибуты
+    del_attr(soup.find_all(['p']), ['align'])
+    del_attr(soup.find_all(['img']), ['border'])
+    del_attr(soup.find_all('table'), ['border', 'align'])
+
+    # чистим таблицу
+    table = soup.find('table')
+    table.parent.unwrap()
+    table.parent.unwrap()
+    [p.unwrap() for p in table.find_all(['p'])]
+    for tr in table.find_all(['tr'], limit = 3):
+        for td in tr.find_all(['td']):
+            td.name = 'th'
+    for td in table.find_all(['td']):
+        td.string = td.text.replace(' ', ' ')
+        td.string = td.text.replace('?', ' ?')
+        td.string = td.text.replace('Z[', 'Z [')
+        td.string = td.text.replace('Р Q R S', 'P Q R S')
+        td.string = td.text.replace('0 0 0\' 0', '0 0 0 0')
+        td.string = td.text.replace('L М N 0', 'L M N O')
+        td.string = td.text.replace('Н I J K', 'H I J K')
+        td.string = td.text.replace('@ А В С', '@ A B C')
 
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
