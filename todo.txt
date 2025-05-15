@@ -1,7 +1,6 @@
 # chipinfo
 
 ie2, ie4, ie5, ie9, li5, ll1, ll2, pp5, rp3, tv1, tv15, tm8 - нет количества интегральных элементов
-добавить статью из http://www.junradio.com/nach/TTL/CHAPTER1/1-4-3.htm локально
 
 # microshemca
 

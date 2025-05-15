@@ -66,6 +66,15 @@
             "cwd": "${workspaceFolder}/junradio",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "release",
+            "type": "python",
+            "request": "launch",
+            "program": "release.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
