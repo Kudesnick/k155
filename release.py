@@ -16,6 +16,13 @@ release=Path('release')
 first_src=Path('chipinfo')
 second_src=Path('microshemca')
 
+def readhtml(s: str):
+    return BeautifulSoup(Path(s).read_text(encoding = enc), parser)
+
+def savehtml(html, s: str):
+    html.smooth()
+    Path(s).write_text(html.prettify(), enc)
+
 # Скраппинг
 # ==============================================================================
 
@@ -41,6 +48,7 @@ for i in src:
 
 shutil.copy('dc.html', str(release))
 shutil.copy('k155.djvu', str(release))
+release.joinpath('more.html').write_bytes(Path('template.html').read_bytes())
 
 # Совмещение навигации
 # ==============================================================================
@@ -48,23 +56,22 @@ shutil.copy('k155.djvu', str(release))
 import os
 os.chdir(release)
 
-first_nav = BeautifulSoup(Path('index.html').read_text(encoding = enc), parser).find('nav').find('ul').find_all('li')[1:-1]
-second_nav = BeautifulSoup(Path('ttl.html').read_text(encoding = enc), parser).find('nav').find('ul').find_all('li')[1:-1]
+first_nav = readhtml('index.html').find('nav').find('ul').find_all('li')[1:-1]
+second_nav = readhtml('ttl.html').find('nav').find('ul').find_all('li')[1:-1]
 
 scnd_nav = [i.a.get('href') for i in second_nav]
 
-table = BeautifulSoup(f'<table></table>', parser)
+global_nav = BeautifulSoup(f'<ul></ul>', parser)
 
 for i in first_nav:
     src, title, text = i.a.get('href'), i.a.get('title'), i.a.text.strip()
     i.clear()
     if Path(src).exists():
-        i.append(BeautifulSoup(f'<td><a href="k155{src}" title="{title}">{text}</a></td><td><a href="{src}" title="{title}">{text}</a></td>', parser))
+        i.append(BeautifulSoup(f'<a href="k155{src}" title="{title}">{text}</a><a href="{src}" title="{title}">{text}</a>', parser))
         if src in scnd_nav: scnd_nav.remove(src)
     else:
-        i.append(BeautifulSoup(f'<td><a href="k155{src}" title="{title}">{text}</a></td><td>{text}</td>', parser))
-    i.name = 'tr'
-    table.table.append(i)
+        i.append(BeautifulSoup(f'<a href="k155{src}" title="{title}">{text}</a><a>{text}</a>', parser))
+    global_nav.ul.append(i)
     while len(scnd_nav) and not Path('k155' + scnd_nav[0]).exists():
         src = scnd_nav[0]
 
@@ -75,25 +82,45 @@ for i in first_nav:
             for k, v in repl.items():
                 text = text.replace(k, v)
             text = f'к155{text}'.upper()
-            
-            table.table.append(BeautifulSoup(f'<tr><td>{text}</td><td><a href="{src}">{text}</a></td></tr>', parser))
+
+            global_nav.ul.append(BeautifulSoup(f'<li><a>{text}</a><a href="{src}">{text}</a></li>', parser))
         scnd_nav.remove(src)
 
-# Ручне исправление исключений
-for i in table.table:
-    if i.find_all('td')[1].text.strip() == 'К155ИЕ7':
-        td = i.find_all('td')[1]
-        td.clear()
-        td.append(BeautifulSoup(f'<a href="ie6.html" title="{i.td.a.get('title')}">К155ИЕ7</a>', parser))
+# Ручное исправление исключений
+for i in global_nav.ul:
+    if i.find_all('a')[1].text.strip() == 'К155ИЕ7':
+        a = i.find_all('a')[1]
+        a['href'] = 'ie6.html'
+        a['title'] = str(i.a['title'])
 
-    if i.find_all('td')[1].text.strip() == 'К155РУ1':
-        td = i.find_all('td')[1]
-        td.clear()
-        td.append(BeautifulSoup(f'<a href="ru1-3.html" title="{i.td.a.get('title')}">К155РУ1-3</a>', parser))
+    if i.find_all('a')[1].text.strip() == 'К155РУ1':
+        a = i.find_all('a')[1]
+        a['href'] = 'ru1-3.html'
+        a['title'] = str(i.a['title'])
+        a.string = 'К155РУ1-3'
+
+# Переписывание меню навигации и "хлебных крошек"
+# ==============================================================================
+
+import copy
+
+template = readhtml('../template.html')
+
+global_nav.ul.insert(0, copy.copy(template.find('nav').find_all('li')[0]))
+global_nav.ul.append(copy.copy(template.find('nav').find_all('li')[1]))
+
+for i in global_nav.ul:
+    breadcrumb = BeautifulSoup('<ul></ul>', parser) if len(i.find_all('a')) > 1 else None
+    for j in [x for x in i.find_all('a') if x.get('href', None) != None]:
+        html = readhtml(j['href'])
+        ul = html.find('nav', {'id': 'map'}).ul
+        ul.clear()
+        ul.extend(copy.copy(global_nav.ul))
+        savehtml(html, j['href'])
 
 # Отладка
+# ==============================================================================
 
-table.smooth()
-Path('../table.html').write_text(table.prettify(), enc)
+savehtml(global_nav, '../table.html')
 
 print('complete')
