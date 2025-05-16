@@ -110,13 +110,27 @@ global_nav.ul.insert(0, copy.copy(template.find('nav').find_all('li')[0]))
 global_nav.ul.append(copy.copy(template.find('nav').find_all('li')[1]))
 
 for i in global_nav.ul:
-    breadcrumb = BeautifulSoup('<ul></ul>', parser) if len(i.find_all('a')) > 1 else None
+    breadcrumb = BeautifulSoup(f'<ul></ul>', parser)
     for j in [x for x in i.find_all('a') if x.get('href', None) != None]:
         html = readhtml(j['href'])
+        if html.find('nav', {'id': 'hor'}):
+            breadcrumb.ul.extend(html.find('nav', {'id': 'hor'}).find_all('li'))
+        else:
+            breadcrumb.ul.extend(BeautifulSoup(f'<li><a href="{j['href']}">{j.text.strip()}</a></li>', parser))
+
+    for i in breadcrumb.ul:
+        html = readhtml(i.a['href'])        
         ul = html.find('nav', {'id': 'map'}).ul
         ul.clear()
         ul.extend(copy.copy(global_nav.ul))
-        savehtml(html, j['href'])
+        hor = html.find('nav', {'id': 'hor'})
+        if hor:
+            hor.clear()
+            hor.unwrap()
+        brd = BeautifulSoup(f'<nav id="breadcrumb"></nav>', parser)
+        brd.append(copy.copy(breadcrumb))
+        html.find('div', {'id': 'content'}).insert_before(brd)
+        savehtml(html, i.a['href'])
 
 # Отладка
 # ==============================================================================

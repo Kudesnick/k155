@@ -77,8 +77,17 @@ def try_int(s: str) -> int:
     except:
         None
 
-def menu_generator(id: str, menu: dict, name: str = ''):
-    menu_list = ''.join([f'<li><a href="{k}">{v}</a></li>' if k != name else f'<li>{v}</li>' for k, v in menu.items()])
+def menu_generator(id: str, menu: dict):
+    firstkey = list(menu.keys())[0]
+    if not 'К155' in menu[firstkey]:
+        # формируем текст ссылки
+        repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м', 'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к'}
+        text = Path(menu[firstkey]).stem
+        for k, v in repl.items():
+            text = text.replace(k, v)
+        menu[firstkey] = f'к155{text}'.upper()
+
+    menu_list = ''.join([f'<li><a href="{k}">{v}</a></li>' for k, v in menu.items()])
     return BeautifulSoup(f'<nav id="{id}"><ul>{menu_list}</ul></nav>' if len(menu) > 1 else '', parser)
 
 # копирование пользовательских картинок
@@ -300,7 +309,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     for h in soup.find_all('h2'): h.name = 'h1'
     for h in soup.find_all('h4'): h.name = 'h2'
 
-    soup.find('h1').insert_after(menu_generator('hor', hor_menu, alt_name))
+    soup.find('h1').insert_after(menu_generator('hor', hor_menu))
 
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
