@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from gettext import find
-import requests
 from bs4 import BeautifulSoup
 from pathlib import Path 
-import sys
-import re
-import subprocess
 import shutil
 
 enc = 'utf-8'
@@ -49,6 +44,7 @@ for i in src:
 shutil.copy('dc.html', str(release))
 shutil.copy('k155.djvu', str(release))
 release.joinpath('more.html').write_bytes(Path('template.html').read_bytes())
+shutil.copy('styles.css', str(release))
 
 # Совмещение навигации
 # ==============================================================================
@@ -110,6 +106,8 @@ global_nav.ul.insert(0, copy.copy(template.find('nav').find_all('li')[0]))
 global_nav.ul.append(copy.copy(template.find('nav').find_all('li')[1]))
 
 for i in global_nav.ul:
+
+    # собираем "хлебные крошки"
     breadcrumb = BeautifulSoup(f'<ul></ul>', parser)
     for j in [x for x in i.find_all('a') if x.get('href', None) != None]:
         html = readhtml(j['href'])
@@ -118,6 +116,7 @@ for i in global_nav.ul:
         else:
             breadcrumb.ul.extend(BeautifulSoup(f'<li><a href="{j['href']}">{j.text.strip()}</a></li>', parser))
 
+    # переписываем "крошки" и боковое меню
     for i in breadcrumb.ul:
         html = readhtml(i.a['href'])        
         ul = html.find('nav', {'id': 'map'}).ul
@@ -128,13 +127,45 @@ for i in global_nav.ul:
             hor.clear()
             hor.unwrap()
         brd = BeautifulSoup(f'<nav id="breadcrumb"></nav>', parser)
-        brd.append(copy.copy(breadcrumb))
+        brd.nav.append(copy.copy(breadcrumb))
         html.find('div', {'id': 'content'}).insert_before(brd)
         savehtml(html, i.a['href'])
 
-# Отладка
+morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 're3a.html']]
+morelist.extend([global_nav.find_all('a')[0], global_nav.find_all('a')[-1]])
+
+# Переписываем "хлебные крошки" для вспомогательных материалов
+for i in morelist:
+    html = readhtml(i['href'])        
+    brd = html.find('nav', {'id': 'breadcrumb'})
+    if brd:
+        brd.clear()
+        brd.unwrap()
+    brd = BeautifulSoup(f'<nav id="breadcrumb"></nav>', parser)
+    brd.nav.append(copy.copy(template.find('nav', {'id': 'map'}).ul))
+    html.find('div', {'id': 'content'}).insert_before(brd)
+    savehtml(html, i['href'])
+
+# Фильтация ссылок на самого себя и упаковка кода
 # ==============================================================================
 
-savehtml(global_nav, '../table.html')
+import htmlmin
+import re
+
+for i in Path('.').glob('*.html'):
+    fname = str(i.name)
+    html = BeautifulSoup(i.read_text(encoding = enc), parser)
+    for link in html.find_all('a'):
+        if link.get('href', '') == fname:
+            del link.attrs['href']
+    html.smooth()
+    html_compact = ' '.join(str(html).replace('\n', ' ').split()).replace(' </', '</')
+    html_compact = html_compact.replace('<b>', '') # это для исправления косяка в la3.html. Больше нигде не встречается
+    for t in ['tr', 'th', 'td', 'ul', 'li']:
+        html_compact = html_compact.replace(' <' + t, '<' + t).replace(' </' + t, '</' + t).replace(t + '> ', t + '>')
+    for t in ['a', 'span', 'sub', 'sup']:
+        html_compact = html_compact.replace(' </' + t, '</' + t)
+        html_compact = re.sub('(<' + t + ' [^>]+>) +', r'\1', html_compact)
+    Path(fname).write_text(htmlmin.minify(html_compact), enc)
 
 print('complete')
