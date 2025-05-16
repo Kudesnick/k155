@@ -160,7 +160,7 @@ for i in Path('.').glob('*.html'):
             del link.attrs['href']
     html.smooth()
     html_compact = ' '.join(str(html).replace('\n', ' ').split()).replace(' </', '</')
-    html_compact = html_compact.replace('<b>', '') # это для исправления косяка в la3.html. Больше нигде не встречается
+    html_compact = html_compact.replace('<b>', '').replace('&lt;b&gt;', '') # это для исправления косяка в la3.html. Больше нигде не встречается
     for t in ['tr', 'th', 'td', 'ul', 'li']:
         html_compact = html_compact.replace(' <' + t, '<' + t).replace(' </' + t, '</' + t).replace(t + '> ', t + '>')
     for t in ['a', 'span', 'sub', 'sup']:
