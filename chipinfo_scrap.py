@@ -280,8 +280,7 @@ def scrap(url: str):
 
         content.append(center)
 
-        glob_nav = [BeautifulSoup('<li><a href = "index.html">&lt;&lt; Домой</a></li>', parser).li]
-        glob_nav.extend([BeautifulSoup(f'<li><a href = "{tr.td.a["href"]}" title = "{str(tr.td.next_sibling.text)}">{tr.td.a.find(string = True)}</a></li>', parser).li for tr in center.find_all('tr') if tr.td])
+        glob_nav = [BeautifulSoup(f'<li><a href = "{tr.td.a["href"]}" title = "{str(tr.td.next_sibling.text)}">{tr.td.a.find(string = True)}</a></li>', parser).li for tr in center.find_all('tr') if tr.td]
 
         # добавляем к таблице <thead>, <caption>, <body>
         if center.table: table_frmt(center.table, template, 'Перечень микросхем серии 155')
@@ -451,10 +450,9 @@ def scrap(url: str):
         i.name = 'br'
 
     # глобальная навигация
-    map = template.find(id = 'map')
-    map.append(template.new_tag('ul'))
+    chip_ul = template.find(id = 'map').ul
     for li in glob_nav:
-        map.ul.append(li)
+        chip_ul.insert(-2, li)
 
     # сохраняем результат в файл
     template.smooth()

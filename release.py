@@ -60,14 +60,36 @@ for i in first_nav:
     i.clear()
     if Path(src).exists():
         i.append(BeautifulSoup(f'<td><a href="k155{src}" title="{title}">{text}</a></td><td><a href="{src}" title="{title}">{text}</a></td>', parser))
-        scnd_nav.remove(src)
+        if src in scnd_nav: scnd_nav.remove(src)
     else:
         i.append(BeautifulSoup(f'<td><a href="k155{src}" title="{title}">{text}</a></td><td>{text}</td>', parser))
     i.name = 'tr'
     table.table.append(i)
-    while not Path('k155' + scnd_nav[0]).exists():
-        table.table.append(BeautifulSoup(f'<tr><td>{scnd_nav[0]}</td><td><a href="{scnd_nav[0]}">{scnd_nav[0]}</a></td></tr>', parser))
-        scnd_nav.remove(scnd_nav[0])
+    while len(scnd_nav) and not Path('k155' + scnd_nav[0]).exists():
+        src = scnd_nav[0]
+
+        if src != "ru1-3.html":
+            # формируем текст ссылки
+            repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м', 'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к'}
+            text = Path(src).stem
+            for k, v in repl.items():
+                text = text.replace(k, v)
+            text = f'к155{text}'.upper()
+            
+            table.table.append(BeautifulSoup(f'<tr><td>{text}</td><td><a href="{src}">{text}</a></td></tr>', parser))
+        scnd_nav.remove(src)
+
+# Ручне исправление исключений
+for i in table.table:
+    if i.find_all('td')[1].text.strip() == 'К155ИЕ7':
+        td = i.find_all('td')[1]
+        td.clear()
+        td.append(BeautifulSoup(f'<a href="ie6.html" title="{i.td.a.get('title')}">К155ИЕ7</a>', parser))
+
+    if i.find_all('td')[1].text.strip() == 'К155РУ1':
+        td = i.find_all('td')[1]
+        td.clear()
+        td.append(BeautifulSoup(f'<a href="ru1-3.html" title="{i.td.a.get('title')}">К155РУ1-3</a>', parser))
 
 # Отладка
 
