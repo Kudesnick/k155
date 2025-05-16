@@ -70,7 +70,7 @@ def table_create(table: BeautifulSoup):
         ('</p></p>', '</p>')
     ])
     text = ' '.join(text.split())
-    text = re.sub('[ \.]{4,}(.+?)(<br/>|</p>)', r'~~\1<~~>', text).replace(':<br/>', ':<~~>').replace('<br/>', ' ').split('<~~>')
+    text = re.sub(r'[ \.]{4,}(.+?)(<br/>|</p>)', r'~~\1<~~>', text).replace(':<br/>', ':<~~>').replace('<br/>', ' ').split('<~~>')
     text = [i.split('~~') for i in text if i]
     # генерация таблицы
     table.name = 'table'

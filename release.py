@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 from pathlib import Path 
 import shutil
+import subprocess
 
 enc = 'utf-8'
 parser = 'html.parser'
@@ -21,9 +22,9 @@ def savehtml(html, s: str):
 # Скраппинг
 # ==============================================================================
 
-# subprocess.run(["python", f'kiloom_scrap.py'])
-# subprocess.run(["python", f'{first_src}_scrap.py'])
-# subprocess.run(["python", f'{second_src}_scrap.py'])
+# subprocess.run(["python", f'kiloom_scrap.py'], cwd = 'kiloom')
+# subprocess.run(["python", f'{first_src}_scrap.py'], cwd = first_src)
+# subprocess.run(["python", f'{second_src}_scrap.py'], cwd = second_src)
 
 # Копирование файлов в релиз
 # ==============================================================================

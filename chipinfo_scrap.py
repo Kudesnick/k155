@@ -77,7 +77,7 @@ def table_frmt(table, bs, caption = None):
 
 # Выдергиваем фразу о количестве интегральных элементов
 def get_el_cnt(s: str):
-    res = re.findall('Содерж\S+\s+\d+\s+интегральны\S+\s+элемент\S*\.', s)
+    res = re.findall(r'Содерж\S+\s+\d+\s+интегральны\S+\s+элемент\S*\.', s)
     if len(res) > 0:
         return res[0].replace('  ', ' ')
     else:
