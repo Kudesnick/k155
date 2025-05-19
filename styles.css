@@ -59,7 +59,7 @@ body {
     float: left;
 }
 
-#map li:first-child a::before, #breadcrumb li:first-child a::before{
+#map li:first-child a::before {
     content: '<<';
     margin-right: 0.3em;
     display: inline-block;
@@ -74,12 +74,18 @@ body {
     display: table-row;
 }
 
+#map li:first-child {
+    display: table-caption;
+    text-align: right;
+}
+
 #map a {
     display: table-cell;
 }
 
 #map li a:last-of-type {
     text-align: right;
+    padding-left: 0.3em;
 }
 
 nav ul {
@@ -126,6 +132,11 @@ th, td {
     padding: 0.5em 0.2em;
 }
 
+#content {
+    display: flex;
+    flex-direction:column;
+}
+
 section:not(#index, #cscheme, #cscheme1, #cscheme2) td:last-child {
     white-space: nowrap;
 }
@@ -145,7 +156,6 @@ caption::before {
 }
 
 section {
-    min-width: 60%;
     display: flow-root;
 }
 
@@ -160,7 +170,6 @@ figure {
 figure:not([class]) {
     width: min-content;
     float: left;
-    min-width: 60%;
 }
 
 figcaption {
@@ -182,7 +191,6 @@ figcaption::before {
 #cscheme1 table,
 #cscheme2 table {
     width: auto;
-    min-width: 60%;
 }
 
 #cscheme th,
@@ -212,7 +220,27 @@ del {
     content: '.'
 }
 
-/* hide menu checkbox */
+/* Всплывающие изображения */
+a[href$=".jpg"] {
+  position: relative;
+}
+
+a[href$=".jpg"]::after {
+  position: absolute;
+  left: 0; bottom: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: ease 1s;
+  content:url('img001a.jpg')
+}
+
+a[href$=".jpg"]:hover::after {
+  padding-bottom: 2em;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Всплывающее меню */
 #menu_toggle, #map > label {
     display: none;
 }

@@ -184,7 +184,9 @@ for i in Path('.').glob('*.html'):
     html_compact = html_compact.replace('<b>', '').replace('&lt;b&gt;', '') # это для исправления косяка в la3.html. Больше нигде не встречается
     for t in ['tr', 'th', 'td', 'ul', 'li']:
         html_compact = html_compact.replace(' <' + t, '<' + t).replace(' </' + t, '</' + t).replace(t + '> ', t + '>')
-    for t in ['a', 'span', 'sub', 'sup']:
+    for t in ['sub', 'sup']:
+        html_compact = html_compact.replace(' <' + t, '<' + t).replace(' </' + t, '</' + t).replace('<' + t + '> ', '<' + t + '>')
+    for t in ['a', 'span']:
         html_compact = html_compact.replace(' </' + t, '</' + t)
         html_compact = re.sub('(<' + t + ' [^>]+>) +', r'\1', html_compact)
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
