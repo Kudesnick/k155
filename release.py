@@ -24,6 +24,7 @@ def savehtml(html, s: str):
 
 # subprocess.run(["python", f'kiloom_scrap.py'], cwd = 'kiloom')
 # subprocess.run(["python", f'{first_src}_scrap.py'], cwd = first_src)
+# subprocess.run(["python", f'junradio_scrap.py'], cwd = 'junradio')
 # subprocess.run(["python", f'{second_src}_scrap.py'], cwd = second_src)
 
 # Копирование файлов в релиз
@@ -40,6 +41,9 @@ for i in src:
 
 src = [i for i in second_src.glob('*') if not '.htm' in str(i) or '.html' in str(i)]
 for i in src:
+    shutil.copy(str(i), str(release))
+
+for i in Path('junradio').glob('*.jpg'):
     shutil.copy(str(i), str(release))
 
 shutil.copy('dc.html', str(release))
@@ -115,7 +119,7 @@ for i in global_nav.ul:
         if html.find('nav', {'id': 'hor'}):
             breadcrumb.ul.extend(html.find('nav', {'id': 'hor'}).find_all('li'))
         else:
-            breadcrumb.ul.extend(BeautifulSoup(f'<li><a href="{j['href']}">{j.text.strip()}</a></li>', parser))
+            breadcrumb.ul.extend(BeautifulSoup(f'<li><a href=\"{j["href"]}\">{j.text.strip()}</a></li>', parser))
 
     # переписываем "крошки" и боковое меню
     for i in breadcrumb.ul:

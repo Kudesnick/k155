@@ -23,7 +23,7 @@ def get_htm(url: str):
     global base_url, enc
     idx = 'htm'
     cache = Path(f'{url}.{idx}').name
-    full_url = f'{base_url}{url}'
+    full_url = f'{base_url}{url}/'
     if not Path(cache).is_file():
         req = requests.get(full_url, headers = {'User-Agent': 'Chrome'})
         if req.status_code != 200:
@@ -353,13 +353,13 @@ if __name__ == '__main__':
     # дополнительные статьи
     articles = {
         'index'    : 'ttl',
-        're3a'     : 're3a',
+        'RE3a'     : 're3a',
         'statii/a1': 'appl',
         'statii/a2': 'gen'
         }
 
     childs.extend(articles.keys())
-    
+
     if len(sys.argv) > 1:
         childs = [i for i in sys.argv[1:]]
 

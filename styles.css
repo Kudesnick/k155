@@ -59,9 +59,27 @@ body {
     float: left;
 }
 
-#map li:first-child::before{
+#map li:first-child a::before, #breadcrumb li:first-child a::before{
     content: '<<';
     margin-right: 0.3em;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#map ul {
+    display: table;
+}
+
+#map li {
+    display: table-row;
+}
+
+#map a {
+    display: table-cell;
+}
+
+#map li a:last-of-type {
+    text-align: right;
 }
 
 nav ul {
@@ -69,9 +87,11 @@ nav ul {
     padding-inline: 0;
 }
 
-#content nav ul li::before {
+#content nav ul li a::before {
     content: '\21D2';
     margin-right: 0.3em;
+    display: inline-block;
+    text-decoration: none;
 }
 
 #breadcrumb ul {
@@ -82,13 +102,9 @@ nav ul {
     float: left;
 }
 
-#breadcrumb li::before{
+#breadcrumb li:not(:first-child)::before{
     content: '|';
     margin: 0 0.3em;
-}
-
-#breadcrumb li:first-child::before{
-    content: '<<';
 }
 
 table {
