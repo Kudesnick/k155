@@ -451,8 +451,7 @@ def scrap(url: str):
 
     # глобальная навигация
     chip_ul = template.find(id = 'map').ul
-    for li in glob_nav:
-        chip_ul.insert(-2, li)
+    chip_ul.extend(glob_nav)
 
     # сохраняем результат в файл
     template.smooth()

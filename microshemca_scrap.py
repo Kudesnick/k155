@@ -23,7 +23,7 @@ def get_htm(url: str):
     global base_url, enc
     idx = 'htm'
     cache = Path(f'{url}.{idx}').name
-    full_url = f'{base_url}{url}/'
+    full_url = f'{base_url}{url}'
     if not Path(cache).is_file():
         req = requests.get(full_url, headers = {'User-Agent': 'Chrome'})
         if req.status_code != 200:
@@ -327,8 +327,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
 
     # глобальная навигация
     chip_ul = template.find(id = 'map').ul
-    for li in glob_nav:
-        chip_ul.insert(-2, li)
+    chip_ul.extend(glob_nav)
 
     # добавляем информацию об источниках
     new_link = BeautifulSoup(f'<section id="literature"><h2>Литература</h2><ul><li><a href="{base_url}{url}">Онлайн справочник microshemca.ru: {content.h1.text}</a></li></ul></section>', parser)
@@ -353,7 +352,7 @@ if __name__ == '__main__':
     # дополнительные статьи
     articles = {
         'index'    : 'ttl',
-        'RE3a'     : 're3a',
+        're3a'     : 're3a',
         'statii/a1': 'appl',
         'statii/a2': 'gen'
         }

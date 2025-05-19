@@ -46,9 +46,7 @@ for i in src:
 for i in Path('junradio').glob('*.jpg'):
     shutil.copy(str(i), str(release))
 
-shutil.copy('dc.html', str(release))
 shutil.copy('k155.djvu', str(release))
-release.joinpath('more.html').write_bytes(Path('template.html').read_bytes())
 shutil.copy('styles.css', str(release))
 
 # Совмещение навигации
@@ -57,8 +55,8 @@ shutil.copy('styles.css', str(release))
 import os
 os.chdir(release)
 
-first_nav = readhtml('index.html').find('nav').find('ul').find_all('li')[1:-1]
-second_nav = readhtml('ttl.html').find('nav').find('ul').find_all('li')[1:-1]
+first_nav = readhtml('index.html').find('nav').find('ul').find_all('li')[1:]
+second_nav = readhtml('ttl.html').find('nav').find('ul').find_all('li')[1:]
 
 scnd_nav = [i.a.get('href') for i in second_nav]
 
@@ -108,7 +106,6 @@ import copy
 template = readhtml('../template.html')
 
 global_nav.ul.insert(0, copy.copy(template.find('nav').find_all('li')[0]))
-global_nav.ul.append(copy.copy(template.find('nav').find_all('li')[1]))
 
 for i in global_nav.ul:
 
@@ -136,19 +133,38 @@ for i in global_nav.ul:
         html.find('div', {'id': 'content'}).insert_before(brd)
         savehtml(html, i.a['href'])
 
-morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 're3a.html']]
-morelist.extend([global_nav.find_all('a')[0], global_nav.find_all('a')[-1]])
+# Работа с дополнительными материалами
+# ==============================================================================
 
-# Переписываем "хлебные крошки" для вспомогательных материалов
+# Формирование страницы dc.html
+html = readhtml(str(Path('..').joinpath('dc.html')))
+dc = copy.copy(template)
+content = dc.find('div', {'id': 'content'})
+content.clear()
+content.extend(html.find('div', {'id': 'content'}))
+savehtml(dc, 'dc.html')
+
+# Переносим текст с основной страницы в 'param.html', но оставляем таблицу в index.html
+param = readhtml('index.html')
+index = copy.copy(template)
+table = param.find('section', {'id': 'index'})
+index.find('div', {'id': 'content'}).insert(-1, table)
+brd = param.find('nav', {'id': 'breadcrumb'})
+brd.clear()
+brd.unwrap()
+savehtml(index, 'index.html')
+savehtml(param, 'param.html')
+
+# Собираем список страниц для редактирования
+morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 're3a.html']]
+morelist.append(global_nav.find_all('a')[0])
+
+# Обновляем боковое меню
 for i in morelist:
     html = readhtml(i['href'])        
-    brd = html.find('nav', {'id': 'breadcrumb'})
-    if brd:
-        brd.clear()
-        brd.unwrap()
-    brd = BeautifulSoup(f'<nav id="breadcrumb"></nav>', parser)
-    brd.nav.append(copy.copy(template.find('nav', {'id': 'map'}).ul))
-    html.find('div', {'id': 'content'}).insert_before(brd)
+    ul = html.find('nav', {'id': 'map'}).ul
+    ul.clear()
+    ul.extend(copy.copy(global_nav.ul))
     savehtml(html, i['href'])
 
 # Фильтация ссылок на самого себя и упаковка кода

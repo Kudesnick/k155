@@ -154,8 +154,7 @@ def scrap(url: str, alt_name = None):
                     true_files.append(href)
                     tr.td.a['href'] = short_name(href)
 
-        glob_nav = [BeautifulSoup('<li><a href = "index.html">Домой</a></li>', 'html.parser').li]
-        glob_nav.extend([BeautifulSoup(f'<li><a href = "{tr.td.a["href"]}" title = "{str(tr.td.next_sibling.text)}">{tr.td.a.find(string = True)}</a></li>', 'html.parser').li for tr in center.find_all('tr') if tr.td and tr.td.a])
+        glob_nav = [BeautifulSoup(f'<li><a href = "{tr.td.a["href"]}" title = "{str(tr.td.next_sibling.text)}">{tr.td.a.find(string = True)}</a></li>', 'html.parser').li for tr in center.find_all('tr') if tr.td and tr.td.a]
 
     # удаляем табличную обертку, которая есть на некоторых страницах
     elif soup.table:
