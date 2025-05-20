@@ -177,9 +177,11 @@ for i in Path('.').glob('*.html'):
     fname = str(i.name)
     html = BeautifulSoup(i.read_text(encoding = enc), parser)
     for link in html.find_all('a'):
+        # Удаляем ссылки на самого себя
         if link.get('href', '') == fname:
             del link.attrs['href']
     html.smooth()
+    # Компактифицируем код
     html_compact = ' '.join(str(html).replace('\n', ' ').split()).replace(' </', '</')
     html_compact = html_compact.replace('<b>', '').replace('&lt;b&gt;', '') # это для исправления косяка в la3.html. Больше нигде не встречается
     for t in ['tr', 'th', 'td', 'ul', 'li']:

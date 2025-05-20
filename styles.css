@@ -18,11 +18,16 @@
         --color-menu-bg: #181818;
         --color-hover-light: #383838;
     }
-    img { filter: invert(1); }
 }
 
 body {
     background: var(--color-bg);
+}
+
+img { filter: grayscale(1); }
+
+@media (prefers-color-scheme: dark) {
+    img { filter: grayscale(1) invert(1); }
 }
 
 * {
@@ -74,18 +79,13 @@ body {
     display: table-row;
 }
 
-#map li:first-child {
-    display: table-caption;
-    text-align: right;
-}
-
 #map a {
     display: table-cell;
 }
 
 #map li a:last-of-type {
     text-align: right;
-    padding-left: 0.3em;
+    padding-left: 0.5em;
 }
 
 nav ul {
@@ -134,7 +134,7 @@ th, td {
 
 #content {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
 }
 
 section:not(#index, #cscheme, #cscheme1, #cscheme2) td:last-child {
@@ -157,6 +157,7 @@ caption::before {
 
 section {
     display: flow-root;
+    clear: both;
 }
 
 figure>img {
@@ -170,6 +171,7 @@ figure {
 figure:not([class]) {
     width: min-content;
     float: left;
+    clear: both;
 }
 
 figcaption {
@@ -221,21 +223,27 @@ del {
 }
 
 /* Всплывающие изображения */
-a[href$=".jpg"] {
+a[href='img001.jpg' ]::after { content: url('img001.jpg' ); }
+a[href='img001a.jpg']::after { content: url('img001a.jpg'); }
+a[href='img002.jpg' ]::after { content: url('img002.jpg' ); }
+a[href='img002a.jpg']::after { content: url('img002a.jpg'); }
+
+a[href$='.jpg'] {
   position: relative;
 }
 
-a[href$=".jpg"]::after {
+a[href$='.jpg']::after {
   position: absolute;
-  left: 0; bottom: 0;
+  display: inline-block;
+  left: 0; bottom: 1.5em;
+  padding: 0; margin: 0;
+  border-style: double;
   visibility: hidden;
   opacity: 0;
   transition: ease 1s;
-  content:url('img001a.jpg')
 }
 
-a[href$=".jpg"]:hover::after {
-  padding-bottom: 2em;
+a[href$='.jpg']:hover::after {
   visibility: visible;
   opacity: 1;
 }
