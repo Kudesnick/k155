@@ -144,6 +144,9 @@ content.clear()
 content.extend(html.find('div', {'id': 'content'}))
 savehtml(dc, 'dc.html')
 
+def row(link: str, linktxt: str, text: str):
+    return BeautifulSoup(f'<tr><td><a href="{link}">{linktxt}</a></td><td>{text}</td></tr>', parser)
+
 # Переносим текст с основной страницы в 'param.html', но оставляем таблицу в index.html
 param = readhtml('index.html')
 index = copy.copy(template)
@@ -152,8 +155,20 @@ index.find('div', {'id': 'content'}).insert(-1, table)
 brd = param.find('nav', {'id': 'breadcrumb'})
 brd.clear()
 brd.unwrap()
-savehtml(index, 'index.html')
 savehtml(param, 'param.html')
+# Меняем ссылки в таблице
+for i in table.table.tbody.find_all('a'):
+    i['href'] = f'k155{i['href']}'
+# Добавляем контент в таблицу
+table.table.tbody.insert(  8, row('iv3.html'  , 'К155ИВ3'  , 'Приоритетный шифратор 9 каналов в 4'))
+table.table.tbody.insert( 16, row('id7.html'  , 'К155ИД7'  , 'Высокоскоростной дешифратор'))
+table.table.tbody.insert( 30, row('id24.html' , 'К155ИД24' , 'Высоковольтный двоично-десятичный дешифратор с ОК'))
+table.table.tbody.insert( 62, row('ip6-7.html', 'К155ИП6-7', '4 ДНШУ'))
+table.table.tbody.insert(122, row('li4.html'  , 'К155ЛИ4'  , '3 логических элемента 3И'))
+table.table.tbody.insert(136, row('ln4.html'  , 'К155ЛН4'  , '6 буферных элементов без инверсии'))
+table.table.tbody.insert(176, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
+table.table.tbody.insert(206, row('xl1.html'  , 'К155ХЛ1'  , 'Универсальный элемент для ЦВМ'))
+savehtml(index, 'index.html')
 
 # Собираем список страниц для редактирования
 morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 're3a.html']]
@@ -181,6 +196,7 @@ for i in Path('.').glob('*.html'):
         if link.get('href', '') == fname:
             del link.attrs['href']
     html.smooth()
+    # savehtml(html, fname)
     # Компактифицируем код
     html_compact = ' '.join(str(html).replace('\n', ' ').split()).replace(' </', '</')
     html_compact = html_compact.replace('<b>', '').replace('&lt;b&gt;', '') # это для исправления косяка в la3.html. Больше нигде не встречается
