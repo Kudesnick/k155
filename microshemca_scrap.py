@@ -114,6 +114,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     patterns = [
                 ('<strong>', ' '),
                 ('</strong>', ' '),
+                ('/>', '>'),
                 # AG1
                 ('<span class=q>Q.</span>', '<span class=q>Q</span>.'),
                 ('(или <span class=q>А2)</span>', '(или <span class=q>А2</span>)'),

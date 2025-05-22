@@ -195,6 +195,9 @@ for i in Path('.').glob('*.html'):
         # Удаляем ссылки на самого себя
         if link.get('href', '') == fname:
             del link.attrs['href']
+        # Ищем ссылки на локальные изображения и добавляем переменную
+        elif '.jpg' in link.get('href', ''):
+            link['style'] = f'--href:url({link['href']})'
     html.smooth()
     # savehtml(html, fname)
     # Компактифицируем код
