@@ -226,7 +226,6 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     if url == 're3a':
         patterns.append(('микросхемы <b>К155РЕ3</b> её', 'микросхемы К155РЕ3 её')),
 
-
     htm = mrep(htm, patterns)
 
     # парсим HTML файл
@@ -271,6 +270,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
             if img.get('alt'):
                 fig.figcaption.append(img['alt'])
 
+    if url == 'ID3':
+        tbl = soup.find('table').find('br').unwrap()
+        print('')
+
     # Убираем вложенность таблиц
     for tbl in soup.find_all('table'):
         for prnt in ['p', 'td', 'tr', 'tbody', 'table']:
@@ -307,7 +310,9 @@ def scrap(url: str, alt_name = None, hor_menu = None):
             a['href'] = scrap(Path(a['href']).name, hor_menu = hor_menu)
 
     # нормализация заголовков
-    for h in soup.find_all('h2'): h.name = 'h1'
+    for h in soup.find_all('h2'):
+        h.name = 'h1'
+        h.string = h.text.strip('.')
     for h in soup.find_all('h4'): h.name = 'h2'
 
     soup.find('h1').insert_after(menu_generator('hor', hor_menu))

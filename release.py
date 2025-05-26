@@ -210,6 +210,17 @@ for i in Path('.').glob('*.html'):
     for t in ['a', 'span']:
         html_compact = html_compact.replace(' </' + t, '</' + t)
         html_compact = re.sub('(<' + t + ' [^>]+>) +', r'\1', html_compact)
+    # Дополнительные точечные правки
+    for i in ',.;:!)':
+        html_compact = html_compact.replace(' ' + i, i) # Убрать пробелы перед знаками препинания
+    for i in '(':
+        html_compact = html_compact.replace(i + ' ', i) # Убрать пробелы после открывающих скобок
+    html_compact = re.sub(r'\.([А-Я])', r'. \1', html_compact) # Добавить пробел после точки
+    html_compact = re.sub(r'([^l\s])(\()', r'\1 (', html_compact)  # Добавить пробел перед открывающими скобками
+    # точечные опечатки в отдельных файлах
+    if (fname == '74121.html'): html_compact = html_compact.replace('(74L121 ', '(74L121) ')
+    html_compact = html_compact.replace('Все выхода отключены', 'Все выходы отключены')
+    # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 
 print('complete')
