@@ -220,6 +220,9 @@ for i in Path('.').glob('*.html'):
     # точечные опечатки в отдельных файлах
     if (fname == '74121.html'): html_compact = html_compact.replace('(74L121 ', '(74L121) ')
     html_compact = html_compact.replace('Все выхода отключены', 'Все выходы отключены')
+    if (fname == 'id10.html'): html_compact = html_compact.replace('ДешифраторыК155ИД10иКМ155ИД10', 'Дешифраторы К155ИД10 и КМ155ИД10')
+    if (fname == 'k155id12.html'): html_compact = html_compact.replace('Микросхем представляет', 'Микросхема представляет')
+    html_compact = html_compact.replace('133 интегральных элементов', '33 интегральных элемента')
     # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 

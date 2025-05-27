@@ -272,7 +272,25 @@ def scrap(url: str, alt_name = None, hor_menu = None):
 
     if url == 'ID3':
         tbl = soup.find('table').find('br').unwrap()
+    
+    if url == 'IE2':
+        tbl = soup.find('table').find('br').unwrap()
+        soup.find('table').unwrap()
+        tbl = soup.find('table')
+
+    if url == '7493':
         print('')
+
+    # Чиним списки, не завернутые в ul 
+    ul = None
+    for li in soup.find_all('li'):
+        if li.parent.name == 'ul':
+            ul = None
+        elif ul == None:
+            ul = BeautifulSoup().new_tag('ul')
+            li.wrap(ul)
+        else:
+            ul.append(li)
 
     # Убираем вложенность таблиц
     for tbl in soup.find_all('table'):
@@ -295,6 +313,22 @@ def scrap(url: str, alt_name = None, hor_menu = None):
             else:
                 for tr in tbl.find_all('tr'):
                     tr.find(['td', 'th']).extract()
+
+    # Нормализуем ширину последней ячейки в столбце
+    def set_cols(tr: BeautifulSoup, cols: int) -> int:
+        tds = tr.find_all(['td', 'th'])
+        cols = max(sum([int(i.get('colspan', '1')) for i in tds]), cols)
+        td = tds[-1]
+        colspan = cols - sum([int(i.get('colspan', '1')) for i in tds[:-1]])
+        if colspan > 1: td['colspan'] = colspan
+        elif td.get('colspan'): del td.attrs['colspan']
+        return cols
+    
+    if url in ['7492', '7493']:
+        for tbl in soup.find_all('table'):
+            cols = 0
+            for tr in tbl.find_all('tr'):
+                cols = set_cols(tr, cols)
 
     for a in soup.find_all('a'):
         if a.get('target'): del a.attrs['target']
@@ -341,6 +375,9 @@ def scrap(url: str, alt_name = None, hor_menu = None):
 
     # сохраняем результат в файл
     template.smooth()
+    # Удаляем пустые абзацы и извлекаем списки из абзацев
+    [p.unwrap() for p in template.find_all('p') if p.text.strip() == '']
+    [ul.parent.unwrap() for ul in template.find_all(['ul', 'ol']) if ul.parent.name == 'p']
     # for release used 'str(template)' instead of 'template.prettify()'
     Path(alt_name).write_text(template.prettify(), enc)
     print(f'File "{alt_name}" writed')

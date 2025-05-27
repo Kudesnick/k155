@@ -44,6 +44,10 @@ a:hover {
     color: var(--color-text-a-hover);
 }
 
+a:not([href]) {
+    color: var(--color-text);
+}
+
 h1 {
     font-size: 150%;
 }
@@ -57,6 +61,14 @@ body {
     max-width: 55em;
     margin: auto;
     padding: 0.35em;
+}
+
+p:has(+ ul) {
+    margin-bottom: 0;
+}
+
+p ~ ul {
+    margin-top: 0;
 }
 
 #map {
