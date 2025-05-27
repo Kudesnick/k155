@@ -87,8 +87,13 @@ for i in first_nav:
 
 # Ручное исправление исключений
 for i in global_nav.ul:
+    if i.find_all('a')[1].text.strip() == 'К155ИЕ6':
+        a = i.find_all('a')[1]
+        a.string = 'К155ИЕ6-7'
+
     if i.find_all('a')[1].text.strip() == 'К155ИЕ7':
         a = i.find_all('a')[1]
+        a.string = 'К155ИЕ6-7'
         a['href'] = 'ie6.html'
         a['title'] = str(i.a['title'])
 
@@ -132,6 +137,18 @@ for i in global_nav.ul:
         brd.nav.append(copy.copy(breadcrumb))
         html.find('div', {'id': 'content'}).insert_before(brd)
         savehtml(html, i.a['href'])
+
+# Кастомные хлебные крошки
+for i in ['k155ie6', 'k155ie7', 'ie6', '74192', '74193']:
+    html = readhtml(f'{i}.html')
+    brd = html.find('nav', {'id': 'breadcrumb'}).ul
+    brd.clear()
+    brd.extend(BeautifulSoup(f'<li><a href="k155ie6.html">К155ИЕ6</a></li><li><a href="k155ie7.html">К155ИЕ7</a></li><li><a href="ie6.html">К155ИЕ6-7</a></li><li><a href="74192.html">74192</a></li><li><a href="74193.html">74193</a></li>', parser))
+    if i == 'ie6':
+        brd = html.find_all('nav', {'id': 'breadcrumb'})[1]
+        brd.clear()
+        brd.unwrap()
+    savehtml(html, f'{i}.html')
 
 # Работа с дополнительными материалами
 # ==============================================================================
