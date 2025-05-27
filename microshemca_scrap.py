@@ -133,7 +133,6 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                 # ID8
                 ('<br>', '<br/>'),
                 # IE9
-                ('&bull; ', '</li><li>'),
                 ('QO', 'Q0'),
                 # IE14
                 ('1. Входной ток низкого уровня	не более -1,6 мА,', '<ol><li>Входной ток низкого уровня не более -1,6 мА,</li>'),
@@ -161,6 +160,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                     ('Зарубежным аналогом микросхем К155ТМ5, КМ155ТМ5 являются микросхемы 7477', 'Зарубежным аналогом микросхем К155ТМ5, КМ155ТМ5 являются микросхемы <a href="https://microshemca.ru/7477">7477</a>'),
                     ('Зарубежным аналогом микросхемы К155ТВ15 являются микросхемы 74109'       , 'Зарубежным аналогом микросхемы К155ТВ15 являются микросхемы <a href="https://microshemca.ru/74109">74109</a>'),
                     ])
+    if url in ['7490', '7492', '74160']:
+        patterns.append(('&bull; ', '</li><li>'))
+    if url == '7497':
+        patterns.append(('<ul compact tupe="disc">', '</p><ul compact tupe="disc"><li>'))
     if url == 'ID9':
         patterns.append(('<table', '</p><table'))
     if url == '74181':

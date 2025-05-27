@@ -240,6 +240,8 @@ for i in Path('.').glob('*.html'):
     if (fname == 'id10.html'): html_compact = html_compact.replace('ДешифраторыК155ИД10иКМ155ИД10', 'Дешифраторы К155ИД10 и КМ155ИД10')
     if (fname == 'k155id12.html'): html_compact = html_compact.replace('Микросхем представляет', 'Микросхема представляет')
     html_compact = html_compact.replace('133 интегральных элементов', '33 интегральных элемента')
+    html_compact = html_compact.replace('Микросхемы представляет', 'Микросхема представляет')
+    html_compact = html_compact.replace('МикросхемаК155ИЕ8', 'Микросхема К155ИЕ8')
     # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 
