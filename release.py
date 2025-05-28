@@ -242,6 +242,10 @@ for i in Path('.').glob('*.html'):
     html_compact = html_compact.replace('133 интегральных элементов', '33 интегральных элемента')
     html_compact = html_compact.replace('Микросхемы представляет', 'Микросхема представляет')
     html_compact = html_compact.replace('МикросхемаК155ИЕ8', 'Микросхема К155ИЕ8')
+    html_compact = html_compact.replace('77 интегральный элемент', '77 интегральных элементов')
+    html_compact = html_compact.replace('для арифметико-логическое устройсво', 'для арифметико-логического устройства')
+    if (fname == 'k155ir13.html'): html_compact = html_compact.replace('четырехразрядный', 'восьмиразрядный')
+    if (fname == 'ld1.html'): html_compact = html_compact.replace('МикросхемаК155ЛД1', 'Микросхема К155ЛД1')
     # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 

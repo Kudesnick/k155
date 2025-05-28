@@ -112,6 +112,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
 
     # чиним сломанный HTML (незакрытые ссылки, опечатки и пр.)
     patterns = [
+                (' <b>', ' '),
+                ('</b> ', ' '),
                 ('<strong>', ' '),
                 ('</strong>', ' '),
                 ('/>', '>'),
@@ -164,8 +166,20 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('&bull; ', '</li><li>'))
     if url == '7497':
         patterns.append(('<ul compact tupe="disc">', '</p><ul compact tupe="disc"><li>'))
-    if url == 'ID9':
+    if url in ['ID9', 'IP3']:
         patterns.append(('<table', '</p><table'))
+        patterns.append(('<br />', ' '))
+        patterns.append(('<br />', ' '))
+    if url == 'IP4':    
+        patterns.append(('Микросхема ', '<p>Микросхема '))
+        patterns.append(('<br/>', ' '))
+        patterns.append(('С<sub>n+y</sub> = ', '</p><p>С<sub>n+y</sub> = '))
+        patterns.append(('С<sub>n+z</sub> = ', '</p><p>С<sub>n+y</sub> = '))
+        patterns.append(('<p><span class=q>G</span>', '</p><p><span class=q>G</span>'))
+    if url == 'IM2':    
+        patterns.append(('воэможные', 'возможные'))
+    if url == 'IR32':    
+        patterns.append((';</td>', '</td>'))
     if url == '74181':
         patterns.append(('<th>Арифметические (M = L, C<sub>n</sub> = L)</th>','<th>Арифметические <nobr>(M = L, C<sub>n</sub> = L)</nobr></th>'))
         patterns.append(('<th>Логические (M = H)</th>','<th>Логические <nobr>(M = H)</nobr></th>'))
@@ -187,6 +201,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('<th colspan=2>Входы</th>', '<th>Входы</th>'))
     if url == 'LA6':
         patterns.append(('<td align=center> 15 </td>', '<td align=center> 14 </td>'))
+    if url == 'LA7':
+        patterns.append(('представляет собой', 'представляют собой'))
     if url == 'LA10':
         patterns.append(('<td align=center> 10 </td>', '<tr>'))
         patterns.append(('<td> 7 </td>', ''))
@@ -281,9 +297,6 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         soup.find('table').unwrap()
         tbl = soup.find('table')
 
-    if url == '7493':
-        print('')
-
     # Чиним списки, не завернутые в ul 
     ul = None
     for li in soup.find_all('li'):
@@ -300,6 +313,15 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         for prnt in ['p', 'td', 'tr', 'tbody', 'table']:
             if tbl.parent.name == prnt:
                 tbl.parent.unwrap()
+
+    # Убираем абзацы внутри ячеек таблиц
+    [p.unwrap() for p in soup.find_all('p') if p.parent.name in ['th', 'td']]
+    
+    # Фиксим незакрытые теги таблиц
+    for tbl in soup.find_all('table'):
+        tbl.extend(tbl.find_all('tr'))
+        for tr in tbl.find_all('tr'):
+            tr.extend(tr.find_all(['th', 'td']))
 
     # Убираем декорацию текста
     [b.unwrap() for b in soup.find_all(['b', 'i', 'strong'])]
