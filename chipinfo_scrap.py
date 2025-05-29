@@ -168,6 +168,10 @@ def scrap(url: str):
         patterns.append(('lp10.gif', 'lp11.gif'))
     if 'pr7.' in url:
         patterns.append(('двоично-десятичного кода в\nдвоичный', '<del>двоично-десятичного кода в двоичный</del><ins>двоичного кода в двоично-десятичный</ins>'))
+    if 'tm2.' in url:
+        patterns.append(('D- триггера', 'D-триггера'))
+    if 'tm8.' in url:
+        patterns.append(('счетверенный D-триггера', 'счетверенный D-триггер'))
     if 'tv1.' in url:
         patterns.append(('Микросхема представляет собой два независимых тактируемых J-K триггера с\nустановкой в 0 и 1.', 'Микросхема представляет собой <del>два независимых тактируемых J-K триггера с установкой в 0 и 1.</del><ins>универсальный многоцелевой JK-триггер с элементами 3-И по входам J и K.</ins>'))
     htm = mrep(htm, patterns)
@@ -467,6 +471,6 @@ if __name__ == '__main__':
         childs = [i for i in childs if i in sys.argv[1:]]
 
     # подгружаем пользовательские картинки
-    img_copy(['*.jpg', '*.png', '*.gif', 'styles.css', '*.html.htm'])
+    img_copy(['*.png', '*.gif', 'styles.css', '*.html.htm'])
 
     for i in childs: scrap(i)

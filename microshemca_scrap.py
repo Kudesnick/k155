@@ -219,10 +219,17 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     if url == 'LI4':
         patterns.append(('(С3)</th></tr>', '(С3)</th>'))
         patterns.append(('<span class=q>(A3B3С3)</span></th>', '<span class=q>(A3B3С3)</span></th></tr>'))
+    if url == 'LN1':
+        patterns.append(('представляет собой', 'представляют собой'))
+    if url == 'LN5':
+        patterns.append(('до 15 8', 'до 15 В'))
     if url == 'LP9':
         patterns.append(('<td align=center> 7 </td>', '<tr><td align=center> 7 </td>'))
     if url == 'LR4':
         patterns.append(('<td align=center> 2 </td>', '<tr><td align=center> 2 </td>'))
+    if url == 'RE3a':
+        patterns.append(('При нажатии; кнопки SB1 &laguo;Запись&raguo;', 'При нажатии кнопки SB1 &laquo;Запись&raquo;'))
+        patterns.append(('микросхемы <b>К155РЕ3</b> её', 'микросхемы К155РЕ3 её'))
     if url == 'RU1-3':
         patterns.append(('записи 1 и О', 'записи лог. "1" и лог. "0"'))
     if url == 'TW1':
@@ -233,7 +240,9 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                          ('К555 5,5','К555 — 5,5'), ('К1533 6','К1533 — 6'),
                          ('градусов С','&#8451;'), ('градусов.','&#8451;.'), ('20...30\' С','20...30 &#8451;'),  ('40\' С','40 &#8451;'),
                          ('(— 5,2 В)','(-5,2 В)'), ('(— 2 или —2,4 В)','(-2 или -2,4 В)'), ('—4,5 и —2 В','-4,5 и -2 В'),
-                         ('K531, KI533','К531, К1533')])
+                         ('K531, KI533','К531, К1533'),
+                         ('токи).', 'токи).</p>'),
+                         ('срабатывание ИС.', 'срабатывание ИС.</p>')])
     if url == 'statii/a2':
         patterns.append(('Р = 1/(2&pi;&radic;<span class=q>LC<sub>э</sub></span>', 'Р = 1/(2&pi;&radic;(LC<sub>э</sub>))')),
     if url == '74366':
@@ -242,8 +251,12 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('<th colspan=3>Входы</th>', '<th colspan=2>Входы</th>')),    
     if url == '74368':
         patterns.append(('<a href="https://www.microshemca.ru/74367"', '<a href="74367.html"')),
-    if url == 're3a':
-        patterns.append(('микросхемы <b>К155РЕ3</b> её', 'микросхемы К155РЕ3 её')),
+    if url == '7481':
+        patterns.append(('Q<sub>H</sub> подается напряжение низкого уровня.', 'Q<sub>H</sub> подается напряжение низкого уровня.</p>'))
+    if url == 'index':
+        patterns.append(('<td colspan=3>I<sup>0</sup><sub>вых</sub>= 20 мА</td>', '<td colspan=3>I<sup>0</sup><sub>вых</sub>= 20 мА</td><td colspan=2></td>'))
+        patterns.append(('<td colspan=3>I<sup>1</sup><sub>вых</sub>= -1 мА</td>', '<td colspan=3>I<sup>1</sup><sub>вых</sub>= -1 мА</td><td colspan=2></td>'))
+        patterns.append(('img1.jpg" ', 'img1.jpg" alt="Схема логического элемента ТТЛ"'))
 
     htm = mrep(htm, patterns)
 
@@ -420,7 +433,7 @@ if __name__ == '__main__':
     # дополнительные статьи
     articles = {
         'index'    : 'ttl',
-        're3a'     : 're3a',
+        'RE3a'     : 're3a',
         'statii/a1': 'appl',
         'statii/a2': 'gen'
         }

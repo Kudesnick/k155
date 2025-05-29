@@ -246,6 +246,7 @@ for i in Path('.').glob('*.html'):
     html_compact = html_compact.replace('для арифметико-логическое устройсво', 'для арифметико-логического устройства')
     if (fname == 'k155ir13.html'): html_compact = html_compact.replace('четырехразрядный', 'восьмиразрядный')
     if (fname == 'ld1.html'): html_compact = html_compact.replace('МикросхемаК155ЛД1', 'Микросхема К155ЛД1')
+    html_compact = html_compact.replace('⊕', '&#8853;').replace('🠕', '&#8593;').replace('↑', '&#8593;').replace('↓', '&#8595;').replace('⇅', '&#8645;').replace('⇵', '&#8693;')
     # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 
