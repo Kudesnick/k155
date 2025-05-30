@@ -199,6 +199,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('плюс', '+'))
     if url == '7430':
         patterns.append(('<th colspan=2>Входы</th>', '<th>Входы</th>'))
+    if url == '7414':
+        patterns.append(('сигналов,формирователи', 'сигналов, формирователи'))
+    if url == '7472':
+        patterns.append(('74imp.jpg" ', '74imp.jpg" alt="Временная диаграмма тактового импульса" '))
     if url == 'LA6':
         patterns.append(('<td align=center> 15 </td>', '<td align=center> 14 </td>'))
     if url == 'LA7':
@@ -223,6 +227,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('представляет собой', 'представляют собой'))
     if url == 'LN5':
         patterns.append(('до 15 8', 'до 15 В'))
+    if url == 'LP4':
+        patterns.append(('imgLN4.jpg', 'imgLP4.jpg'))
     if url == 'LP9':
         patterns.append(('<td align=center> 7 </td>', '<tr><td align=center> 7 </td>'))
     if url == 'LR4':
@@ -232,6 +238,9 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('микросхемы <b>К155РЕ3</b> её', 'микросхемы К155РЕ3 её'))
     if url == 'RU1-3':
         patterns.append(('записи 1 и О', 'записи лог. "1" и лог. "0"'))
+    if url in ['TM5', 'TM7']:
+        patterns.append(('защелк', 'защёлк'))
+        patterns.append(('ячёйку', 'ячейку'))
     if url == 'TW1':
         patterns.append(('<td><u>&nbsp;&nbsp;</u>&prod;<u>&nbsp;&nbsp;</u></td>', '<td>&#8645;</td>'))
     if url == 'statii/a1':
@@ -253,6 +262,14 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('<a href="https://www.microshemca.ru/74367"', '<a href="74367.html"')),
     if url == '7481':
         patterns.append(('Q<sub>H</sub> подается напряжение низкого уровня.', 'Q<sub>H</sub> подается напряжение низкого уровня.</p>'))
+    if url == '74175':
+        patterns.append(('<th>Выходы</th>', '<th colspan=2>Выходы</th>'))
+    if url == '74185':
+        patterns.append(('<th colspan=5>Выходы ', '<th colspan=8>Выходы '))
+    if url == '74172':
+        patterns.append(('1WO/R0 и 2W2/R2.', '1WO/R0 и 2W2/R2.</li>'))
+        patterns.append(('на <li>Выходы', 'на выходы данных.</li><li>Выходы'))
+        patterns.append(('разрешенич', 'разрешения'))
     if url == 'index':
         patterns.append(('<td colspan=3>I<sup>0</sup><sub>вых</sub>= 20 мА</td>', '<td colspan=3>I<sup>0</sup><sub>вых</sub>= 20 мА</td><td colspan=2></td>'))
         patterns.append(('<td colspan=3>I<sup>1</sup><sub>вых</sub>= -1 мА</td>', '<td colspan=3>I<sup>1</sup><sub>вых</sub>= -1 мА</td><td colspan=2></td>'))
@@ -279,12 +296,8 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     for capt in soup.find_all('caption'):
         if capt.find('h4'): capt.h4.unwrap()
         [br.decompose() for br in capt.find_all('br')]
-    del_attr(soup.find_all(['table', 'caption', 'tbody', 'tr', 'th', 'td', 'ul']),
-                           ['align', 'border', 'cellpadding', 'cellspacing', 'width', 'tupe'])
-    
-    # удаляем лишнее форматирование у прочих элементов
-    del_attr(soup.find_all(['ul']),
-                           ['compact','tupe'])
+    del_attr(soup.find_all(['table', 'caption', 'tbody', 'tr', 'th', 'td', 'ul', 'ol']),
+                           ['align', 'border', 'cellpadding', 'cellspacing', 'width', 'tupe', 'compact', 'type', 'start'])
 
     # загружаем изображения
     del_attr(soup.find_all('img'), ["align", "hspace", "vspace", "width"])
@@ -313,7 +326,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     # Чиним списки, не завернутые в ul 
     ul = None
     for li in soup.find_all('li'):
-        if li.parent.name == 'ul':
+        if li.parent.name in ['ul', 'ol']:
             ul = None
         elif ul == None:
             ul = BeautifulSoup().new_tag('ul')
@@ -423,7 +436,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     return alt_name
 
 if __name__ == '__main__':
-    childs = 'AG1.AG3.AP1.IW1.IW3.ID1.ID3.ID4.ID7.ID8.ID9.ID10.ID11.ID12.ID13.ID15.ID24.IE1.IE2.IE4.IE5.IE6.IE7.IE8.IE9.IE14.IM1.IM2.IM3.IP2.IP3.IP4.IP6-7.IR1.IR13.IR15.IR17.IR32.KP1.KP2.KP5.KP7.LA1.LA2.LA3.LA4.LA6.LA7.LA8.LA10.LA11.LA12.LA13.LA18.LD1.LD3.LE1.LE2.LE3.LE4.LE5.LE6.LI1.LI4.LI5.LL1.LL2.LN1.LN2.LN3.LN4.LN5.LN6.LP4.LP5.LP7.LP8.LP9.LP10.LP11.LR1.LR3.LR4.PP5.PR6.PR7.RE3.RE21.RE22.RE23.RE24.RP1.RP3.RU1-3.RU2.RU5.RU7.TW1.TW15.TL1.TL2.TL3.TM2.TM5.TM7.TM8.XL1'.split('.')
+    childs = 'AG1.AG3.AP1.IW1.IW3.ID1.ID3.ID4.ID7.ID8.ID9.ID10.ID11.ID12.ID13.ID15.ID24.IE1.IE2.IE4.IE5.IE6.IE7.IE8.IE9.IE14.IM1.IM2.IM3.IP2.IP3.IP4.IP6-7.IR1.IR13.IR15.IR17.IR32.KP1.KP2.KP5.KP7.LA1.LA2.LA3.LA4.LA6.LA7.LA8.LA10.LA11.LA12.LA13.LA18.LD1.LD3.LE1.LE2.LE3.LE4.LE5.LE6.LI1.LI4.LI5.LL1.LL2.LN1.LN2.LN3.LN5.LN6.LP4.LP5.LP7.LP8.LP9.LP10.LP11.LR1.LR3.LR4.PP5.PR6.PR7.RE3.RE21.RE22.RE23.RE24.RP1.RP3.RU1-3.RU2.RU5.RU7.TW1.TW15.TL1.TL2.TL3.TM2.TM5.TM7.TM8.XL1'.split('.')
     # фактически отсутствующие страницы
     # IE7 объединена с IE6
     # IM3 отсутствует
@@ -445,7 +458,7 @@ if __name__ == '__main__':
 
     glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', parser).li for i in childs if not i in articles.keys()]
 
-    for i in childs: scrap(i)
-
     # подгружаем пользовательские картинки
-    img_copy(['styles.css'])
+    img_copy(['imgLP4.jpg', 'styles.css'])
+
+    for i in childs: scrap(i)

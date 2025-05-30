@@ -47,6 +47,7 @@ for i in Path('junradio').glob('*.jpg'):
     shutil.copy(str(i), str(release))
 
 shutil.copy('k155.djvu', str(release))
+shutil.copy('k155.pdf', str(release))
 shutil.copy('styles.css', str(release))
 
 # Совмещение навигации
@@ -153,13 +154,14 @@ for i in ['k155ie6', 'k155ie7', 'ie6', '74192', '74193']:
 # Работа с дополнительными материалами
 # ==============================================================================
 
-# Формирование страницы dc.html
-html = readhtml(str(Path('..').joinpath('dc.html')))
-dc = copy.copy(template)
-content = dc.find('div', {'id': 'content'})
-content.clear()
-content.extend(html.find('div', {'id': 'content'}))
-savehtml(dc, 'dc.html')
+# Формирование дополнительных страниц dc.html
+for fname in ['dc', 'ln4']:
+    html = readhtml(str(Path('..').joinpath(f'{fname}.html')))
+    tmp = copy.copy(template)
+    content = tmp.find('div', {'id': 'content'})
+    content.clear()
+    content.extend(html.find('div', {'id': 'content'}))
+    savehtml(tmp, f'{fname}.html')
 
 def row(link: str, linktxt: str, text: str):
     return BeautifulSoup(f'<tr><td><a href="{link}">{linktxt}</a></td><td>{text}</td></tr>', parser)
@@ -182,13 +184,12 @@ table.table.tbody.insert( 16, row('id7.html'  , 'К155ИД7'  , 'Высокос�
 table.table.tbody.insert( 30, row('id24.html' , 'К155ИД24' , 'Высоковольтный двоично-десятичный дешифратор с ОК'))
 table.table.tbody.insert( 62, row('ip6-7.html', 'К155ИП6-7', '4 ДНШУ'))
 table.table.tbody.insert(122, row('li4.html'  , 'К155ЛИ4'  , '3 логических элемента 3И'))
-table.table.tbody.insert(136, row('ln4.html'  , 'К155ЛН4'  , '6 буферных элементов без инверсии'))
-table.table.tbody.insert(176, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
-table.table.tbody.insert(206, row('xl1.html'  , 'К155ХЛ1'  , 'Универсальный элемент для ЦВМ'))
+table.table.tbody.insert(174, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
+table.table.tbody.insert(204, row('xl1.html'  , 'К155ХЛ1'  , 'Универсальный элемент для ЦВМ'))
 savehtml(index, 'index.html')
 
 # Собираем список страниц для редактирования
-morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 're3a.html']]
+morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 'k155.pdf', 're3a.html']]
 morelist.append(global_nav.find_all('a')[0])
 
 # Обновляем боковое меню
