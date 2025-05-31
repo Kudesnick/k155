@@ -265,41 +265,19 @@ a[href$='.jpg']:hover::after {
 }
 
 /* Всплывающее меню */
-#menu_toggle, #map > label {
-    display: none;
-}
-
 @media only screen and (max-width: 768px) {
+    #map {
+        float: none;
+    }
+
     /* menu button */
-    #map > label {
+    #map::before {
         display: flex;
         align-items: center;
         position: relative;
-        width: 2em;
-        height: 2em;
-        top: 0.5em;
-        left: 1em;
         cursor: pointer;
-        z-index: 1;
-    }
-    #map > label > span,
-    #map > label > span::before,
-    #map > label > span::after {
-        display: block;
-        position: absolute;
-        width: 0.3em;
-        height: 0.3em;
-        border-radius: 0.15em;
-        margin: 0 auto;
-        background-color: var(--color-menu-border);
-    }
-    #map > label > span::before {
-        content: '';
-        top: -0.7em;
-    }
-    #map > label > span::after {
-        content: '';
-        top: 0.7em;
+        content: '≡';
+        font-size: 2.5em;
     }
 
     #map > ul {
@@ -312,6 +290,8 @@ a[href$='.jpg']:hover::after {
         text-align: center;
         background-color: var(--color-menu-bg);
         opacity: 0;
+        margin: 0;
+        padding: 0;
     }
     /* menu items */
     #map > ul > li {
@@ -325,32 +305,14 @@ a[href$='.jpg']:hover::after {
     }
 
     /* show menu */
-    #map > label:hover > span {
-        transform: rotate(45deg);
-        width: 100%;
-    }
-    #map > label:hover > span::before {
-        top: 0;
-        transform: rotate(0);
-        visibility: hidden;
-    }
-    #map > label:hover > span::after {
-        top: 0;
-        transform: rotate(90deg);
-        width: 100%;
-    }
-    #map > label:hover ~ ul, #map > label ~ ul:hover {
+    #map:hover > ul {
         display: block;
         left: 0;
         opacity: 1;
     }
 
     /* animation */
-    #map > label > span,
-    #map > label > span::before,
-    #map > label > span::after,
-    #map > ul,
-    #map > ul > * {
+    #map > ul, #map > ul > * {
         transition-duration: .5s;
     }
 }
