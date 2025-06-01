@@ -11,31 +11,11 @@
             "justMyCode": true
         },
         {
-            "name": "chipinfo_arg",
-            "type": "python",
-            "request": "launch",
-            "program": "../chipinfo_scrap.py",
-            "cwd": "${workspaceFolder}/chipinfo",
-            "args": ["pp5.html", "tv1.html", "tv15.html", "tm2.html", "ru5.html", "ru7.html", "id9.html", "pr7.html"],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
             "name": "kiloom",
             "type": "python",
             "request": "launch",
             "program": "../kiloom_scrap.py",
             "cwd": "${workspaceFolder}/kiloom",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "kiloom_arg",
-            "type": "python",
-            "request": "launch",
-            "program": "../kiloom_scrap.py",
-            "cwd": "${workspaceFolder}/kiloom",
-            "args": ["k155la1-km155la1-kb155la1-4.html", "k155la2-km155la2-kb155la2-4.html", "k155la3-km155la3-kb155la3-4.html"],
             "console": "integratedTerminal",
             "justMyCode": true
         },
@@ -49,16 +29,6 @@
             "justMyCode": true
         },
         {
-            "name": "microshemca_arg",
-            "type": "python",
-            "request": "launch",
-            "program": "../microshemca_scrap.py",
-            "cwd": "${workspaceFolder}/microshemca",
-            "args": ["index", "a1", "a2"],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
             "name": "junradio",
             "type": "python",
             "request": "launch",
@@ -66,6 +36,14 @@
             "cwd": "${workspaceFolder}/junradio",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "kozak",
+            "type": "python",
+            "request": "launch",
+            "program": "../kozak_scrap.py",
+            "cwd": "${workspaceFolder}/kozak",
+            "console": "integratedTerminal"
         },
         {
             "name": "release",

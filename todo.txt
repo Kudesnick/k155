@@ -2,10 +2,12 @@
 
 ie2, ie4, ie5, ie9, li5, ll1, ll2, pp5, rp3, tv1, tv15, tm8 - нет количества интегральных элементов
 
-# microshemca
-
 # miscelaneous
 
+Заскрапить https://www.inp.nsk.su/~kozak/ttl/ttlh00.htm
+Заскрапить https://lib.qrz.ru/node/5104
+
+Менять title в соответствии с названием страницы
 Добавить ссылку на dc.html в связанные страницы
 Конвертировать *.gif в *.png
 Иконка сайта
