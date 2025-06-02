@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>TTL, handbook, V.Kozak</title>
+<link rel="stylesheet" href="ttlcss.css">
+</head>
+<body bgcolor="#FFFFFF">
+<table border="0" cellspacing="0" cellpadding="4" bgcolor="#CCCCCC" width="100%">
+  <tr class="greenheader3"> 
+    <td width="25%"> 
+      <div align="center"><a href="ttlh54.htm">Предыдущая</a></div>
+    </td>
+    <td width="25%"> 
+      <div align="center"><a href="../start.htm">Начало сайта</a></div>
+    </td>
+    <td width="25%">
+      <div align="center"><a href="ttlh00.htm">Первая страница</a></div>
+    </td>
+    <td width="25%">
+      <div align="center"><a href="ttlh56.htm">Следующая</a></div>
+    </td>
+  </tr>
+</table>
+<br>
+<div align="center"> 
+  <div align="left"> 
+    <table border="0" cellspacing="2" cellpadding="2" bgcolor="#CCCCCC" width="100%">
+      <tr> 
+        <td> 
+          <div align="center"><b class="greenheader2">Справочник по стандартным 
+            цифровым ТТЛ микросхемам</b></div>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <div align="center" class="td1"><tt>ИЕ14 = (196) - двоично-десятичный 
+            счетчик</tt> <br>
+            <tt>ИЕ15 = (197) - двоичный счетчик</tt></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <tt><img src="ttlp070.gif" height=110 width=150 align=RIGHT>&nbsp;&nbsp;&nbsp;&nbsp; 
+    Счетчики состоят из делителей на 2 и на 5/8 с общими сбросом и загрузкой. 
+    Для получения делителя на 10/16 необходимо соединить "Qa" и " Cb". "M"=H - 
+    счет; "M"=L - загрузка. <br>
+    &nbsp; </tt> 
+    <table  cellspacing=0 cellpadding=3 cols=2 width="300" border="1" >
+      <tr class="row"> 
+        <td  width="19%"><tt>Вывод</tt></td>
+        <td  width="81%"><tt>&nbsp;&nbsp;&nbsp; Назначение</tt></td>
+      </tr>
+      <tr> 
+        <td  width="19%"><tt>M</tt></td>
+        <td  width="81%"><tt>выбор счет/загрузка</tt></td>
+      </tr>
+      <tr> 
+        <td  width="19%"><tt>Ca</tt></td>
+        <td  width="81%"><tt>вход делителя на 2 (~\_)</tt></td>
+      </tr>
+      <tr> 
+        <td  width="19%"><tt>Cb</tt></td>
+        <td  width="81%"><tt>вход делителя на 5/8 (~\_)</tt></td>
+      </tr>
+      <tr> 
+        <td  width="19%"><tt>Cl</tt></td>
+        <td  width="81%"><tt>сброс (активно- L)</tt></td>
+      </tr>
+      <tr> 
+        <td  width="19%"><tt>A-D</tt></td>
+        <td  width="81%"><tt>входы для загрузки</tt></td>
+      </tr>
+    </table>
+    <tt>&nbsp;</tt> 
+    <table  cellspacing=0 cellpadding=3 cols=4 width="560" border="1" >
+      <tr class="row"> 
+        <td  width="51%"><tt>&nbsp;&nbsp;&nbsp; Параметры</tt></td>
+        <td  width="15%"><tt>&nbsp; 54/74</tt> <br>
+          <tt>(133,155)</tt></td>
+        <td  width="17%"><tt>&nbsp;54LS/74LS</tt> <br>
+          <tt>&nbsp;(533,555)</tt></td>
+        <td  width="17%"><tt>&nbsp; 54S/74S</tt> <br>
+          <tt>&nbsp;(530,531)</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Выходной ток лог. 1, мА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp; 0.8</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp; 0.4</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Выходной ток лог. 0, мА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 16</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp; 4/8</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 20</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 0 Ca, мА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp; 4.8</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp; 2.4</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 0 Cb (ИЕ14), мА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp; 6.4</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp; 2.8</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 10</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 0 Cb (ИЕ15), мА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp; 3.2</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp; 1.3</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%" height="21"><tt>Входной ток лог. 0 Cl (ИЕ14), 
+          мА</tt></td>
+        <td  width="15%" height="21"><tt>&nbsp;&nbsp;&nbsp; 3.2</tt></td>
+        <td  width="17%" height="21"><tt>&nbsp;&nbsp;&nbsp; 0.8</tt></td>
+        <td  width="17%" height="21"><tt>&nbsp;&nbsp; 0.75</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 0 (ИЕ15), мА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp; 1.6</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp; 0.4</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp; 0.75</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 1 Ca, мкА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 80</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 40</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 50</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 1 Cb, мкА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp; 120</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 80</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 50</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 1 Cb, мкА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 80</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 40</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 50</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 1 Cl, мкА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 80</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 40</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 50</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Входной ток лог. 1, мкА</tt></td>
+        <td  width="15%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 40</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 20</tt></td>
+        <td  width="17%"><tt>&nbsp;&nbsp;&nbsp;&nbsp; 50</tt></td>
+      </tr>
+      <tr> 
+        <td  width="51%"><tt>Ток потребления, мА</tt></td>
+        <td  width="15%"><tt>&nbsp;-48-59</tt></td>
+        <td  width="17%"><tt>&nbsp;-16-27</tt></td>
+        <td  width="17%"><tt>&nbsp;-75-120</tt></td>
+      </tr>
+    </table>
+    <tt>&nbsp;</tt> <br>
+    <tt>Задержки распространения (нс)</tt> 
+    <table  cellspacing=0 cellpadding=3 cols=7 width="650" border="1" >
+      <tr class="row"> 
+        <td  width="27%"><tt>От входа До выхода</tt></td>
+        <td  width="12%"><tt>&nbsp;155ИЕ14</tt></td>
+        <td  width="12%"><tt>&nbsp;155ИЕ15</tt></td>
+        <td  width="12%"><tt>&nbsp;555ИЕ14</tt></td>
+        <td  width="12%"><tt>&nbsp;555ИЕ15</tt></td>
+        <td  width="13%"><tt>&nbsp;531ИЕ14</tt></td>
+        <td  width="13%"><tt>&nbsp;531ИЕ15</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Cl"&nbsp;&nbsp;&nbsp; Q = H-->L</tt></td>
+        <td  width="12%"><tt>&nbsp;-25-37</tt></td>
+        <td  width="12%"><tt>&nbsp;-25-37</tt></td>
+        <td  width="12%"><tt>&nbsp;-34-51</tt></td>
+        <td  width="12%"><tt>&nbsp;-34-51</tt></td>
+        <td  width="13%"><tt>&nbsp;-26-37</tt></td>
+        <td  width="13%"><tt>&nbsp;-26-37</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Load"&nbsp; Q = L-->H</tt></td>
+        <td  width="12%"><tt>&nbsp;-22-33</tt></td>
+        <td  width="12%"><tt>&nbsp;-22-33</tt></td>
+        <td  width="12%"><tt>&nbsp;-27-41</tt></td>
+        <td  width="12%"><tt>&nbsp;-26-39</tt></td>
+        <td  width="13%"><tt>&nbsp;-10-18</tt></td>
+        <td  width="13%"><tt>&nbsp;-10-18</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Load"&nbsp; Q = H-->L</tt></td>
+        <td  width="12%"><tt>&nbsp;-24-36</tt></td>
+        <td  width="12%"><tt>&nbsp;-24-36</tt></td>
+        <td  width="12%"><tt>&nbsp;-30-45</tt></td>
+        <td  width="12%"><tt>&nbsp;-30-45</tt></td>
+        <td  width="13%"><tt>&nbsp;-12-18</tt></td>
+        <td  width="13%"><tt>&nbsp;-12-18</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"A"-"D" Q = L-->H</tt></td>
+        <td  width="12%"><tt>&nbsp;-16-24</tt></td>
+        <td  width="12%"><tt>&nbsp;-16-24</tt></td>
+        <td  width="12%"><tt>&nbsp;-20-30</tt></td>
+        <td  width="12%"><tt>&nbsp;-18-27</tt></td>
+        <td  width="13%"><tt>&nbsp;- 7-12</tt></td>
+        <td  width="13%"><tt>&nbsp;- 7-12</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"A"-"D" Q = H-->L</tt></td>
+        <td  width="12%"><tt>&nbsp;-25-38</tt></td>
+        <td  width="12%"><tt>&nbsp;-25-38</tt></td>
+        <td  width="12%"><tt>&nbsp;-29-44</tt></td>
+        <td  width="12%"><tt>&nbsp;-29-44</tt></td>
+        <td  width="13%"><tt>&nbsp;-12-18</tt></td>
+        <td  width="13%"><tt>&nbsp;-12-18</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Ca"&nbsp;&nbsp;&nbsp; Qa= L-->H</tt></td>
+        <td  width="12%"><tt>&nbsp;- 7-12</tt></td>
+        <td  width="12%"><tt>&nbsp;- 7-12</tt></td>
+        <td  width="12%"><tt>&nbsp;- 8-15</tt></td>
+        <td  width="12%"><tt>&nbsp;- 8-15</tt></td>
+        <td  width="13%"><tt>&nbsp;- 5-10</tt></td>
+        <td  width="13%"><tt>&nbsp;- 5-10</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Ca"&nbsp;&nbsp;&nbsp; Qa= H-->L</tt></td>
+        <td  width="12%"><tt>&nbsp;-10-15</tt></td>
+        <td  width="12%"><tt>&nbsp;-10-15</tt></td>
+        <td  width="12%"><tt>&nbsp;-13-20</tt></td>
+        <td  width="12%"><tt>&nbsp;-14-21</tt></td>
+        <td  width="13%"><tt>&nbsp;- 6-10</tt></td>
+        <td  width="13%"><tt>&nbsp;- 6-10</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Cb"&nbsp;&nbsp;&nbsp; Qb= L-->H</tt></td>
+        <td  width="12%"><tt>&nbsp;-12-18</tt></td>
+        <td  width="12%"><tt>&nbsp;-12-18</tt></td>
+        <td  width="12%"><tt>&nbsp;-16-24</tt></td>
+        <td  width="12%"><tt>&nbsp;-12-19</tt></td>
+        <td  width="13%"><tt>&nbsp;- 5-10</tt></td>
+        <td  width="13%"><tt>&nbsp;- 5-10</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Cb"&nbsp;&nbsp;&nbsp; Qb= H-->L</tt></td>
+        <td  width="12%"><tt>&nbsp;-14-21</tt></td>
+        <td  width="12%"><tt>&nbsp;-14-21</tt></td>
+        <td  width="12%"><tt>&nbsp;-22-33</tt></td>
+        <td  width="12%"><tt>&nbsp;-22-35</tt></td>
+        <td  width="13%"><tt>&nbsp;- 8-12</tt></td>
+        <td  width="13%"><tt>&nbsp;- 8-12</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Cb"&nbsp;&nbsp;&nbsp; Qd= L-->H</tt></td>
+        <td  width="12%"><tt>&nbsp;-14-21</tt></td>
+        <td  width="12%"><tt>&nbsp;-36-54</tt></td>
+        <td  width="12%"><tt>&nbsp;-12-18</tt></td>
+        <td  width="12%"><tt>&nbsp;-55-78</tt></td>
+        <td  width="13%"><tt>&nbsp;- 5-10</tt></td>
+        <td  width="13%"><tt>&nbsp;-18-27</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>"Cb"&nbsp;&nbsp;&nbsp; Qd= H-->L</tt></td>
+        <td  width="12%"><tt>&nbsp;-12-18</tt></td>
+        <td  width="12%"><tt>&nbsp;-42-63</tt></td>
+        <td  width="12%"><tt>&nbsp;-30-45</tt></td>
+        <td  width="12%"><tt>&nbsp;-63-95</tt></td>
+        <td  width="13%"><tt>&nbsp;- 8-12</tt></td>
+        <td  width="13%"><tt>&nbsp;-22-33</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>Длительность "Ca"</tt></td>
+        <td  width="12%"><tt>&nbsp; 10-</tt></td>
+        <td  width="12%"><tt>&nbsp; 10-</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp; 5-</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp; 5-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>Длительность "Cb"</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="12%"><tt>&nbsp; 30-</tt></td>
+        <td  width="12%"><tt>&nbsp; 30-</tt></td>
+        <td  width="13%"><tt>&nbsp; 10-</tt></td>
+        <td  width="13%"><tt>&nbsp; 10-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>Длительность "Cl"</tt></td>
+        <td  width="12%"><tt>&nbsp; 15-</tt></td>
+        <td  width="12%"><tt>&nbsp; 15-</tt></td>
+        <td  width="12%"><tt>&nbsp; 15-</tt></td>
+        <td  width="12%"><tt>&nbsp; 15-</tt></td>
+        <td  width="13%"><tt>&nbsp; 30-</tt></td>
+        <td  width="13%"><tt>&nbsp; 30-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>Длительность "Load"</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="12%"><tt>&nbsp; 20-</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp; 5-</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp; 5-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>Fмакс. для "Ca", МГц</tt></td>
+        <td  width="12%"><tt>&nbsp; 50-70-</tt></td>
+        <td  width="12%"><tt>&nbsp; 50-70-</tt></td>
+        <td  width="12%"><tt>&nbsp; 30-40-</tt></td>
+        <td  width="12%"><tt>&nbsp; 30-40-</tt></td>
+        <td  width="13%"><tt>&nbsp;100-140-</tt></td>
+        <td  width="13%"><tt>&nbsp;100-140-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="27%"><tt>Fмакс. для "Cb", МГц</tt></td>
+        <td  width="12%"><tt>&nbsp; 25-</tt></td>
+        <td  width="12%"><tt>&nbsp; 25-</tt></td>
+        <td  width="12%"><tt>&nbsp; 15-</tt></td>
+        <td  width="12%"><tt>&nbsp; 15-</tt></td>
+        <td  width="13%"><tt>&nbsp; 50-</tt></td>
+        <td  width="13%"><tt>&nbsp; 50-</tt></td>
+      </tr>
+    </table>
+    <tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt> <br>
+  </div>
+</div>
+<div align="right"><span class="txtjust"></span><span class="greenheader"></span> 
+</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
+  <tr align="center"> 
+    <td width="50%"> 
+      <div align="center">Козак Виктор Романович, Новосибирск, 14-июня-2014 г. 
+      </div>
+    </td>
+    <td width="50%"> 
+      <div align="center"><a href="mailto:kozak@inp.nsk.su">email: kozak@inp.nsk.su</a></div>
+    </td>
+  </tr>
+  <tr align="center"> 
+    <td width="50%"><!-- HotLog --> 
+      <div align="center"> 
+        <script type="text/javascript" language="javascript">
+hotlog_js="1.0"; hotlog_r=""+Math.random()+"&s=86549&im=125&r="+
+escape(document.referrer)+"&pg="+escape(window.location.href);
+document.cookie="hotlog=1; path=/"; hotlog_r+="&c="+(document.cookie?"Y":"N");
+</script>
+        <script type="text/javascript" language="javascript1.1">
+hotlog_js="1.1"; hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N");
+</script>
+        <script type="text/javascript" language="javascript1.2">
+hotlog_js="1.2"; hotlog_r+="&wh="+screen.width+"x"+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?screen.colorDepth:screen.pixelDepth);
+</script>
+        <script type="text/javascript" language="javascript1.3">
+hotlog_js="1.3";
+</script>
+        <script type="text/javascript" language="javascript">
+hotlog_r+="&js="+hotlog_js;
+document.write('<a href="http://click.hotlog.ru/?86549" target="_top"><img '+
+'src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?'+
+hotlog_r+'" border="0" width="88" height="31" alt="HotLog"><\/a>');
+</script>
+        <noscript> <a href="http://click.hotlog.ru/?86549" target="_top"><img
+src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?s=86549&im=125" border="0"
+width="88" height="31" alt="HotLog"></a> </noscript> <!-- /HotLog --> </div>
+    </td>
+    <td width="50%"><!-- begin of Top100 code --> 
+      <div align="center"> 
+        <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?434437"></script>
+        <noscript> <img src="http://counter.rambler.ru/top100.cnt?434437" alt="" width="1" height="1" border="0" /> 
+        </noscript> <!-- end of Top100 code --> <!-- begin of Top100 logo --> 
+        <a href="http://top100.rambler.ru/home?id=434437"> <img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-gray2.gif" alt="Rambler's Top100"
+width="88" height="31" border="0" /></a> <!-- end of Top100 logo --></div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

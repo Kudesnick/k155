@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>TTL, handbook, V.Kozak</title>
+<link rel="stylesheet" href="ttlcss.css">
+</head>
+<body bgcolor="#FFFFFF">
+<table border="0" cellspacing="0" cellpadding="4" bgcolor="#CCCCCC" width="100%">
+  <tr class="greenheader3"> 
+    <td width="25%"> 
+      <div align="center"><a href="ttlh51.htm">Предыдущая</a></div>
+    </td>
+    <td width="25%"> 
+      <div align="center"><a href="../start.htm">Начало сайта</a></div>
+    </td>
+    <td width="25%">
+      <div align="center"><a href="ttlh00.htm">Первая страница</a></div>
+    </td>
+    <td width="25%">
+      <div align="center"><a href="ttlh53.htm">Следующая</a></div>
+    </td>
+  </tr>
+</table>
+<br>
+<div align="center"> 
+  <div align="left"> 
+    <table border="0" cellspacing="2" cellpadding="2" bgcolor="#CCCCCC" width="100%">
+      <tr> 
+        <td> 
+          <div align="center"><b class="greenheader2">Справочник по стандартным 
+            цифровым ТТЛ микросхемам</b></div>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <div align="center" class="td1"><tt>ИЕ8 = (97) - 6-разрядный делитель 
+            частоты с переменным коэффициентом деления</tt></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt> <img src="ttlp067.gif" height=140 width=175 align=RIGHT>&nbsp; 
+    <br>
+    <tt>&nbsp;&nbsp;&nbsp; ИЕ8 представляет из себя схему, пропускающую из 64-х 
+    входных импульсов на выход столько, сколько указано кодом на входах A-F. Fout=Fin*(32*F+16*E+8*D+4*C+2*B+A)/64. 
+    Микросхемы можно каскадировать для получения делителя большей разрядности.</tt> 
+    <br>
+    &nbsp; 
+    <table  cellspacing=0 cellpadding=3 width="240" border="1" >
+      <tr class="row"> 
+        <td  width="22%"><tt>Вывод</tt></td>
+        <td  width="78%"><tt>&nbsp;&nbsp;&nbsp; Назначение</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>Cк</tt></td>
+        <td  width="78%"><tt>входная частота</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>Cl</tt></td>
+        <td  width="78%"><tt>сброс</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>A-F</tt></td>
+        <td  width="78%"><tt>код выходной частоты</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>Str</tt></td>
+        <td  width="78%"><tt>запрет Z и Y</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>U/CI</tt></td>
+        <td  width="78%"><tt>запрет Y</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>En.I</tt></td>
+        <td  width="78%"><tt>вход каскадирования</tt></td>
+      </tr>
+      <tr> 
+        <td  width="22%"><tt>En.O</tt></td>
+        <td  width="78%"><tt>выход каскадирования</tt></td>
+      </tr>
+    </table>
+    &nbsp; 
+    <table  cellspacing=0 cellpadding=3 cols=9 width="430" border="1" >
+      <tr class="row"> 
+        <td  width="10%"><tt>&nbsp;Cl</tt></td>
+        <td  width="11%"><tt>En.I</tt></td>
+        <td  width="11%"><tt>&nbsp;Str</tt></td>
+        <td  width="17%"><tt>&nbsp; F-A</tt></td>
+        <td  width="11%"><tt>&nbsp;Cк</tt></td>
+        <td  width="11%"><tt>U/CI</tt></td>
+        <td  width="9%"><tt>&nbsp;Y</tt></td>
+        <td  width="9%"><tt>&nbsp;Z</tt></td>
+        <td  width="11%"><tt>En.O</tt></td>
+      </tr>
+      <tr> 
+        <td  width="10%"><tt>&nbsp;H</tt></td>
+        <td  width="11%"><tt>&nbsp;X</tt></td>
+        <td  width="11%"><tt>&nbsp;H</tt></td>
+        <td  width="17%"><tt>&nbsp; X</tt></td>
+        <td  width="11%"><tt>&nbsp;X</tt></td>
+        <td  width="11%"><tt>&nbsp;H</tt></td>
+        <td  width="9%"><tt>&nbsp;L</tt></td>
+        <td  width="9%"><tt>&nbsp;H</tt></td>
+        <td  width="11%"><tt>&nbsp; H</tt></td>
+      </tr>
+      <tr> 
+        <td  width="10%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="17%"><tt>&nbsp;LLLLLL</tt></td>
+        <td  width="11%"><tt>&nbsp;64</tt></td>
+        <td  width="11%"><tt>&nbsp;H</tt></td>
+        <td  width="9%"><tt>&nbsp;L</tt></td>
+        <td  width="9%"><tt>&nbsp;H</tt></td>
+        <td  width="11%"><tt>&nbsp; 1</tt></td>
+      </tr>
+      <tr> 
+        <td  width="10%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="17%"><tt>&nbsp;LHLLLL</tt></td>
+        <td  width="11%"><tt>&nbsp;64</tt></td>
+        <td  width="11%"><tt>&nbsp;H</tt></td>
+        <td  width="9%"><tt>&nbsp;16</tt></td>
+        <td  width="9%"><tt>&nbsp;16</tt></td>
+        <td  width="11%"><tt>&nbsp; 1</tt></td>
+      </tr>
+      <tr> 
+        <td  width="10%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="17%"><tt>&nbsp;HHHHHH</tt></td>
+        <td  width="11%"><tt>&nbsp;64</tt></td>
+        <td  width="11%"><tt>&nbsp;H</tt></td>
+        <td  width="9%"><tt>&nbsp;63</tt></td>
+        <td  width="9%"><tt>&nbsp;63</tt></td>
+        <td  width="11%"><tt>&nbsp; 1</tt></td>
+      </tr>
+      <tr> 
+        <td  width="10%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="17%"><tt>&nbsp;HHHHHH</tt></td>
+        <td  width="11%"><tt>&nbsp;64</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="9%"><tt>&nbsp;H</tt></td>
+        <td  width="9%"><tt>&nbsp;63</tt></td>
+        <td  width="11%"><tt>&nbsp; 1</tt></td>
+      </tr>
+      <tr> 
+        <td  width="10%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="11%"><tt>&nbsp;L</tt></td>
+        <td  width="17%"><tt>&nbsp;HLHLLL</tt></td>
+        <td  width="11%"><tt>&nbsp;64</tt></td>
+        <td  width="11%"><tt>&nbsp;H</tt></td>
+        <td  width="9%"><tt>&nbsp;40</tt></td>
+        <td  width="9%"><tt>&nbsp;40</tt></td>
+        <td  width="11%"><tt>&nbsp; 1</tt></td>
+      </tr>
+    </table>
+    &nbsp;&nbsp;&nbsp; <tt>В таблице число означает количество импульсов</tt> 
+    <br>
+    <tt>&nbsp;</tt> 
+    <table  cellspacing=0 cellpadding=3 cols=2 width="430" border="1" >
+      <tr class="row"> 
+        <td  width="72%"><tt>&nbsp;&nbsp;&nbsp; Параметры</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp; 133/155</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Входной ток лог. 0 для Cк, мА</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp; -3.2</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Входной ток лог. 0, мА</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp; -1.6</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Входной ток лог. 1 для Cк, мкА</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp; -80</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Входной ток лог. 1, мкА</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp; -40</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Ток потребления, мА</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp; -122</tt></td>
+      </tr>
+      <tr class="row"> 
+        <td  width="72%"><tt>Задержки распространения (нс)</tt></td>
+        <td  width="28%">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "En.I" до "En.O" L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>-13-20/-14-21</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Str " до "Z"&nbsp;&nbsp;&nbsp; L-->H 
+          / H-->L</tt></td>
+        <td  width="28%"><tt>-12-18/-15-23</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Cк " до "Y"&nbsp;&nbsp;&nbsp;&nbsp; 
+          L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>-26-39/-20-30</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Cк " до "Z"&nbsp;&nbsp;&nbsp;&nbsp; 
+          L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>-12-18/-17-26</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "A"-"F" до "Z"&nbsp;&nbsp; L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>- 6-10/- 9-14</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "U/C.I" до "Y"&nbsp;&nbsp; L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>- 9-14/- 6-10</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Str " до "Y"&nbsp;&nbsp;&nbsp; L-->H 
+          / H-->L</tt></td>
+        <td  width="28%"><tt>-19-30/-22-33</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Cк " до "En.O"&nbsp; L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>-19-30/-22-33</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "A"-"F" до "Y"&nbsp;&nbsp; L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>-15-23/-15-23</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Cl " до "Y"&nbsp;&nbsp;&nbsp;&nbsp; 
+          L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -24-36</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>От "Cl " до "Z"&nbsp;&nbsp;&nbsp;&nbsp; 
+          L-->H / H-->L</tt></td>
+        <td  width="28%"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /-15-23</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Длительность импульса "Cк", нс</tt></td>
+        <td  width="28%"><tt>&nbsp;20-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Длительность импульса "Cl", нс</tt></td>
+        <td  width="28%"><tt>&nbsp;15-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="72%"><tt>Максимальная тактовая частота, МГц</tt></td>
+        <td  width="28%"><tt>&nbsp;35-32-</tt></td>
+      </tr>
+    </table>
+    <br>
+  </div>
+</div>
+<div align="right"><span class="txtjust"></span><span class="greenheader"></span> 
+</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
+  <tr align="center"> 
+    <td width="50%"> 
+      <div align="center">Козак Виктор Романович, Новосибирск, 14-июня-2014 г. 
+      </div>
+    </td>
+    <td width="50%"> 
+      <div align="center"><a href="mailto:kozak@inp.nsk.su">email: kozak@inp.nsk.su</a></div>
+    </td>
+  </tr>
+  <tr align="center"> 
+    <td width="50%"><!-- HotLog --> 
+      <div align="center"> 
+        <script type="text/javascript" language="javascript">
+hotlog_js="1.0"; hotlog_r=""+Math.random()+"&s=86549&im=125&r="+
+escape(document.referrer)+"&pg="+escape(window.location.href);
+document.cookie="hotlog=1; path=/"; hotlog_r+="&c="+(document.cookie?"Y":"N");
+</script>
+        <script type="text/javascript" language="javascript1.1">
+hotlog_js="1.1"; hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N");
+</script>
+        <script type="text/javascript" language="javascript1.2">
+hotlog_js="1.2"; hotlog_r+="&wh="+screen.width+"x"+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?screen.colorDepth:screen.pixelDepth);
+</script>
+        <script type="text/javascript" language="javascript1.3">
+hotlog_js="1.3";
+</script>
+        <script type="text/javascript" language="javascript">
+hotlog_r+="&js="+hotlog_js;
+document.write('<a href="http://click.hotlog.ru/?86549" target="_top"><img '+
+'src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?'+
+hotlog_r+'" border="0" width="88" height="31" alt="HotLog"><\/a>');
+</script>
+        <noscript> <a href="http://click.hotlog.ru/?86549" target="_top"><img
+src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?s=86549&im=125" border="0"
+width="88" height="31" alt="HotLog"></a> </noscript> <!-- /HotLog --> </div>
+    </td>
+    <td width="50%"><!-- begin of Top100 code --> 
+      <div align="center"> 
+        <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?434437"></script>
+        <noscript> <img src="http://counter.rambler.ru/top100.cnt?434437" alt="" width="1" height="1" border="0" /> 
+        </noscript> <!-- end of Top100 code --> <!-- begin of Top100 logo --> 
+        <a href="http://top100.rambler.ru/home?id=434437"> <img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-gray2.gif" alt="Rambler's Top100"
+width="88" height="31" border="0" /></a> <!-- end of Top100 logo --></div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

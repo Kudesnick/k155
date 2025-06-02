@@ -40,7 +40,7 @@ def get_img(url: str):
     global base_url
     cache = Path(url).name
     if not Path(cache).is_file():
-        req = requests.get(url, headers = {'User-Agent': 'Chrome'})
+        req = requests.get(base_url + url, headers = {'User-Agent': 'Chrome'})
         if req.status_code != 200:
             print(f'Error. Failed to download "{url}"', file = sys.stderr)
             return None
@@ -110,12 +110,16 @@ def scrap(url: str, alt_name):
         soup = BeautifulSoup(text, parser)
         # Убираем ссылки, не относящиеся к серии 155
         soup.ul.li.extract()
-        [li.extract() for li in soup.find_all('li') if not li.a['href'] in [f'ttlh{str(j).zfill(2)}.htm' for j in arglst]]
+        [li.extract() for li in soup.find_all('li') if not li.a['href'] in [f'ttlh{str(j).zfill(2)}.htm' for j in args.keys()]]
         glob_nav = copy.copy(soup.ul)
         for li in glob_nav.find_all('li'):
             txt = li.find_all(string = True)[2]
             li.a['title'] = txt.strip(' -')
             txt.extract()
+            href = li.a['href'].replace('ttlh', '').replace('.htm', '')
+            v = args[int(href)]
+            if not isinstance(v,str): v = v[0]
+            li.a['href'] = f'{href.zfill(3)}{v}.html'
 
     # предварительное форматирование текста
     soup.smooth()
@@ -126,18 +130,38 @@ def scrap(url: str, alt_name):
     soup.smooth()
 
     # удаляем лишнее форматирование
-    del_attr(soup.find_all(['table', 'div', 'tr', 'th', 'td', 'ul', 'ol']),
-                           ['align', 'border', 'bgcolor', 'cellpadding', 'cellspacing', 'width', 'tupe', 'compact', 'type', 'start'])
+    del_attr(soup.find_all(['table', 'div', 'tr', 'th', 'td', 'ul', 'ol', 'img']),
+                           ['align', 'border', 'bgcolor', 'cellpadding', 'cellspacing', 'width', 'height', 'tupe', 'compact', 'type', 'start'])
 
     # загружаем изображения
     for img in soup.find_all('img'):
         img['src'] = get_img(img['src'])
+        img.wrap(BeautifulSoup().new_tag('figure'))
+        img.parent.append(BeautifulSoup().new_tag('figcaption'))
+
+    # удаляем ненужные теги
+    [i.unwrap() for i in soup.find_all(string = False) if i.name in ['center']]
 
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
 
     content = template.find('div', id = "content")
     content.clear()
+
+    if alt_name != 'index.html':
+        # Извлекаем заголовки
+        hdrs = soup.table.find_all('tt')
+        if not hdrs: hdrs = [soup.table.find('div', {'class': 'td1'})]
+        for i in hdrs:
+            i.name = 'h1'
+        content.extend(hdrs)
+        soup.table.extract()
+        # Избавляемся от <tt> и <span class="txtjust">
+        for i in soup.find_all('span', {'class': 'txtjust'}):
+            i.name = 'tt'
+            del i.attrs['class']
+        [i.unwrap() for i in soup.find_all('tt') if i.parent.name in ['tt', 'td']]
+        for i in soup.find_all('tt'): i.name = 'p'
 
     # добавляем содержимое
     content.extend(soup)
@@ -148,7 +172,7 @@ def scrap(url: str, alt_name):
     # глобальная навигация
     if glob_nav:
         chip_ul = template.find(id = 'map').ul
-        chip_ul.extend(glob_nav)
+        chip_ul.extend(copy.copy(glob_nav))
 
     # сохраняем результат в файл
     template.smooth()
@@ -158,16 +182,22 @@ def scrap(url: str, alt_name):
     Path(alt_name).write_text(template.prettify(), enc)
     print(f'File "{alt_name}" writed')
 
-    return glob_nav
-
 if __name__ == '__main__':
-    arglst = [7, 8, 28, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 42, 47, 48, 49, 50, 51, 52, 53, 55, 63, 64, 65, 69,
-           70, 71, 73, 80, 86, 87, 89, 103, 112, 113, 114, 126, 128, 130, 131, 132, 139, 142, 143, 144, 145, 148]
+    args = {7: 'ag1', 8: 'ag3', 28: 'iv1', 29: 'iv3', 30: 'id1', 31: 'id3', 32: 'id4', 34: 'id7',
+        35: 'id8', 36: 'id9', 37: ['id10', 'id24'], 38: 'id11', 39: 'id12', 40: 'id13', 42: 'id15',
+        47: 'ie1', 48: 'ie2', 49: 'ie4', 50: 'ie5', 51: 'ie6', 52: 'ie8', 53: 'ie9', 55: 'ie14',
+        63: 'im1', 64: 'im2', 65: 'im3', 69: 'ip2', 70: 'ip3', 71: 'ip4', 73: 'ip6-7', 80: 'ir1',
+        86: 'ir13', 87: 'ir15', 89: 'ir17', 103: 'ir32', 112: 'kp1', 113: 'kp2',
+        114: ['kp5', 'kp7'], 126: ['pr6', 'pr7'], 128: 're3', 130: 'rp1', 131: 'rp3', 132: 'ru2',
+        139: 'tv1', 142: 'tv15', 143: 'tm2', 144: ['tm5', 'tm7'], 145: 'tm8', 148: 'xl1'}
+
+    # подгружаем пользовательские картинки
+    img_copy(['styles.css'])
 
     scrap('00', 'index.html')
 
+    for k, v in args.items():
+        val = [v] if isinstance(v,str) else v
+        [scrap(str(k).zfill(2), f'{str(k).zfill(3)}{i}.html') for i in val]
+
     print('complete')
-
-    # glob_nav = [BeautifulSoup(f'<li><a href = "{short_name(i)}">К155{Path(short_name(i)).stem}</a></li>', parser).li for i in childs if not i in articles.keys()]
-
-    # for i in childs: scrap(i)

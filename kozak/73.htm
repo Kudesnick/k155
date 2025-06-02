@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>TTL, handbook, V.Kozak</title>
+<link rel="stylesheet" href="ttlcss.css">
+</head>
+<body bgcolor="#FFFFFF">
+<table border="0" cellspacing="0" cellpadding="4" bgcolor="#CCCCCC" width="100%">
+  <tr class="greenheader3"> 
+    <td width="25%"> 
+      <div align="center"><a href="ttlh72.htm">Предыдущая</a></div>
+    </td>
+    <td width="25%"> 
+      <div align="center"><a href="../start.htm">Начало сайта</a></div>
+    </td>
+    <td width="25%">
+      <div align="center"><a href="ttlh00.htm">Первая страница</a></div>
+    </td>
+    <td width="25%">
+      <div align="center"><a href="ttlh74.htm">Следующая</a></div>
+    </td>
+  </tr>
+</table>
+<br>
+<div align="center"> 
+  <div align="left"> 
+    <table border="0" cellspacing="2" cellpadding="2" bgcolor="#CCCCCC" width="100%">
+      <tr> 
+        <td> 
+          <div align="center"><b class="greenheader2">Справочник по стандартным 
+            цифровым ТТЛ микросхемам</b></div>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <div align="center" class="td1"><tt>ИП6 = (242) - четыре инверсных двунаправленных 
+            драйвера</tt> <br>
+            <tt>ИП7 = (243) - четыре неинверсных двунаправленных драйвера</tt></div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <img src="ttlp088.gif" height=115 width=160 align=RIGHT>&nbsp;&nbsp;&nbsp; 
+    <tt>Параметры приведены для 54LS242/ 74LS242, 54LS243/ 74LS243, AM54 S242/AM74S242, 
+    AM54S243/AM74S243</tt>.<br>
+    <tt>&nbsp;&nbsp;&nbsp; ИП6 и ИП7 могут передавать данные с шины A на шину 
+    B или с шины B на шину A в прямом (ИП7) или инверсном (ИП6) виде или быть 
+    отключены от обоих шин.Приемники обоих схем имеют на входе триггеры Шмитта 
+    с гистерезисом 0.2-0.4- В.<br>
+    <br>
+    </tt> <tt>&nbsp;&nbsp;&nbsp; ИП6<br>
+    </tt> 
+    <table  cellspacing=0 cellpadding=3 cols=2 width="200" border="1" >
+      <tr class="row"> 
+        <td  width="52%"><tt>&nbsp;Управление</tt> <br>
+          <tt>&nbsp; входами</tt> <br>
+          <tt>&nbsp;-Gab Gba</tt></td>
+        <td  width="48%"><tt>&nbsp;Выходные</tt> <br>
+          <tt>&nbsp; данные</tt> <br>
+          <tt>&nbsp; A&nbsp;&nbsp; B</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; H&nbsp;&nbsp; H</tt></td>
+        <td  width="48%"><tt>&nbsp;-O&nbsp;&nbsp; I</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; L&nbsp;&nbsp; H</tt></td>
+        <td  width="48%"><tt>&nbsp; *&nbsp;&nbsp; *</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; H&nbsp;&nbsp; L</tt></td>
+        <td  width="48%"><tt>&nbsp;Отключено</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; L&nbsp;&nbsp; L</tt></td>
+        <td  width="48%"><tt>&nbsp; I&nbsp; -O</tt></td>
+      </tr>
+    </table>
+    &nbsp; <br>
+    <tt>&nbsp;&nbsp;&nbsp; ИП7</tt> 
+    <table  cellspacing=0 cellpadding=3 cols=2 width="200" border="1" >
+      <tr class="row"> 
+        <td  width="52%"><tt>&nbsp;Управление</tt> <br>
+          <tt>&nbsp; входами</tt> <br>
+          <tt>&nbsp;-Gab Gba</tt></td>
+        <td  width="48%"><tt>&nbsp;Выходные</tt> <br>
+          <tt>&nbsp; данные</tt> <br>
+          <tt>&nbsp; A&nbsp;&nbsp; B</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; H&nbsp;&nbsp; H</tt></td>
+        <td  width="48%"><tt>&nbsp; O&nbsp;&nbsp; I</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; L&nbsp;&nbsp; H</tt></td>
+        <td  width="48%"><tt>&nbsp; *&nbsp;&nbsp; *</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; H&nbsp;&nbsp; L</tt></td>
+        <td  width="48%"><tt>&nbsp;Отключено</tt></td>
+      </tr>
+      <tr> 
+        <td  width="52%"><tt>&nbsp;&nbsp; L&nbsp;&nbsp; L</tt></td>
+        <td  width="48%"><tt>&nbsp; I&nbsp;&nbsp; O</tt></td>
+      </tr>
+    </table>
+    <tt>&nbsp;</tt> 
+    <table  cellspacing=0 cellpadding=3 cols=6 width="750" border="1" >
+      <tr class="row"> 
+        <td  width="42%"><tt>&nbsp;&nbsp;&nbsp; Параметры</tt></td>
+        <td  width="13%"> 
+          <center>
+            <tt>54LS/74LS</tt> <br>
+            <tt>533,555</tt>
+          </center>
+        </td>
+        <td  width="11%"> 
+          <center>
+            <tt>54S/74S</tt> <br>
+            <tt>530,531</tt>
+          </center>
+        </td>
+        <td  width="13%"> 
+          <center>
+            <tt>74ALS</tt> <br>
+            <tt>(1533)</tt>
+          </center>
+        </td>
+        <td  width="10%"> 
+          <center>
+            <tt>74AS</tt> <br>
+            <tt>(1530)</tt>
+          </center>
+        </td>
+        <td  width="11%"> 
+          <center>
+            <tt>54F/74F</tt> <br>
+            <tt>(1531)</tt>
+          </center>
+        </td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходной ток лог.0, мА</tt></td>
+        <td  width="13%"><tt>&nbsp; 12/24</tt></td>
+        <td  width="11%"><tt>&nbsp; 48/64</tt></td>
+        <td  width="13%"><tt>&nbsp; 12/15</tt></td>
+        <td  width="10%"><tt>&nbsp; 12/15</tt></td>
+        <td  width="11%"><tt>&nbsp; 12/15</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходной ток лог.1, мА</tt></td>
+        <td  width="13%"><tt>&nbsp; 12/15</tt></td>
+        <td  width="11%"><tt>&nbsp; 12/15</tt></td>
+        <td  width="13%"><tt>&nbsp; 12/24</tt></td>
+        <td  width="10%"><tt>&nbsp; 48/64</tt></td>
+        <td  width="11%"><tt>&nbsp; 48/64</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Входной ток лог.0 для Gi, мкА</tt></td>
+        <td  width="13%"><tt>&nbsp;200</tt></td>
+        <td  width="11%"><tt>2000</tt></td>
+        <td  width="13%"><tt>&nbsp;100</tt></td>
+        <td  width="10%"><tt>&nbsp;500</tt></td>
+        <td  width="11%"><tt>1600</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Входной ток лог.0, мкА</tt></td>
+        <td  width="13%"><tt>&nbsp;200</tt></td>
+        <td  width="11%"><tt>&nbsp;400</tt></td>
+        <td  width="13%"><tt>&nbsp;100</tt></td>
+        <td  width="10%"><tt>1000</tt></td>
+        <td  width="11%"><tt>1600</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Входной ток лог.1, мкА</tt></td>
+        <td  width="13%"><tt>&nbsp; 20</tt></td>
+        <td  width="11%"><tt>&nbsp; 50</tt></td>
+        <td  width="13%"><tt>&nbsp; 20</tt></td>
+        <td  width="10%"><tt>&nbsp; 50</tt></td>
+        <td  width="11%"><tt>&nbsp; 70</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходное напр. лог.0 при токе 24 мА, В</tt></td>
+        <td  width="13%"><tt>-.35-0.5</tt></td>
+        <td  width="11%">&nbsp;</td>
+        <td  width="13%"><tt>-.35-0.5</tt></td>
+        <td  width="10%">&nbsp;</td>
+        <td  width="11%">&nbsp;</td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходное напр. лог.0 при токе 48 мА, В</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp;&nbsp; -0.55</tt></td>
+        <td  width="11%">&nbsp;</td>
+        <td  width="13%">&nbsp;</td>
+        <td  width="10%"><tt>&nbsp; -0.55</tt></td>
+        <td  width="11%"><tt>-0.5/</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходное напр. лог.0 при токе 64 мА, В</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp;&nbsp; -0.55</tt></td>
+        <td  width="11%"><tt>&nbsp;&nbsp;&nbsp; -0.55</tt></td>
+        <td  width="13%">&nbsp;</td>
+        <td  width="10%">&nbsp;</td>
+        <td  width="11%"><tt>&nbsp;&nbsp;&nbsp; /0.5</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходное напр. лог.1 при токе 3 мА, В</tt></td>
+        <td  width="13%"><tt>&nbsp;2.4-3.4-</tt></td>
+        <td  width="11%"><tt>&nbsp;2.4-3.4-</tt></td>
+        <td  width="13%"><tt>&nbsp;2.4-3.2-</tt></td>
+        <td  width="10%">&nbsp;</td>
+        <td  width="11%"><tt>&nbsp;2.4-3.4-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Выходное напр. лог.1 при токе 12 мА, В</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp; 2-</tt></td>
+        <td  width="11%"><tt>&nbsp;&nbsp; 2-</tt></td>
+        <td  width="13%"><tt>&nbsp;&nbsp; 2-</tt></td>
+        <td  width="10%"><tt>2.4-</tt></td>
+        <td  width="11%"><tt>&nbsp;2.0-</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток короткого замыкания мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-40-225</tt></td>
+        <td  width="11%"><tt>&nbsp;-50-225</tt></td>
+        <td  width="13%"><tt>&nbsp; 30-112</tt></td>
+        <td  width="10%"><tt>&nbsp;50-150</tt></td>
+        <td  width="11%"><tt>&nbsp;100-225</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток потребления, выходы H, ИП6 мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-22-38</tt></td>
+        <td  width="11%"><tt>&nbsp;-80-135</tt></td>
+        <td  width="13%"><tt>&nbsp;-10-16</tt></td>
+        <td  width="10%"><tt>-18-28</tt></td>
+        <td  width="11%"><tt>&nbsp;-22-35</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток потребления, выходы H, ИП7 мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-22-38</tt></td>
+        <td  width="11%"><tt>&nbsp;-95-160</tt></td>
+        <td  width="13%"><tt>&nbsp;-15-25</tt></td>
+        <td  width="10%"><tt>-28-44</tt></td>
+        <td  width="11%"><tt>&nbsp;-64-80</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток потребления, выходы L, ИП6 мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-29-50</tt></td>
+        <td  width="11%"><tt>-100-150</tt></td>
+        <td  width="13%"><tt>&nbsp;-14-21</tt></td>
+        <td  width="10%"><tt>-38-60</tt></td>
+        <td  width="11%"><tt>&nbsp;-40-55</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток потребления, выходы L, ИП7 мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-29-50</tt></td>
+        <td  width="11%"><tt>-120-180</tt></td>
+        <td  width="13%"><tt>&nbsp;-20-30</tt></td>
+        <td  width="10%"><tt>-47-74</tt></td>
+        <td  width="11%"><tt>&nbsp;-64-90</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток потребления, выходы Z, ИП6 мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-29-50</tt></td>
+        <td  width="11%"><tt>-100-150</tt></td>
+        <td  width="13%"><tt>&nbsp;-15-22</tt></td>
+        <td  width="10%"><tt>-25-39</tt></td>
+        <td  width="11%"><tt>&nbsp;-32-45</tt></td>
+      </tr>
+      <tr> 
+        <td  width="42%"><tt>Ток потребления, выходы Z, ИП7 мА</tt></td>
+        <td  width="13%"><tt>&nbsp;-32-54</tt></td>
+        <td  width="11%"><tt>-120-180</tt></td>
+        <td  width="13%"><tt>&nbsp;-21-32</tt></td>
+        <td  width="10%"><tt>-35-56</tt></td>
+        <td  width="11%"><tt>&nbsp;-71-90</tt></td>
+      </tr>
+    </table>
+    <tt>&nbsp;</tt> 
+    <table  cellspacing=0 cellpadding=3 cols=11 width="820" border="1" >
+      <tr> 
+        <td  width="14%" class="row"><tt>Задержки, нс</tt></td>
+        <td  width="8%" class="row"><tt>&nbsp;LS242</tt></td>
+        <td  width="8%" class="row"><tt>&nbsp;LS243</tt></td>
+        <td  width="9%" class="row"><tt>&nbsp;S242</tt></td>
+        <td  width="8%" class="row"><tt>&nbsp;S243</tt></td>
+        <td  width="8%" class="row"><tt>ALS242</tt></td>
+        <td  width="8%" class="row"><tt>ALS243</tt></td>
+        <td  width="8%" class="row"><tt>&nbsp;AS242</tt></td>
+        <td  width="8%" class="row"><tt>&nbsp;AS243</tt></td>
+        <td  width="10%" class="row"><tt>&nbsp;F242</tt></td>
+        <td  width="10%" class="row"><tt>&nbsp;F243</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%" class="row">&nbsp;</td>
+        <td  width="8%" class="row"><tt>555ИП6</tt></td>
+        <td  width="8%" class="row"><tt>555ИП7</tt></td>
+        <td  width="9%" class="row"><tt>531ИП6</tt></td>
+        <td  width="8%" class="row"><tt>531ИП7</tt></td>
+        <td  width="8%" class="row"><tt>1533ИП6</tt></td>
+        <td  width="8%" class="row"><tt>1533ИП7</tt></td>
+        <td  width="8%" class="row"><tt>1530ИП6</tt></td>
+        <td  width="8%" class="row"><tt>1530ИП7</tt></td>
+        <td  width="10%" class="row"><tt>1531ИП6</tt></td>
+        <td  width="10%" class="row"><tt>1531ИП7</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%"><tt>Вых.= L-->H</tt></td>
+        <td  width="8%"><tt>- 9-14</tt></td>
+        <td  width="8%"><tt>-12-18</tt></td>
+        <td  width="9%"><tt>-4.5-7</tt></td>
+        <td  width="8%"><tt>- 6-9</tt></td>
+        <td  width="8%"><tt>&nbsp; -11</tt></td>
+        <td  width="8%"><tt>&nbsp; -11</tt></td>
+        <td  width="8%"><tt>&nbsp;-6.5</tt></td>
+        <td  width="8%"><tt>&nbsp;-7.5</tt></td>
+        <td  width="10%"><tt>-4.5-6.5</tt></td>
+        <td  width="10%"><tt>-4.0-5.2</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%"><tt>Вых.= H-->L</tt></td>
+        <td  width="8%"><tt>-12-18</tt></td>
+        <td  width="8%"><tt>-12-18</tt></td>
+        <td  width="9%"><tt>-4.5-7</tt></td>
+        <td  width="8%"><tt>- 6-9</tt></td>
+        <td  width="8%"><tt>&nbsp; -10</tt></td>
+        <td  width="8%"><tt>&nbsp; -11</tt></td>
+        <td  width="8%"><tt>&nbsp;-5.7</tt></td>
+        <td  width="8%"><tt>&nbsp;-6.5</tt></td>
+        <td  width="10%"><tt>-3.0-4.5</tt></td>
+        <td  width="10%"><tt>-4.0-5.2</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%"><tt>Вых.= Z-->L</tt></td>
+        <td  width="8%"><tt>-20-30</tt></td>
+        <td  width="8%"><tt>-20-30</tt></td>
+        <td  width="9%"><tt>&nbsp;-10-15</tt></td>
+        <td  width="8%"><tt>-10-15</tt></td>
+        <td  width="8%"><tt>&nbsp; -18</tt></td>
+        <td  width="8%"><tt>&nbsp; -20</tt></td>
+        <td  width="8%"><tt>&nbsp;-6</tt></td>
+        <td  width="8%"><tt>&nbsp;-11</tt></td>
+        <td  width="10%"><tt>-6.0-7.5</tt></td>
+        <td  width="10%"><tt>-4.5-5.7</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%"><tt>Вых.= Z-->H</tt></td>
+        <td  width="8%"><tt>-15-23</tt></td>
+        <td  width="8%"><tt>-15-23</tt></td>
+        <td  width="9%"><tt>-6.5-10</tt></td>
+        <td  width="8%"><tt>- 8-12</tt></td>
+        <td  width="8%"><tt>&nbsp; -21</tt></td>
+        <td  width="8%"><tt>&nbsp; -20</tt></td>
+        <td  width="8%"><tt>&nbsp;-8</tt></td>
+        <td  width="8%"><tt>&nbsp;-8.5</tt></td>
+        <td  width="10%"><tt>-6.5-9.0</tt></td>
+        <td  width="10%"><tt>-5.0-7.5</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%"><tt>Вых.= L-->Z</tt></td>
+        <td  width="8%"><tt>-15-25</tt></td>
+        <td  width="8%"><tt>-15-25</tt></td>
+        <td  width="9%"><tt>&nbsp;-10-15</tt></td>
+        <td  width="8%"><tt>-10-15</tt></td>
+        <td  width="8%"><tt>&nbsp; -14</tt></td>
+        <td  width="8%"><tt>&nbsp; -14</tt></td>
+        <td  width="8%"><tt>&nbsp;-7</tt></td>
+        <td  width="8%"><tt>&nbsp;-7</tt></td>
+        <td  width="10%"><tt>-7.0-9.0</tt></td>
+        <td  width="10%"><tt>-4.0-6.0</tt></td>
+      </tr>
+      <tr> 
+        <td  width="14%"><tt>Вых.= H-->Z</tt></td>
+        <td  width="8%"><tt>-10-18</tt></td>
+        <td  width="8%"><tt>-10-18</tt></td>
+        <td  width="9%"><tt>&nbsp;- 6-9</tt></td>
+        <td  width="8%"><tt>- 6-9</tt></td>
+        <td  width="8%"><tt>&nbsp; -22</tt></td>
+        <td  width="8%"><tt>&nbsp; -22</tt></td>
+        <td  width="8%"><tt>&nbsp;-11</tt></td>
+        <td  width="8%"><tt>&nbsp;-11</tt></td>
+        <td  width="10%"><tt>-6.0-9.5</tt></td>
+        <td  width="10%"><tt>-4.5-6.0</tt></td>
+      </tr>
+    </table>
+    <br>
+  </div>
+</div>
+<div align="right"><span class="txtjust"></span><span class="greenheader"></span> 
+</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
+  <tr align="center"> 
+    <td width="50%"> 
+      <div align="center">Козак Виктор Романович, Новосибирск, 14-июня-2014 г. 
+      </div>
+    </td>
+    <td width="50%"> 
+      <div align="center"><a href="mailto:kozak@inp.nsk.su">email: kozak@inp.nsk.su</a></div>
+    </td>
+  </tr>
+  <tr align="center"> 
+    <td width="50%"><!-- HotLog --> 
+      <div align="center"> 
+        <script type="text/javascript" language="javascript">
+hotlog_js="1.0"; hotlog_r=""+Math.random()+"&s=86549&im=125&r="+
+escape(document.referrer)+"&pg="+escape(window.location.href);
+document.cookie="hotlog=1; path=/"; hotlog_r+="&c="+(document.cookie?"Y":"N");
+</script>
+        <script type="text/javascript" language="javascript1.1">
+hotlog_js="1.1"; hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N");
+</script>
+        <script type="text/javascript" language="javascript1.2">
+hotlog_js="1.2"; hotlog_r+="&wh="+screen.width+"x"+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?screen.colorDepth:screen.pixelDepth);
+</script>
+        <script type="text/javascript" language="javascript1.3">
+hotlog_js="1.3";
+</script>
+        <script type="text/javascript" language="javascript">
+hotlog_r+="&js="+hotlog_js;
+document.write('<a href="http://click.hotlog.ru/?86549" target="_top"><img '+
+'src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?'+
+hotlog_r+'" border="0" width="88" height="31" alt="HotLog"><\/a>');
+</script>
+        <noscript> <a href="http://click.hotlog.ru/?86549" target="_top"><img
+src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?s=86549&im=125" border="0"
+width="88" height="31" alt="HotLog"></a> </noscript> <!-- /HotLog --> </div>
+    </td>
+    <td width="50%"><!-- begin of Top100 code --> 
+      <div align="center"> 
+        <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?434437"></script>
+        <noscript> <img src="http://counter.rambler.ru/top100.cnt?434437" alt="" width="1" height="1" border="0" /> 
+        </noscript> <!-- end of Top100 code --> <!-- begin of Top100 logo --> 
+        <a href="http://top100.rambler.ru/home?id=434437"> <img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-gray2.gif" alt="Rambler's Top100"
+width="88" height="31" border="0" /></a> <!-- end of Top100 logo --></div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
