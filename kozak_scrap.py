@@ -92,9 +92,7 @@ def scrap(url: str, alt_name):
     htm = re.sub(r'<!.*?>','', htm)
 
     # чиним сломанный HTML (незакрытые ссылки, опечатки и пр.)
-    patterns = [
-                (' ', ' '),
-                ]
+    patterns = [('~\\_', '&#8595;'), ('_/~', '&#8593;'), ('/~\\', '&#8645;'), ('\\_/', '&#8693;')]
     if alt_name == 'index.html':
         patterns.append(('<p>', '</p><p>'))
     htm = mrep(htm, patterns)
@@ -160,8 +158,20 @@ def scrap(url: str, alt_name):
         for i in soup.find_all('span', {'class': 'txtjust'}):
             i.name = 'tt'
             del i.attrs['class']
-        [i.unwrap() for i in soup.find_all('tt') if i.parent.name in ['tt', 'td']]
+        [i.unwrap() for i in soup.find_all('tt') if i.parent.name in ['tt', 'td', 'th']]
         for i in soup.find_all('tt'): i.name = 'p'
+
+        # Чиним оформление таблиц
+        for tr in soup.find_all('tr', {'class': 'row'}):
+            for td in tr.find_all(['td', 'th']):
+                td.name = 'th'
+            del tr.attrs['class']
+        for td in soup.find_all(['td', 'th'], {'class': 'row'}):
+            td.name = 'th'
+            del td.attrs['class']
+        for td in soup.find_all(['td', 'th']):
+            [i.unwrap() for i in td.find_all(['div', 'tt', 'center', 'p'])]
+
 
     # добавляем содержимое
     content.extend(soup)
@@ -176,8 +186,9 @@ def scrap(url: str, alt_name):
 
     # сохраняем результат в файл
     template.smooth()
-    # Удаляем пустые абзацы и извлекаем списки из абзацев
+    # Удаляем пустые абзацы и извлекаем вложенные абзацы
     [p.unwrap() for p in template.find_all('p') if p.text.strip() == '']
+    [p.parent.unwrap() for p in template.find_all('p') if p.parent.name == 'p']
     # for release used 'str(template)' instead of 'template.prettify()'
     Path(alt_name).write_text(template.prettify(), enc)
     print(f'File "{alt_name}" writed')

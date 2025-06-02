@@ -198,6 +198,9 @@ figcaption {
 figcaption::before {
     content: 'Рис. ' counter(img_cnt) ' - ';
 }
+figcaption:not(:has(*))::before {
+    content: 'Рис. ' counter(img_cnt);
+}
 
 #package1, #package2, #cscheme1, #cscheme2 {
     width: 50%;
