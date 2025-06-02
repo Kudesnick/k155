@@ -43,7 +43,17 @@
             "request": "launch",
             "program": "../kozak_scrap.py",
             "cwd": "${workspaceFolder}/kozak",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "libqrz",
+            "type": "python",
+            "request": "launch",
+            "program": "../libqrz_scrap.py",
+            "cwd": "${workspaceFolder}/libqrz",
+            "console": "integratedTerminal",
+            "justMyCode": true
         },
         {
             "name": "release",
