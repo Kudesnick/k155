@@ -76,6 +76,12 @@ p ~ ul {
     margin-top: 0;
 }
 
+dt { float: left; font-weight: bold; }
+dd { margin-inline-start: 1em; }
+dd::before {  margin: 0 0.5em; content: '-'; }
+dd::after { content: '.'; }
+dt:hover, dt:hover + dd { background-color: var(--color-hover-light); }
+
 #map {
     margin-right: 1em;
     float: left;
