@@ -107,6 +107,7 @@ def scrap(alt_name):
             div = s4.find('div', {'id': f'node-{id}'})
             link.append(div.h1)
             link.name = 'figure'
+            link.img['alt'] = link.h1.text.strip()
             link.h1.name = 'figcaption'
             del link.attrs['href']
             div.extract()
@@ -118,14 +119,15 @@ def scrap(alt_name):
     for div in soup.find_all('div', {'class': 'section-4'}):
         if div.p.get('align', '') == 'center':
            div.p.extract()
-        div.name = 'section' 
+        div.name = 'section'
+        div.h1.name = 'h2'
 
     # Приводим впорядок заголовки
     for div in soup.find_all('div', {'class': 'section-5'}):
         if div.p.get('align', '') == 'center':
            div.p.extract()
         div.name = 'section'
-        div.h1.name = 'h2'
+        div.h1.name = 'h3'
     
     # Удаляем пустые абзацы и абзацы из ячеек таблицы
     [p.unwrap() for p in soup.find_all('p') if (p.text.strip() == '') or (p.parent.name in ['td', 'th'])]
@@ -142,6 +144,31 @@ def scrap(alt_name):
             p.string = text + next_p.text.strip()
             next_p.extract()
 
+    # Приводим в порядок таблицы
+    for td in soup.find_all(['td', 'th']):
+        td.string = ' '.join(td.text.replace('\r', ' ').replace('\n', ' ').split(' ')).strip()
+
+    # Убираем лишние атрибуты
+    del_attr(soup.find_all(['p', 'img', 'table', 'figcaption', 'div', 'section']), ['align', 'border', 'hspace', 'vspace', 'class', 'height'])
+
+    repl = [
+        ('&lt;&lt;П&gt;&gt;', '«П»'),
+        ('+-;', '&plusmn;'),
+        ('+-', '&plusmn;'),
+        ('ЛА13КР1533ЛА23'      ,'ЛА13, КР1533ЛА23'      ),
+        ('КР1533ЛА21КР1533ЛА24','КР1533ЛА21, КР1533ЛА24'),
+        ('К155ЛЕ2К155ЛЕЗ'      ,'К155ЛЕ2, К155ЛЕЗ'      ),
+        ('ЛЕ1ЛЕ4КР531ЛЕ7'      ,'ЛЕ1, ЛЕ4, КР531ЛЕ7'    ),
+        ('К555КП 11'           ,'К555КП11'              ),
+        ('КМ155ИД8АКМ155ИД8БКМ155ИД9', 'КМ155ИД8А, КМ155ИД8Б, КМ155ИД9'),
+        ('К155РЕ23К155РЕ2','К155РЕ23 К155РЕ2'),
+    ]
+    string = mrep(str(soup), repl)
+    string = re.sub(r'([а-я,\(]+)([А-Я0-9]{2,})', r'\1 \2', string)
+    string = re.sub(r'([А-Я0-9]{2,})([^,\.\-\: А-Я0-9\)]+)', r'\1 \2', string)
+    string = string.replace('МО м', 'МОм')
+    soup = BeautifulSoup(string, parser)
+
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
 
@@ -149,7 +176,7 @@ def scrap(alt_name):
     content.clear()
 
     # добавляем содержимое
-    content.extend(soup)
+    content.extend(soup.div)
 
     # сохраняем результат в файл
     template.smooth()
