@@ -94,6 +94,20 @@ def scrap(alt_name):
     for img in soup.find_all('img'):
         img['src'] = get_img(img['src'])
 
+    # Преобразуем ссылки на описание картинок в подписи к картинкам
+    for s4 in soup.find_all('div', {'class': 'section-4'}):
+        for link in [i for i in s4.find_all('a') if i.find('img') != None]:
+            id = link['href'].replace('/node/', '')
+            div = s4.find('div', {'id': f'node-{id}'})
+            link.append(div.h1)
+            link.name = 'figure'
+            link.h1.name = 'figcaption'
+            del link.attrs['href']
+            div.extract()
+
+    # Разворачиваем вложенность div
+    [div.unwrap() for div in soup.find_all('div') if not 'section' in div.get('class', '')]
+
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
 
