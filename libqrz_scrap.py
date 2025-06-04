@@ -87,8 +87,14 @@ def scrap(alt_name):
     htm = get_htm()
     if htm == None: return None
 
+    # удаляем комментарии
+    htm = re.sub(r'<!.*?>','', htm)
+
     # парсим HTML файл
     soup = BeautifulSoup(htm, parser).find('div', {'class': 'section-3'})
+
+    # Удаляем br, b, i
+    [br.extract() for br in soup.find_all(['br', 'b', 'i'])]
 
     # загружаем изображения
     for img in soup.find_all('img'):
@@ -104,9 +110,37 @@ def scrap(alt_name):
             link.h1.name = 'figcaption'
             del link.attrs['href']
             div.extract()
+            if link.parent.name == 'p': link.parent.unwrap()
 
     # Разворачиваем вложенность div
-    [div.unwrap() for div in soup.find_all('div') if not 'section' in div.get('class', '')]
+    [div.unwrap() for div in soup.find_all('div') if len(set(['section-4', 'section-5']) & set(div.get('class', []))) == 0]
+
+    for div in soup.find_all('div', {'class': 'section-4'}):
+        if div.p.get('align', '') == 'center':
+           div.p.extract()
+        div.name = 'section' 
+
+    # Приводим впорядок заголовки
+    for div in soup.find_all('div', {'class': 'section-5'}):
+        if div.p.get('align', '') == 'center':
+           div.p.extract()
+        div.name = 'section'
+        div.h1.name = 'h2'
+    
+    # Удаляем пустые абзацы и абзацы из ячеек таблицы
+    [p.unwrap() for p in soup.find_all('p') if (p.text.strip() == '') or (p.parent.name in ['td', 'th'])]
+
+    # склеиваем переносы по абзацам
+    for p in reversed(soup.find_all('p')):
+        text = p.text.strip('\r\n ')
+        if text[-1] != '.':
+            if text[-1] == '-' and text[-2] != ' ':
+                text = text[:-1]
+            else:
+                text = text + ' '
+            next_p = p.find_next_siblings('p', limit=1)[0]
+            p.string = text + next_p.text.strip()
+            next_p.extract()
 
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
