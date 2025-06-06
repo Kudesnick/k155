@@ -95,6 +95,11 @@ true_files = []
 def short_name(name: str):
     return name.split('.', 2)[0].split('-', 2)[0].replace('k155', '').replace('id8a', 'id8') + Path(name).suffix
 
+# копирование пользовательских картинок
+def img_copy(patterns: list):
+    for i in [f for f_ in [Path('..').glob(e) for e in patterns] for f in f_]:
+        Path(i.name).write_bytes(i.read_bytes())
+
 # скраппинг
 def scrap(url: str, alt_name = None):
     global glob_nav
@@ -200,3 +205,5 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         childs = [i for i in childs if i in sys.argv[1:]]
     for i in childs: scrap(i)
+
+    img_copy(['styles.css'])

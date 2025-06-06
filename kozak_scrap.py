@@ -184,6 +184,12 @@ def scrap(url: str, alt_name):
         chip_ul = template.find(id = 'map').ul
         chip_ul.extend(copy.copy(glob_nav))
 
+    if url != '00':
+        # добавляем информацию об источниках
+        template.footer.append(BeautifulSoup(f'<p>Scrapped from <a href="{base_url}ttlh{url}.htm" title="Справочник по стандартным цифровым ТТЛ микросхемам. Козак Виктор Романович, Новосибирск, 11-июня-2014 г.: {template.h1.text.strip()}">{base_url}ttlh{url}.htm</a></p>', parser))
+        # дополняем <title>
+        template.title.string = 'К155' + template.h1.text.strip()
+
     # сохраняем результат в файл
     template.smooth()
     # Удаляем пустые абзацы и извлекаем вложенные абзацы

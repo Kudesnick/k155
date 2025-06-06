@@ -421,8 +421,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     chip_ul.extend(glob_nav)
 
     # добавляем информацию об источниках
-    new_link = BeautifulSoup(f'<section id="literature"><h2>Литература</h2><ul><li><a href="{base_url}{url}">Онлайн справочник microshemca.ru: {content.h1.text}</a></li></ul></section>', parser)
-    template.find(id = 'content').append(new_link)
+    template.footer.append(BeautifulSoup(f'<p>Scrapped from <a href="{base_url}{url}" title="Онлайн справочник microshemca.ru: {content.h1.text}">{base_url}{url}</a></p>', parser))
+
+    # дополняем <title>
+    template.title.string = template.h1.text
 
     # сохраняем результат в файл
     template.smooth()

@@ -82,7 +82,7 @@ def img_copy(patterns: list):
         Path(i.name).write_bytes(i.read_bytes())
 
 # скраппинг
-def scrap(alt_name):
+def scrap():
     global glob_nav
     htm = get_htm()
     if htm == None: return None
@@ -197,22 +197,58 @@ def scrap(alt_name):
     string = re.sub(r'(табл\. )([0-9]+)', r'<a href="#tab-\2">\1\2</a>', string)
     soup = BeautifulSoup(string, parser)
 
+    # Формируем глобальную навигацию
+    glob_nav = BeautifulSoup(f'<ul><li><a href="5105.html">{soup.h1.text.strip()}</a></li><ul></ul></ul>', parser)
+    for section in soup.div.find_all('section', recursive = False):
+        li = BeautifulSoup(f'<li><a href="{section["id"].replace("node-", "")}.html">{section.h2.text.strip()}</a></li>', parser)
+        if section.find_all('section'):
+            li.append(BeautifulSoup().new_tag('ul'))
+            for sec in section.find_all('section'):
+                li.ul.append(BeautifulSoup(f'<li><a href="{sec["id"].replace("node-", "")}.html">{sec.h3.text.strip()}</a></li>', parser))
+        glob_nav.ul.ul.append((li))
+
     # подгружаем шаблон
     template = BeautifulSoup(Path('../template.html').read_text(enc), parser)
 
     content = template.find('div', id = "content")
     content.clear()
 
-    # добавляем содержимое
-    content.extend(soup.div)
+    # добавляем навигацию
+    template.nav.extract()
 
-    # сохраняем результат в файл
-    template.smooth()
-    # for release used 'str(template)' instead of 'template.prettify()'
-    Path(alt_name).write_text(template.prettify(), enc)
-    print(f'File "{alt_name}" writed')
+    # сохраняем каждую секцию в отдельный файл
+    for li in reversed(glob_nav.find_all('li')):
+        page = copy.copy(template)
+        node = li.a["href"].replace('.html', '')
+
+        if node == '5202':
+            li.a.unwrap()
+            soup.find('section', {'id': f'node-{node}'}).extract()
+            continue
+
+        # добавляем содержимое
+        if node != '5105':
+            page.div.append(soup.find('section', {'id': f'node-{node}'}))
+            page.div.section.unwrap()
+        else:
+            page.div.append(soup)
+            page.div.div.unwrap()
+            page.div.append(glob_nav)
+
+        # Формируем title
+        page.title.string = 'Микросхемы серии ТТЛ. ' + page.find(['h1', 'h2', 'h3']).text.strip()
+
+        # Добавляем ссылку на исходник
+        href = f'https://lib.qrz.ru/node/{node}'
+        page.footer.append(BeautifulSoup(f'<p>Scrapping from <a href="{href}" title="Микросхемы серии ТТЛ. {li.text}">{href}</a></p>', parser))
+
+        # сохраняем результат в файл
+        page.smooth()
+        # for release used 'str(template)' instead of 'template.prettify()'
+        Path(li.a["href"]).write_text(page.prettify(), enc)
+        print(f'File "{li.a["href"]}" writed')
 
 if __name__ == '__main__':
-    scrap('index.html')
+    scrap()
 
     print('complete')

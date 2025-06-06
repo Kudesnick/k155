@@ -403,20 +403,6 @@ def scrap(url: str):
             section.dir.name = 'ul'
             [b.unwrap() for b in section.ul.find_all('b')]
 
-            # добавляем информацию об источниках
-            if url != 'lr4.html':
-                new_link = BeautifulSoup(f'<li><a href="{base_url}{url}">Онлайн справочник chipinfo.ru: {content.h1.text}</a></li>', parser)
-                section.ul.append(new_link)
-
-            if alt_content:
-                new_link = BeautifulSoup(f'<li><a href="{alt_content.body["href"]}">Онлайн справочник kiloom.ru: {alt_content.body["name"]}</a></li>', parser)
-            section.ul.append(new_link)
-
-            # добавляем пользовательские элементы в информацию об источниках
-            for li in [i for i in replace_soup.find('ul', id = 'source_append').find_all('li') if url in i['name'].split(' ')]:
-                del li.attrs['name']
-                section.ul.append(li)
-
     # добавляем целые разделы
     insert_section(template, replace_soup, url)
 
@@ -437,14 +423,16 @@ def scrap(url: str):
             pattern.unwrap()
 
     # дополняем <title>
-    if url != 'index.html':
-        repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м',
-                'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к'}
-        s = Path(url).stem
-        for k, v in repl.items():
-            s = s.replace(k, v)
-        template.find('title').clear()
-        template.find('title').append(f'к155{s}')
+    template.title.string = template.h1.text
+
+    # добавляем информацию об источниках
+    scrap_link = []
+    if url != 'lr4.html':
+        scrap_link.append(f'<a href="{base_url}{url}" title="Онлайн справочник chipinfo.ru: {content.h1.text.strip()}">{base_url}{url}</a>')
+    if alt_content:
+        scrap_link.append(f'<a href="{alt_content.body["href"]}" title="Онлайн справочник kiloom.ru: {alt_content.body["name"]}">{alt_content.body["href"]}</a>')
+    if len(scrap_link):
+        template.footer.append(BeautifulSoup(f'<p>Scrapped from {", ".join(scrap_link)}</p>', parser))
 
     del_attr(template.find_all('td'), ['valign'])
 

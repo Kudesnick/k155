@@ -19,14 +19,6 @@ def savehtml(html, s: str):
     html.smooth()
     Path(s).write_text(html.prettify(), enc)
 
-# Скраппинг
-# ==============================================================================
-
-# subprocess.run(["python", f'kiloom_scrap.py'], cwd = 'kiloom')
-# subprocess.run(["python", f'{first_src}_scrap.py'], cwd = first_src)
-# subprocess.run(["python", f'junradio_scrap.py'], cwd = 'junradio')
-# subprocess.run(["python", f'{second_src}_scrap.py'], cwd = second_src)
-
 # Копирование файлов в релиз
 # ==============================================================================
 
@@ -43,7 +35,9 @@ src = [i for i in second_src.glob('*') if not '.htm' in str(i) or '.html' in str
 for i in src:
     shutil.copy(str(i), str(release))
 
-for i in Path('junradio').glob('*.jpg'):
+for i in Path('kozak').glob('*.jpg'):
+    shutil.copy(str(i), str(release))
+for i in Path('kozak').glob('*.html'):
     shutil.copy(str(i), str(release))
 
 shutil.copy('k155.djvu', str(release))
@@ -177,7 +171,7 @@ brd.unwrap()
 savehtml(param, 'param.html')
 # Меняем ссылки в таблице
 for i in table.table.tbody.find_all('a'):
-    i['href'] = f'k155{i['href']}'
+    i['href'] = f'k155{i["href"]}'
 # Добавляем контент в таблицу
 table.table.tbody.insert(  8, row('iv3.html'  , 'К155ИВ3'  , 'Приоритетный шифратор 9 каналов в 4'))
 table.table.tbody.insert( 16, row('id7.html'  , 'К155ИД7'  , 'Высокоскоростной дешифратор'))
@@ -215,7 +209,7 @@ for i in Path('.').glob('*.html'):
             del link.attrs['href']
         # Ищем ссылки на локальные изображения и добавляем переменную
         elif '.jpg' in link.get('href', ''):
-            link['style'] = f'--href:url({link['href']})'
+            link['style'] = f'--href:url({link["href"]})'
     html.smooth()
     # savehtml(html, fname)
     # Компактифицируем код
