@@ -112,23 +112,39 @@ def scrap(alt_name):
             del link.attrs['href']
             div.extract()
             if link.parent.name == 'p': link.parent.unwrap()
+            if 'Рис. ' in link.img['alt']:
+                link['id'] = 'pic-' + re.findall('[0-9]+', link.img['alt'])[0]
+            if 'Таблица ' in link.img['alt']:
+                link['id'] = 'tab-' + re.findall('[0-9]+', link.img['alt'])[0]
+
+    # Устанавливаем id для таблиц
+    table = soup.find_all('table')
+    table[0]['id'] = 'tab-4'
+    table[0].insert(0, BeautifulSoup('<caption>Таблица 4. Получение различных K</caption>', parser))
+    table[1]['id'] = 'tab-5'
+    table[1].insert(0, BeautifulSoup('<caption>Таблица 5. Индицируемы знаки</caption>', parser))
+    table[2]['id'] = 'tab-6'
+    table[2].insert(0, BeautifulSoup('<caption>Таблица 6. Таблица истинности сумматора</caption>', parser))
 
     # Разворачиваем вложенность div
     [div.unwrap() for div in soup.find_all('div') if len(set(['section-4', 'section-5']) & set(div.get('class', []))) == 0]
 
-    for div in soup.find_all('div', {'class': 'section-4'}):
+    def section(div, h):
         if div.p.get('align', '') == 'center':
            div.p.extract()
         div.name = 'section'
-        div.h1.name = 'h2'
+        div.h1.name = h
 
-    # Приводим впорядок заголовки
+    # Приводим в порядок заголовки
+    for div in soup.find_all('div', {'class': 'section-4'}):
+        section(div, 'h2')
+
     for div in soup.find_all('div', {'class': 'section-5'}):
-        if div.p.get('align', '') == 'center':
-           div.p.extract()
-        div.name = 'section'
-        div.h1.name = 'h3'
-    
+        section(div, 'h3')
+
+    for h in soup.find_all(['h1', 'h2', 'h3']):
+        h.string = h.text.strip(' \r\n.')
+
     # Удаляем пустые абзацы и абзацы из ячеек таблицы
     [p.unwrap() for p in soup.find_all('p') if (p.text.strip() == '') or (p.parent.name in ['td', 'th'])]
 
@@ -149,10 +165,11 @@ def scrap(alt_name):
         td.string = ' '.join(td.text.replace('\r', ' ').replace('\n', ' ').split(' ')).strip()
 
     # Убираем лишние атрибуты
-    del_attr(soup.find_all(['p', 'img', 'table', 'figcaption', 'div', 'section']), ['align', 'border', 'hspace', 'vspace', 'class', 'height'])
+    del_attr(soup.find_all(['p', 'img', 'table', 'figcaption', 'div', 'section', 'h1', 'h2', 'h3']), ['align', 'border', 'hspace', 'vspace', 'class', 'height'])
 
     repl = [
         ('&lt;&lt;П&gt;&gt;', '«П»'),
+        ('&lt;&lt;Ъ&gt;&gt;', '«Ъ»'),
         ('+-;', '&plusmn;'),
         ('+-', '&plusmn;'),
         ('ЛА13КР1533ЛА23'      ,'ЛА13, КР1533ЛА23'      ),
@@ -162,11 +179,22 @@ def scrap(alt_name):
         ('К555КП 11'           ,'К555КП11'              ),
         ('КМ155ИД8АКМ155ИД8БКМ155ИД9', 'КМ155ИД8А, КМ155ИД8Б, КМ155ИД9'),
         ('К155РЕ23К155РЕ2','К155РЕ23 К155РЕ2'),
+        ('с- неиспользуемыми', 'с неиспользуемыми'),
+        ('-инвертирующие', '- инвертирующие'),
+        ('^м', '<sup>м</sup>'),
+        ('^2', '<sup>2</sup>'),
+        ('^i', '<sup>i</sup>'),
+        ('^n', '<sup>n</sup>'),
+        ('вь1ходы', 'выходы'),
+        ('К Все', 'К. Все'),
     ]
     string = mrep(str(soup), repl)
     string = re.sub(r'([а-я,\(]+)([А-Я0-9]{2,})', r'\1 \2', string)
-    string = re.sub(r'([А-Я0-9]{2,})([^,\.\-\: А-Я0-9\)]+)', r'\1 \2', string)
+    string = re.sub(r'([А-Я0-9]{2,})([^,\.\-\: \'\"А-Я0-9\)]+)', r'\1 \2', string)
     string = string.replace('МО м', 'МОм')
+    # ссылки на рисунки
+    string = re.sub(r'(рис\. )([0-9]+)', r'<a href="#pic-\2">\1\2</a>', string)
+    string = re.sub(r'(табл\. )([0-9]+)', r'<a href="#tab-\2">\1\2</a>', string)
     soup = BeautifulSoup(string, parser)
 
     # подгружаем шаблон
