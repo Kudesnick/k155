@@ -35,9 +35,14 @@ src = [i for i in second_src.glob('*') if not '.htm' in str(i) or '.html' in str
 for i in src:
     shutil.copy(str(i), str(release))
 
-for i in Path('kozak').glob('*.jpg'):
+for i in Path('kozak').glob('*.gif'):
     shutil.copy(str(i), str(release))
-for i in Path('kozak').glob('*.html'):
+for i in [f for f in Path('kozak').glob('*.html') if not 'index' in str(f)]:
+    shutil.copy(str(i), str(release))
+
+for i in Path('libqrz').glob('*.jpg'):
+    shutil.copy(str(i), str(release))
+for i in Path('libqrz').glob('*.html'):
     shutil.copy(str(i), str(release))
 
 shutil.copy('k155.djvu', str(release))
@@ -71,7 +76,7 @@ for i in first_nav:
 
         if src != "ru1-3.html":
             # формируем текст ссылки
-            repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м', 'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к'}
+            repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м', 'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к', 'x': 'х'}
             text = Path(src).stem
             for k, v in repl.items():
                 text = text.replace(k, v)
@@ -98,6 +103,14 @@ for i in global_nav.ul:
         a['title'] = str(i.a['title'])
         a.string = 'К155РУ1-3'
 
+# Добавление ссылок на kozak
+for li in global_nav.find_all('li'):
+    link = [i['href'] for i in li.find_all('a') if i.get('href', False)][-1].replace('k155', '')
+    kz = list(Path('.').glob(f'???{link}'))
+    link = str(kz[0]) if len(kz) else None
+    if link:
+        li.append(BeautifulSoup(f'<a href="{link}">{li.a.text.replace("К155", "")}</a>', parser))
+
 # Переписывание меню навигации и "хлебных крошек"
 # ==============================================================================
 
@@ -111,12 +124,14 @@ for i in global_nav.ul:
 
     # собираем "хлебные крошки"
     breadcrumb = BeautifulSoup(f'<ul></ul>', parser)
+    brd = None
     for j in [x for x in i.find_all('a') if x.get('href', None) != None]:
         html = readhtml(j['href'])
         if html.find('nav', {'id': 'hor'}):
-            breadcrumb.ul.extend(html.find('nav', {'id': 'hor'}).find_all('li'))
-        else:
-            breadcrumb.ul.extend(BeautifulSoup(f'<li><a href=\"{j["href"]}\">{j.text.strip()}</a></li>', parser))
+            brd = html.find('nav', {'id': 'hor'}).find_all('li')[1:]
+        breadcrumb.ul.extend(BeautifulSoup(f'<li><a href=\"{j["href"]}\">{j.text.strip()}</a></li>', parser))
+    if brd:
+        breadcrumb.ul.extend(brd)
 
     # переписываем "крошки" и боковое меню
     for i in breadcrumb.ul:
@@ -134,12 +149,12 @@ for i in global_nav.ul:
         savehtml(html, i.a['href'])
 
 # Кастомные хлебные крошки
-for i in ['k155ie6', 'k155ie7', 'ie6', '74192', '74193']:
+for i in ['k155ie6', 'k155ie7', 'ie6', '051ie6', '74192', '74193']:
     html = readhtml(f'{i}.html')
     brd = html.find('nav', {'id': 'breadcrumb'}).ul
     brd.clear()
-    brd.extend(BeautifulSoup(f'<li><a href="k155ie6.html">К155ИЕ6</a></li><li><a href="k155ie7.html">К155ИЕ7</a></li><li><a href="ie6.html">К155ИЕ6-7</a></li><li><a href="74192.html">74192</a></li><li><a href="74193.html">74193</a></li>', parser))
-    if i == 'ie6':
+    brd.extend(BeautifulSoup(f'<li><a href="k155ie6.html">К155ИЕ6</a></li><li><a href="k155ie7.html">К155ИЕ7</a></li><li><a href="ie6.html">К155ИЕ6-7</a></li><li><a href="051ie6.html">ИЕ6-7</a></li><li><a href="74192.html">74192</a></li><li><a href="74193.html">74193</a></li>', parser))
+    if i == 'ie6' or i == '051ie6':
         brd = html.find_all('nav', {'id': 'breadcrumb'})[1]
         brd.clear()
         brd.unwrap()
@@ -148,8 +163,8 @@ for i in ['k155ie6', 'k155ie7', 'ie6', '74192', '74193']:
 # Работа с дополнительными материалами
 # ==============================================================================
 
-# Формирование дополнительных страниц dc.html
-for fname in ['dc', 'ln4']:
+# Формирование дополнительных страниц
+for fname in ['ln4']:
     html = readhtml(str(Path('..').joinpath(f'{fname}.html')))
     tmp = copy.copy(template)
     content = tmp.find('div', {'id': 'content'})
@@ -183,7 +198,7 @@ table.table.tbody.insert(204, row('xl1.html'  , 'К155ХЛ1'  , 'Универс�
 savehtml(index, 'index.html')
 
 # Собираем список страниц для редактирования
-morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['k155.djvu', 'k155.pdf', 're3a.html']]
+morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['re3a.html']]
 morelist.append(global_nav.find_all('a')[0])
 
 # Обновляем боковое меню

@@ -200,6 +200,26 @@ def scrap(url: str, alt_name):
     print(f'File "{alt_name}" writed')
 
 if __name__ == '__main__':
+    for file in Path('.').glob('*.html'):
+        htm = file.read_text(encoding = enc)
+        htm = htm.replace('--&gt;', '&#8594;')
+        soup = BeautifulSoup(htm, parser)
+        if str(file) != 'index.html':
+            # добавляем информацию об источниках
+            soup.footer.p.extract()
+            url = f'{base_url}ttlh{str(int(str(file)[0:3])).zfill(2)}.htm'
+            soup.footer.append(BeautifulSoup(f'<p>Scrapped from <a href="{url}" title="Справочник по стандартным цифровым ТТЛ микросхемам. Козак Виктор Романович, Новосибирск, 11-июня-2014 г.: {soup.h1.text.strip()}">{url}</a></p>', parser))
+            # дополняем <title>
+            soup.title.string = 'К155' + soup.h1.text.strip()
+        soup.smooth()
+        file.write_text(soup.prettify(), enc)
+        print(f'File "{str(file)}" writed')
+
+
+    print('complete')
+    exit(0)
+
+# Превичная обработка (после неё были ручные правки)
     args = {7: 'ag1', 8: 'ag3', 28: 'iv1', 29: 'iv3', 30: 'id1', 31: 'id3', 32: 'id4', 34: 'id7',
         35: 'id8', 36: 'id9', 37: ['id10', 'id24'], 38: 'id11', 39: 'id12', 40: 'id13', 42: 'id15',
         47: 'ie1', 48: 'ie2', 49: 'ie4', 50: 'ie5', 51: 'ie6', 52: 'ie8', 53: 'ie9', 55: 'ie14',

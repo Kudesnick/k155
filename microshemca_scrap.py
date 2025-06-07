@@ -81,7 +81,7 @@ def menu_generator(id: str, menu: dict):
     firstkey = list(menu.keys())[0]
     if not 'К155' in menu[firstkey]:
         # формируем текст ссылки
-        repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м', 'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к'}
+        repl = {'a': 'а', 'g': 'г', 'p': 'п', 'i': 'и', 'v': 'в', 'd': 'д', 'e': 'е', 'm': 'м', 'r': 'р', 'l': 'л', 'n': 'н', 'u': 'у', 't': 'т', 'k': 'к', 'x': 'х'}
         text = Path(menu[firstkey]).stem
         for k, v in repl.items():
             text = text.replace(k, v)

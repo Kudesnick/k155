@@ -2,15 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "chipinfo",
-            "type": "python",
-            "request": "launch",
-            "program": "../chipinfo_scrap.py",
-            "cwd": "${workspaceFolder}/chipinfo",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
             "name": "kiloom",
             "type": "python",
             "request": "launch",
@@ -20,20 +11,20 @@
             "justMyCode": true
         },
         {
+            "name": "chipinfo",
+            "type": "python",
+            "request": "launch",
+            "program": "../chipinfo_scrap.py",
+            "cwd": "${workspaceFolder}/chipinfo",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "microshemca",
             "type": "python",
             "request": "launch",
             "program": "../microshemca_scrap.py",
             "cwd": "${workspaceFolder}/microshemca",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "junradio",
-            "type": "python",
-            "request": "launch",
-            "program": "../junradio_scrap.py",
-            "cwd": "${workspaceFolder}/junradio",
             "console": "integratedTerminal",
             "justMyCode": true
         },
