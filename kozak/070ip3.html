@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=0.8" name="viewport"/>
   <title>
-   к155
+   К155ИП3 = (181) - четырехразрядное АЛУ
   </title>
   <meta content="Справочник по микросхемам серии к155" name="description"/>
   <style type="text/css">
@@ -338,15 +338,73 @@
     </figcaption>
    </figure>
    <table>
-    <caption>Назначение выводов</caption>
-    <tr><td>A0-A3, B0-B3</td><td>входы операндов</td></tr>
-    <tr><td>F0-F3</td><td>выход результата</td></tr>
-    <tr><td>S0-S3</td><td>код функции</td></tr>
-    <tr><td>M</td><td>выбор операции арифметические/логические</td></tr>
-    <tr><td>Cn</td><td>вход переноса</td></tr>
-    <tr><td>Cn+4</td><td>выход переноса</td></tr>
-    <tr><td>A=B</td><td>выход компаратора</td></tr>
-    <tr><td>-P,-G</td><td>выходы для стыковки со схемой ускоренного переноса</td></tr>
+    <caption>
+     Назначение выводов
+    </caption>
+    <tr>
+     <td>
+      A0-A3, B0-B3
+     </td>
+     <td>
+      входы операндов
+     </td>
+    </tr>
+    <tr>
+     <td>
+      F0-F3
+     </td>
+     <td>
+      выход результата
+     </td>
+    </tr>
+    <tr>
+     <td>
+      S0-S3
+     </td>
+     <td>
+      код функции
+     </td>
+    </tr>
+    <tr>
+     <td>
+      M
+     </td>
+     <td>
+      выбор операции арифметические/логические
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Cn
+     </td>
+     <td>
+      вход переноса
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Cn+4
+     </td>
+     <td>
+      выход переноса
+     </td>
+    </tr>
+    <tr>
+     <td>
+      A=B
+     </td>
+     <td>
+      выход компаратора
+     </td>
+    </tr>
+    <tr>
+     <td>
+      -P,-G
+     </td>
+     <td>
+      выходы для стыковки со схемой ускоренного переноса
+     </td>
+    </tr>
    </table>
    <p>
     Выход A=B - с открытым коллектором.
@@ -447,7 +505,9 @@
     Выход "A=B" = H, если все "Fi" = H.
    </p>
    <table cols="4">
-    <caption>Режим вычитания двух чисел</caption>
+    <caption>
+     Режим вычитания двух чисел
+    </caption>
     <tr>
      <th>
       Вход Cn
@@ -757,7 +817,7 @@
     </tr>
     <tr>
      <td>
-      От Cn до Cn+4 = L--&gt;H
+      От Cn до Cn+4 = L→H
      </td>
      <td>
       -18
@@ -777,7 +837,7 @@
     </tr>
     <tr>
      <td>
-      От Cn до Cn+4 = H--&gt;L
+      От Cn до Cn+4 = H→L
      </td>
      <td>
       -19
@@ -797,7 +857,7 @@
     </tr>
     <tr>
      <td>
-      От Cn до Fi = L--&gt;H
+      От Cn до Fi = L→H
      </td>
      <td>
       -19
@@ -817,7 +877,7 @@
     </tr>
     <tr>
      <td>
-      От Cn до Fi = H--&gt;L
+      От Cn до Fi = H→L
      </td>
      <td>
       -18
@@ -837,7 +897,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до Cn+4 = L--&gt;H
+      От Ai, Bi до Cn+4 = L→H
      </td>
      <td>
       -50
@@ -857,7 +917,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до Cn+4 = H--&gt;L
+      От Ai, Bi до Cn+4 = H→L
      </td>
      <td>
       -50
@@ -877,7 +937,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до Fi = L--&gt;H
+      От Ai, Bi до Fi = L→H
      </td>
      <td>
       -48
@@ -897,7 +957,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до Fi = H--&gt;L
+      От Ai, Bi до Fi = H→L
      </td>
      <td>
       -34
@@ -917,7 +977,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до -P = L--&gt;H
+      От Ai, Bi до -P = L→H
      </td>
      <td>
       -25
@@ -937,7 +997,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до -P = H--&gt;L
+      От Ai, Bi до -P = H→L
      </td>
      <td>
       -25
@@ -957,7 +1017,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до -G = L--&gt;H
+      От Ai, Bi до -G = L→H
      </td>
      <td>
       -25
@@ -977,7 +1037,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до -G = H--&gt;L
+      От Ai, Bi до -G = H→L
      </td>
      <td>
       -25
@@ -997,7 +1057,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до A=B = L--&gt;H
+      От Ai, Bi до A=B = L→H
      </td>
      <td>
       -50
@@ -1017,7 +1077,7 @@
     </tr>
     <tr>
      <td>
-      От Ai, Bi до A=B = H--&gt;L
+      От Ai, Bi до A=B = H→L
      </td>
      <td>
       -48
@@ -1037,7 +1097,9 @@
     </tr>
    </table>
    <table cols="4">
-    <caption>Отрицательная логика</caption>
+    <caption>
+     Отрицательная логика
+    </caption>
     <tr>
      <th>
       Выбор
@@ -1289,7 +1351,9 @@
     </tr>
    </table>
    <table cols="4">
-    <caption>Положительная логика</caption>
+    <caption>
+     Положительная логика
+    </caption>
     <tr>
      <th>
       Выбор
@@ -1541,34 +1605,56 @@
     </tr>
    </table>
    <dl>
-    <dt>"+"</dt><dd>арифметическое сложение</dd>
-    <dt>"-"</dt><dd>арифметическое вычитание</dd>
-    <dt>-</dt><dd>логическрое отрицание</dd>
-    <dt>!</dt><dd>исключающее ИЛИ</dd>
-    <dt>&amp;</dt><dd>И</dd>
-    <dt>$</dt><dd>ИЛИ</dd>
-    <dt>&lt;1</dt><dd>сдвиг влево на 1 бит</dd>
-   </pdl>
+    <dt>
+     "+"
+    </dt>
+    <dd>
+     арифметическое сложение
+    </dd>
+    <dt>
+     "-"
+    </dt>
+    <dd>
+     арифметическое вычитание
+    </dd>
+    <dt>
+     -
+    </dt>
+    <dd>
+     логическрое отрицание
+    </dd>
+    <dt>
+     !
+    </dt>
+    <dd>
+     исключающее ИЛИ
+    </dd>
+    <dt>
+     &amp;
+    </dt>
+    <dd>
+     И
+    </dd>
+    <dt>
+     $
+    </dt>
+    <dd>
+     ИЛИ
+    </dd>
+    <dt>
+     &lt;1
+    </dt>
+    <dd>
+     сдвиг влево на 1 бит
+    </dd>
+   </dl>
   </div>
   <footer>
    <p>
-    Сайт сгенерирован путем скрейпинга и компиляции части сайтов
-    <a href="http://www.chipinfo.ru/dsheets/ic/155/">
-     cipinfo.ru
+    Scrapped from
+    <a href="https://www.inp.nsk.su/~kozak/ttl/ttlh70.htm" title="Справочник по стандартным цифровым ТТЛ микросхемам. Козак Виктор Романович, Новосибирск, 11-июня-2014 г.: ИП3 = (181) - четырехразрядное АЛУ">
+     https://www.inp.nsk.su/~kozak/ttl/ttlh70.htm
     </a>
-    ,
-    <a href="https://kiloom.ru/spravochnik-radiodetalej/microsxema/mikrosxemy-serii-k155.html">
-     kiloom.ru
-    </a>
-    и
-    <a href="https://www.microshemca.ru/">
-     microshemca.ru
-    </a>
-    исключительно с целью сохранения информации в удобочитаемом виде. Если вы являетесь правообладателем информации, размещеннной на исходном ресурсе, просьба связаться с
-    <a href="https://whois.ru/k155.su">
-     владельцем домена k155.su
-    </a>
-    .
    </p>
   </footer>
  </body>
