@@ -19,7 +19,19 @@ def savehtml(html, s: str):
     html.smooth()
     Path(s).write_text(html.prettify(), enc)
 
-# Копирование файлов в релиз
+import time
+start_time = time.time()
+end_time = time.time()
+
+def log(msg: str, end: str = ''):
+    global start_time, end_time
+    end_time = time.time()
+    elaps = end_time - start_time
+    print(f' ({elaps:.2f}).')
+    print(msg, end = end)
+    start_time = time.time()
+
+log('Копирование файлов в релиз')
 # ==============================================================================
 
 release.mkdir(parents=True, exist_ok=True)
@@ -49,7 +61,7 @@ shutil.copy('k155.djvu', str(release))
 shutil.copy('k155.pdf', str(release))
 shutil.copy('styles.css', str(release))
 
-# Совмещение навигации
+log('Совмещение навигации')
 # ==============================================================================
 
 import os
@@ -63,7 +75,7 @@ scnd_nav = [i.a.get('href') for i in second_nav]
 global_nav = BeautifulSoup(f'<ul></ul>', parser)
 
 for i in first_nav:
-    src, title, text = i.a.get('href'), i.a.get('title'), i.a.text.strip()
+    src, title, text = i.a.get('href'), i.a.get('title'), i.a.text.strip().replace('К155', '')
     i.clear()
     if Path(src).exists():
         i.append(BeautifulSoup(f'<a href="k155{src}" title="{title}">{text}</a><a href="{src}" title="{title}">{text}</a>', parser))
@@ -80,38 +92,50 @@ for i in first_nav:
             text = Path(src).stem
             for k, v in repl.items():
                 text = text.replace(k, v)
-            text = f'к155{text}'.upper()
+            text = f'{text}'.upper()
 
             global_nav.ul.append(BeautifulSoup(f'<li><a>{text}</a><a href="{src}">{text}</a></li>', parser))
         scnd_nav.remove(src)
 
 # Ручное исправление исключений
 for i in global_nav.ul:
-    if i.find_all('a')[1].text.strip() == 'К155ИЕ6':
+    if i.find_all('a')[1].text.strip() == 'ИЕ6':
         a = i.find_all('a')[1]
-        a.string = 'К155ИЕ6-7'
+        a.string = 'ИЕ6-7'
 
-    if i.find_all('a')[1].text.strip() == 'К155ИЕ7':
+    if i.find_all('a')[1].text.strip() == 'ИЕ7':
         a = i.find_all('a')[1]
-        a.string = 'К155ИЕ6-7'
+        a.string = 'ИЕ6-7'
         a['href'] = 'ie6.html'
         a['title'] = str(i.a['title'])
 
-    if i.find_all('a')[1].text.strip() == 'К155РУ1':
+    if i.find_all('a')[1].text.strip() == 'РУ1':
         a = i.find_all('a')[1]
         a['href'] = 'ru1-3.html'
         a['title'] = str(i.a['title'])
-        a.string = 'К155РУ1-3'
+        a.string = 'РУ1-3'
 
 # Добавление ссылок на kozak
 for li in global_nav.find_all('li'):
-    link = [i['href'] for i in li.find_all('a') if i.get('href', False)][-1].replace('k155', '')
-    kz = list(Path('.').glob(f'???{link}'))
-    link = str(kz[0]) if len(kz) else None
-    if link:
-        li.append(BeautifulSoup(f'<a href="{link}">{li.a.text.replace("К155", "")}</a>', parser))
+    link = [i for i in li.find_all('a') if i.get('href', False)][-1]
+    kz = list(Path('.').glob(f'???{link["href"].replace("k155", "")}'))
+    href = str(kz[0]) if len(kz) else None
+    if href:
+        li.append(BeautifulSoup(f'<a href="{href}">{link.text}</a>', parser))
+    else:
+        li.append(BeautifulSoup(f'<a>{link.text}</a>', parser))
 
-# Переписывание меню навигации и "хлебных крошек"
+log ('Обновление title и классов у ссылок основного меню')
+# ==============================================================================
+for li in global_nav.find_all('li'):
+    a = li.find_all('a')
+    a[0]['class'] = 'kzs'
+    a[1]['class'] = 'msh'
+    a[2]['class'] = 'kzk'
+    for i in [i for i in a if i.get('href', None)]:
+        i['title'] = ', '.join([i.text.strip() for i in readhtml(i['href']).find_all('h1')])
+
+log('Переписывание меню навигации и "хлебных крошек"')
 # ==============================================================================
 
 import copy
@@ -133,6 +157,17 @@ for i in global_nav.ul:
     if brd:
         breadcrumb.ul.extend(brd)
 
+    # Классы и title "хлебных крошек"
+    if i.a.get('href', 'index.html') != 'index.html':
+        for a in breadcrumb.find_all('a'):
+            donor = global_nav.find('a', {'href': a['href']})
+            if donor:
+                a['class'] = donor['class']
+                a['title'] = donor['title']
+            else:
+                a['class'] = ['msh', 'analog']
+                a['title'] = readhtml(a['href']).find('h1').text.strip()
+
     # переписываем "крошки" и боковое меню
     for i in breadcrumb.ul:
         html = readhtml(i.a['href'])        
@@ -149,18 +184,27 @@ for i in global_nav.ul:
         savehtml(html, i.a['href'])
 
 # Кастомные хлебные крошки
+brd_custom = BeautifulSoup(f'<li><a href="k155ie6.html" class="kzs">ИЕ6</a></li><li><a href="k155ie7.html" class="kzs">ИЕ7</a></li><li><a href="ie6.html" class="msh">ИЕ6-7</a></li><li><a href="051ie6.html" class="kzk">ИЕ6-7</a></li><li><a href="74192.html" class="msh analog">74192</a></li><li><a href="74193.html" class="msh analog">74193</a></li>', parser)
+for a in brd_custom.find_all('a'):
+    a['title'] = ', '.join([i.text.strip() for i in readhtml(a['href']).find_all('h1')])
 for i in ['k155ie6', 'k155ie7', 'ie6', '051ie6', '74192', '74193']:
     html = readhtml(f'{i}.html')
     brd = html.find('nav', {'id': 'breadcrumb'}).ul
-    brd.clear()
-    brd.extend(BeautifulSoup(f'<li><a href="k155ie6.html">К155ИЕ6</a></li><li><a href="k155ie7.html">К155ИЕ7</a></li><li><a href="ie6.html">К155ИЕ6-7</a></li><li><a href="051ie6.html">ИЕ6-7</a></li><li><a href="74192.html">74192</a></li><li><a href="74193.html">74193</a></li>', parser))
+    brd.extend(copy.copy(brd_custom))
     if i == 'ie6' or i == '051ie6':
         brd = html.find_all('nav', {'id': 'breadcrumb'})[1]
-        brd.clear()
-        brd.unwrap()
+        brd.extract()
     savehtml(html, f'{i}.html')
 
-# Работа с дополнительными материалами
+log('Работа с многостраничным справочником')
+# ==============================================================================
+
+ttl = readhtml('5105.html').div
+ttl.h1.string = 'Микросхемы серии ТТЛ и их применение'
+ttl.name = 'nav'
+ttl['id'] = 'ttl'
+
+log('Работа с дополнительными материалами')
 # ==============================================================================
 
 # Формирование дополнительных страниц
@@ -178,38 +222,63 @@ def row(link: str, linktxt: str, text: str):
 # Переносим текст с основной страницы в 'param.html', но оставляем таблицу в index.html
 param = readhtml('index.html')
 index = copy.copy(template)
-table = param.find('section', {'id': 'index'})
-index.find('div', {'id': 'content'}).insert(-1, table)
+section = param.find('section', {'id': 'index'})
+index.find('div', {'id': 'content'}).insert(-1, section)
 brd = param.find('nav', {'id': 'breadcrumb'})
 brd.clear()
 brd.unwrap()
 savehtml(param, 'param.html')
 # Меняем ссылки в таблице
-for i in table.table.tbody.find_all('a'):
+table = section.table
+for i in table.tbody.find_all('a'):
     i['href'] = f'k155{i["href"]}'
+# Удаляем переносы
+[br.extract() for br in table.find_all('br')]
 # Добавляем контент в таблицу
-table.table.tbody.insert(  8, row('iv3.html'  , 'К155ИВ3'  , 'Приоритетный шифратор 9 каналов в 4'))
-table.table.tbody.insert( 16, row('id7.html'  , 'К155ИД7'  , 'Высокоскоростной дешифратор'))
-table.table.tbody.insert( 30, row('id24.html' , 'К155ИД24' , 'Высоковольтный двоично-десятичный дешифратор с ОК'))
-table.table.tbody.insert( 62, row('ip6-7.html', 'К155ИП6-7', '4 ДНШУ'))
-table.table.tbody.insert(122, row('li4.html'  , 'К155ЛИ4'  , '3 логических элемента 3И'))
-table.table.tbody.insert(174, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
-table.table.tbody.insert(204, row('xl1.html'  , 'К155ХЛ1'  , 'Универсальный элемент для ЦВМ'))
+table.tbody.insert(  8, row('iv3.html'  , 'К155ИВ3'  , 'Приоритетный шифратор 9 каналов в 4'))
+table.tbody.insert( 16, row('id7.html'  , 'К155ИД7'  , 'Высокоскоростной дешифратор'))
+table.tbody.insert( 30, row('id24.html' , 'К155ИД24' , 'Высоковольтный двоично-десятичный дешифратор с ОК'))
+table.tbody.insert( 62, row('ip6-7.html', 'К155ИП6-7', '4 двунаправленных шинных усилителя'))
+table.tbody.insert(122, row('li4.html'  , 'К155ЛИ4'  , '3 логических элемента 3И'))
+table.tbody.insert(174, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
+table.tbody.insert(204, row('xl1.html'  , 'К155ХЛ1'  , 'Универсальный элемент для ЦВМ'))
+# Превращаем таблицу в словарь
+table.caption.name = 'h1'
+table.insert_before(table.h1)
+table.thead.extract()
+table.tbody.unwrap()
+for tr in table.find_all('tr'):
+    dt, dd = tr.find_all('td')
+    dt.name = 'dt'
+    dd.name = 'dd'
+    tr.unwrap()
+table.name = 'dl'
+# Нормализуем ссылки
+for a in table.find_all('a'):
+    a.string = a.text.split()[0].replace('К155', '').strip()
+    donor = global_nav.find('a', {'href': a['href']})
+    a['class'] = donor['class']
+    a['title'] = donor['title']
+# Добавляем многостраничный справочник
+index.find('nav', {'id': 'articles'}).insert_before(ttl)
 savehtml(index, 'index.html')
 
 # Собираем список страниц для редактирования
-morelist = [x for x in template.find('nav', {'id': 'articles'}).find_all('a') if x['href'] not in ['re3a.html']]
-morelist.append(global_nav.find_all('a')[0])
+morelist = index.find('nav', {'id': 'articles'}).find_all('a')
+morelist.extend(index.find('nav', {'id': 'ttl'}).find_all('a'))
+morelist.append(global_nav.a)
 
 # Обновляем боковое меню
 for i in morelist:
-    html = readhtml(i['href'])        
+    html = readhtml(i['href'])
+    if not html.find('nav', {'id': 'map'}):
+        html.body.insert(0, BeautifulSoup('<nav id="map"><ul></ul></nav>', parser))
     ul = html.find('nav', {'id': 'map'}).ul
     ul.clear()
     ul.extend(copy.copy(global_nav.ul))
     savehtml(html, i['href'])
 
-# Фильтация ссылок на самого себя и упаковка кода
+log('Фильтация ссылок на самого себя и упаковка кода')
 # ==============================================================================
 
 import htmlmin
@@ -260,4 +329,4 @@ for i in Path('.').glob('*.html'):
     # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 
-print('complete')
+log('complete', '\n')

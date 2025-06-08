@@ -233,10 +233,25 @@ def scrap():
         else:
             page.div.append(soup)
             page.div.div.unwrap()
-            page.div.append(glob_nav)
+            page.div.append(copy.copy(glob_nav))
 
         # Формируем title
         page.title.string = 'Микросхемы серии ТТЛ. ' + page.find(['h1', 'h2', 'h3']).text.strip()
+
+        # Формируем хлебные крошки
+        lst = glob_nav.find_all('li')
+        lst.pop(7)
+        index = lst.index(li)
+        breadcrumb = BeautifulSoup('<nav id="breadcrumb"><ul></ul></nav>', parser)
+        if index > 0:
+            breadcrumb.ul.append(copy.copy(lst[index - 1]))
+        else:
+            breadcrumb.ul.append(BeautifulSoup('<li>&nbsp;</li>', parser))
+        if index < (len(lst) - 1):
+            breadcrumb.ul.append(copy.copy(lst[index + 1]))
+        else:
+            breadcrumb.ul.append(BeautifulSoup('<li>&nbsp;</li>', parser))
+        page.find('div', {'id': 'content'}).insert_before(breadcrumb)
 
         # Добавляем ссылку на исходник
         href = f'https://lib.qrz.ru/node/{node}'
