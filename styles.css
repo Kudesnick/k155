@@ -123,15 +123,15 @@ nav ul {
     text-decoration: none;
 }
 
-#breadcrumb ul {
+.breadcrumb ul {
     display: flow-root;
 }
 
-#breadcrumb li {
+.breadcrumb li {
     float: left;
 }
 
-#breadcrumb li:not(:first-child)::before{
+.breadcrumb li:not(:first-child)::before{
     content: '|';
     margin: 0 0.3em;
 }

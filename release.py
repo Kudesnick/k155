@@ -143,9 +143,9 @@ import copy
 template = readhtml('../template.html')
 
 global_nav.ul.insert(0, copy.copy(template.find('nav').find_all('li')[0]))
+global_links = [a for a in global_nav.find_all('a') if a.get('href', 'index.html') != 'index.html']
 
-for i in global_nav.ul:
-
+for i in [i for i in global_nav.ul if i.a.get('href', 'index.html') != 'index.html']:
     # собираем "хлебные крошки"
     breadcrumb = BeautifulSoup(f'<ul></ul>', parser)
     brd = None
@@ -158,18 +158,33 @@ for i in global_nav.ul:
         breadcrumb.ul.extend(brd)
 
     # Классы и title "хлебных крошек"
-    if i.a.get('href', 'index.html') != 'index.html':
-        for a in breadcrumb.find_all('a'):
-            donor = global_nav.find('a', {'href': a['href']})
-            if donor:
-                a['class'] = donor['class']
-                a['title'] = donor['title']
-            else:
-                a['class'] = ['msh', 'analog']
-                a['title'] = readhtml(a['href']).find('h1').text.strip()
+    a_begin = None
+    for a in breadcrumb.find_all('a'):
+        donor = global_nav.find('a', {'href': a['href']})
+        if donor:
+            if not a_begin: a_begin = copy.copy(donor)
+            a['class'] = donor['class']
+            a['title'] = donor['title']
+            a_end = copy.copy(donor)
+        else:
+            a['class'] = ['msh', 'analog']
+            a['title'] = readhtml(a['href']).find('h1').text.strip()
+    # Добавляем элементы "вперед/назад"
+    a_begin = global_links.index(global_nav.find('a', {'href': a_begin['href']})) - 1
+    a_end = global_links.index(global_nav.find('a', {'href': a_end['href']})) + 1
+    if a_begin >= 0:
+        li = BeautifulSoup().new_tag('li')
+        li.insert(0, copy.copy(global_links[a_begin]))
+        li.a.string = '<'
+        breadcrumb.ul.insert(0, li)
+    if a_end <= len(global_links):
+        li = BeautifulSoup().new_tag('li')
+        li.insert(0, copy.copy(global_links[a_end]))
+        li.a.string = '>'
+        breadcrumb.ul.insert(len(breadcrumb.find_all('li')), li)
 
     # переписываем "крошки" и боковое меню
-    for i in breadcrumb.ul:
+    for i in [i for i in breadcrumb.ul if i.a.text.strip() not in '<>']:
         html = readhtml(i.a['href'])        
         ul = html.find('nav', {'id': 'map'}).ul
         ul.clear()
@@ -184,12 +199,13 @@ for i in global_nav.ul:
         savehtml(html, i.a['href'])
 
 # Кастомные хлебные крошки
-brd_custom = BeautifulSoup(f'<li><a href="k155ie6.html" class="kzs">ИЕ6</a></li><li><a href="k155ie7.html" class="kzs">ИЕ7</a></li><li><a href="ie6.html" class="msh">ИЕ6-7</a></li><li><a href="051ie6.html" class="kzk">ИЕ6-7</a></li><li><a href="74192.html" class="msh analog">74192</a></li><li><a href="74193.html" class="msh analog">74193</a></li>', parser)
+brd_custom = BeautifulSoup(f'<li><a href="050ie5.html" class="kzk">&lt;</a></li><li><a href="k155ie6.html" class="kzs">ИЕ6</a></li><li><a href="k155ie7.html" class="kzs">ИЕ7</a></li><li><a href="ie6.html" class="msh">ИЕ6-7</a></li><li><a href="051ie6.html" class="kzk">ИЕ6-7</a></li><li><a href="74192.html" class="msh analog">74192</a></li><li><a href="74193.html" class="msh analog">74193</a></li><li><a href="k155ie8.html" class="kzs">&gt;</a></li>', parser)
 for a in brd_custom.find_all('a'):
     a['title'] = ', '.join([i.text.strip() for i in readhtml(a['href']).find_all('h1')])
 for i in ['k155ie6', 'k155ie7', 'ie6', '051ie6', '74192', '74193']:
     html = readhtml(f'{i}.html')
     brd = html.find('nav', {'id': 'breadcrumb'}).ul
+    brd.clear()
     brd.extend(copy.copy(brd_custom))
     if i == 'ie6' or i == '051ie6':
         brd = html.find_all('nav', {'id': 'breadcrumb'})[1]
@@ -224,9 +240,6 @@ param = readhtml('index.html')
 index = copy.copy(template)
 section = param.find('section', {'id': 'index'})
 index.find('div', {'id': 'content'}).insert(-1, section)
-brd = param.find('nav', {'id': 'breadcrumb'})
-brd.clear()
-brd.unwrap()
 savehtml(param, 'param.html')
 # Меняем ссылки в таблице
 table = section.table
@@ -277,6 +290,18 @@ for i in morelist:
     ul.clear()
     ul.extend(copy.copy(global_nav.ul))
     savehtml(html, i['href'])
+
+log('Добавление хлебных крошек вниз')
+# ==============================================================================
+for i in Path('.').glob('*.html'):
+    html = readhtml(str(i))
+    fst_brd = html.find('nav', {'id': 'breadcrumb'})
+    if fst_brd:
+        fst_brd['class'] = 'breadcrumb'
+        scn_brd = copy.copy(fst_brd)
+        del scn_brd.attrs['id']
+        html.div.insert_after(scn_brd)
+        savehtml(html, str(i))
 
 log('Фильтация ссылок на самого себя и упаковка кода')
 # ==============================================================================
