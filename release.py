@@ -145,6 +145,12 @@ template = readhtml('../template.html')
 global_nav.ul.insert(0, copy.copy(template.find('nav').find_all('li')[0]))
 global_links = [a for a in global_nav.find_all('a') if a.get('href', 'index.html') != 'index.html']
 
+def add_class(el, s: str):
+    if isinstance(el['class'], str):
+        el['class'] = [el['class']]
+    el['class'].append(s)
+
+prev_last = None
 for i in [i for i in global_nav.ul if i.a.get('href', 'index.html') != 'index.html']:
     # собираем "хлебные крошки"
     breadcrumb = BeautifulSoup(f'<ul></ul>', parser)
@@ -158,33 +164,31 @@ for i in [i for i in global_nav.ul if i.a.get('href', 'index.html') != 'index.ht
         breadcrumb.ul.extend(brd)
 
     # Классы и title "хлебных крошек"
-    a_begin = None
     for a in breadcrumb.find_all('a'):
         donor = global_nav.find('a', {'href': a['href']})
         if donor:
-            if not a_begin: a_begin = copy.copy(donor)
             a['class'] = donor['class']
             a['title'] = donor['title']
-            a_end = copy.copy(donor)
+            a_end = donor
         else:
             a['class'] = ['msh', 'analog']
             a['title'] = readhtml(a['href']).find('h1').text.strip()
     # Добавляем элементы "вперед/назад"
-    a_begin = global_links.index(global_nav.find('a', {'href': a_begin['href']})) - 1
     a_end = global_links.index(global_nav.find('a', {'href': a_end['href']})) + 1
-    if a_begin >= 0:
-        li = BeautifulSoup().new_tag('li')
-        li.insert(0, copy.copy(global_links[a_begin]))
-        li.a.string = '<'
-        breadcrumb.ul.insert(0, li)
+    if prev_last:
+        prev_last.a.string = ''
+        add_class(prev_last.a, 'prev')
+        breadcrumb.ul.insert(0, prev_last)
+    prev_last = copy.copy(breadcrumb.find_all('li')[-1])
     if a_end <= len(global_links):
         li = BeautifulSoup().new_tag('li')
         li.insert(0, copy.copy(global_links[a_end]))
-        li.a.string = '>'
+        li.a.string = ''
+        add_class(li.a, 'next')
         breadcrumb.ul.insert(len(breadcrumb.find_all('li')), li)
 
     # переписываем "крошки" и боковое меню
-    for i in [i for i in breadcrumb.ul if i.a.text.strip() not in '<>']:
+    for i in [i for i in breadcrumb.ul if i.a.text.strip() != '']:
         html = readhtml(i.a['href'])        
         ul = html.find('nav', {'id': 'map'}).ul
         ul.clear()
@@ -199,7 +203,7 @@ for i in [i for i in global_nav.ul if i.a.get('href', 'index.html') != 'index.ht
         savehtml(html, i.a['href'])
 
 # Кастомные хлебные крошки
-brd_custom = BeautifulSoup(f'<li><a href="050ie5.html" class="kzk">&lt;</a></li><li><a href="k155ie6.html" class="kzs">ИЕ6</a></li><li><a href="k155ie7.html" class="kzs">ИЕ7</a></li><li><a href="ie6.html" class="msh">ИЕ6-7</a></li><li><a href="051ie6.html" class="kzk">ИЕ6-7</a></li><li><a href="74192.html" class="msh analog">74192</a></li><li><a href="74193.html" class="msh analog">74193</a></li><li><a href="k155ie8.html" class="kzs">&gt;</a></li>', parser)
+brd_custom = BeautifulSoup(f'<li><a href="7493.html" class="msh analog prev"></a></li><li><a href="k155ie6.html" class="kzs">ИЕ6</a></li><li><a href="k155ie7.html" class="kzs">ИЕ7</a></li><li><a href="ie6.html" class="msh">ИЕ6-7</a></li><li><a href="051ie6.html" class="kzk">ИЕ6-7</a></li><li><a href="74192.html" class="msh analog">74192</a></li><li><a href="74193.html" class="msh analog">74193</a></li><li><a href="k155ie8.html" class="kzs next"></a></li>', parser)
 for a in brd_custom.find_all('a'):
     a['title'] = ', '.join([i.text.strip() for i in readhtml(a['href']).find_all('h1')])
 for i in ['k155ie6', 'k155ie7', 'ie6', '051ie6', '74192', '74193']:
