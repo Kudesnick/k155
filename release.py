@@ -441,7 +441,7 @@ log('.htaccess, robots.txt и sitemap.xml')
 
 host = 'k155.su'
 Path('.htaccess').write_text('AddDefaultCharset utf-8\nErrorDocument 404 /404.html\n', 'utf-8')
-Path('robots.txt').write_text('User-agent: *\n' + ''.join([f'Disallow: https://{host}/{i}.html\n' for i in canonical.values()]) + f'Sitemap: https://{host}/sitemap.xml\n', 'utf-8')
+Path('robots.txt').write_text('User-agent: *\n' + ''.join([f'Disallow: /{i}.html\n' for i in canonical.values()]) + f'Sitemap: https://{host}/sitemap.xml\n', 'utf-8')
 sitemap = Sitemap(Path('..').joinpath('sitemap.xml'))
 sitemap.extend([str(i) for i in Path('').glob('*.html')])
 [sitemap.remove(f'{i}.html') for i in canonical.values()]
