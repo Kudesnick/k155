@@ -259,6 +259,10 @@ a[href$='.jpg']:hover::after {
         float: none;
     }
 
+    #map li:first-child, #map li a {
+        display: inline-block;
+    }
+
     /* menu button */
     #map::before {
         display: flex;

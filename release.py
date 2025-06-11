@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
-from pathlib import Path 
+from pathlib import Path
 import shutil
 import subprocess
 
@@ -23,13 +23,40 @@ import time
 start_time = time.time()
 end_time = time.time()
 
-def log(msg: str, end: str = ''):
+def log(msg: str):
     global start_time, end_time
     end_time = time.time()
     elaps = end_time - start_time
     print(f' ({elaps:.2f}).')
-    print(msg, end = end)
+    print(msg, end = '')
     start_time = time.time()
+
+class Sitemap(list[str]):
+    __parser = 'html.parser' # 'xml'
+    def __init__(self, fname: str):
+        self.__xml = BeautifulSoup(Path(fname).read_text('utf-8'), self.__parser)
+        super().__init__()
+
+    def save(self, fname: str, url: str):
+        from datetime import datetime
+        self.__lastmod = datetime.today().strftime('%Y-%m-%d')
+        self.__changefreq = 'never'
+        # Генерируем карту
+        self.__xml.urlset.extend([BeautifulSoup(f'<url><loc>https://{url}/{i}</loc><lastmod>{self.__lastmod}</lastmod><changefreq>{self.__changefreq}</changefreq></url>', self.__parser) for i in self])
+        # Генерируем список изображений
+        for i in self.__xml.urlset:
+            imgs = {}
+            for img in readhtml(i.loc.text.strip().replace(f'https://{url}/', '')).find_all('img'):
+                imgs[img['src']] = img.get('alt', None)
+            for k, v in imgs.items():
+                if v:
+                    im = BeautifulSoup(f'<image:image><image:loc>https://{url}/{k}</image:loc><image:title>{v}</image:title></image:image>', self.__parser)
+                else:
+                    im = BeautifulSoup(f'<image:image><image:loc>https://{url}/{k}</image:loc></image:image>', self.__parser)
+                i.loc.insert_after(im)
+        # Сохраняем карту
+        self.__xml.smooth()
+        Path(fname).write_text(self.__xml.prettify(), 'utf-8')
 
 log('Копирование файлов в релиз')
 # ==============================================================================
@@ -135,6 +162,16 @@ for li in global_nav.find_all('li'):
     for i in [i for i in a if i.get('href', None)]:
         i['title'] = ', '.join([i.text.strip() for i in readhtml(i['href']).find_all('h1')])
 
+log('Решаем проблему дублирования аналога 74170')
+# ==============================================================================
+
+altname = '74170rp1.html'
+shutil.copy('74170.html', altname)
+html = readhtml('rp1.html')
+for a in html.find_all('a', {'href': '74170.html'}):
+    a['href'] = altname
+savehtml(html, 'rp1.html')
+
 log('Переписывание меню навигации и "хлебных крошек"')
 # ==============================================================================
 
@@ -151,7 +188,10 @@ def add_class(el, s: str):
     el['class'].append(s)
 
 prev_last = None
-for i in [i for i in global_nav.ul if i.a.get('href', 'index.html') != 'index.html']:
+for i in global_nav.ul:
+    if i.a.get('href', '') == 'index.html':
+        continue
+
     # собираем "хлебные крошки"
     breadcrumb = BeautifulSoup(f'<ul></ul>', parser)
     brd = None
@@ -180,7 +220,7 @@ for i in [i for i in global_nav.ul if i.a.get('href', 'index.html') != 'index.ht
         add_class(prev_last.a, 'prev')
         breadcrumb.ul.insert(0, prev_last)
     prev_last = copy.copy(breadcrumb.find_all('li')[-1])
-    if a_end <= len(global_links):
+    if a_end < len(global_links):
         li = BeautifulSoup().new_tag('li')
         li.insert(0, copy.copy(global_links[a_end]))
         li.a.string = ''
@@ -216,11 +256,24 @@ for i in ['k155ie6', 'k155ie7', 'ie6', '051ie6', '74192', '74193']:
         brd.extract()
     savehtml(html, f'{i}.html')
 
+# log('Проверка уникальности аналогов')
+# ==============================================================================
+# Код запускался один раз. Выявлена проблема с аналогом 74170
+# err = 0
+# for f in Path('.').glob('74*.html'):
+#     html = readhtml(str(f))
+#     if len(html.find_all('nav', {'id': 'breadcrumb'})) != 1:
+#         log(f'Error! Breadcrumb in "{str(f)}" not consistent.\n')
+#         err += 1
+# if err > 0:
+#     exit(err)
+
 log('Работа с многостраничным справочником')
 # ==============================================================================
 
 ttl = readhtml('5105.html').div
-ttl.h1.string = 'Микросхемы серии ТТЛ и их применение'
+ttl.h1.name = 'h2'
+ttl.h2.string = 'Микросхемы серии ТТЛ и их применение'
 ttl.name = 'nav'
 ttl['id'] = 'ttl'
 
@@ -257,11 +310,11 @@ table.tbody.insert( 16, row('id7.html'  , 'К155ИД7'  , 'Высокоскор�
 table.tbody.insert( 30, row('id24.html' , 'К155ИД24' , 'Высоковольтный двоично-десятичный дешифратор с ОК'))
 table.tbody.insert( 62, row('ip6-7.html', 'К155ИП6-7', '4 двунаправленных шинных усилителя'))
 table.tbody.insert(122, row('li4.html'  , 'К155ЛИ4'  , '3 логических элемента 3И'))
-table.tbody.insert(174, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
+table.tbody.insert(176, row('rp1.html'  , 'К155РП1'  , 'Матрица ОЗУ на 16 ячеек (4 x 4)'))
 table.tbody.insert(204, row('xl1.html'  , 'К155ХЛ1'  , 'Универсальный элемент для ЦВМ'))
 # Превращаем таблицу в словарь
-table.caption.name = 'h1'
-table.insert_before(table.h1)
+table.caption.name = 'h2'
+table.insert_before(table.h2)
 table.thead.extract()
 table.tbody.unwrap()
 for tr in table.find_all('tr'):
@@ -295,7 +348,7 @@ for i in morelist:
     ul.extend(copy.copy(global_nav.ul))
     savehtml(html, i['href'])
 
-log('Добавление хлебных крошек вниз')
+log('Добавление "хлебных крошек" вниз')
 # ==============================================================================
 for i in Path('.').glob('*.html'):
     html = readhtml(str(i))
@@ -306,6 +359,31 @@ for i in Path('.').glob('*.html'):
         del scn_brd.attrs['id']
         html.div.insert_after(scn_brd)
         savehtml(html, str(i))
+
+log('Генерация страницы 404')
+# ==============================================================================
+
+html = readhtml('index.html')
+html.h1.string = html.h1.text.strip() + ' [404]'
+html.h1.insert_after(BeautifulSoup('<p>Этой страницы не существует, но считайте, что вы на главной странице.</p>', parser))
+savehtml(html, '404.html')
+
+log('Добавляем тег canonical к дубликатам')
+# ==============================================================================
+
+canonical = {
+    'index'  : '404',
+    '74170'  : '74170rp1',
+    '037id10': '037id24',
+    '114kp5' : '114kp7',
+    '126pr6' : '126pr7',
+    '144tm5' : '144tm7',
+}
+for origin, cp in canonical.items():
+    for i in [origin, cp]:
+        html = readhtml(f'{i}.html')
+        html.head.append(BeautifulSoup(f'<link rel="canonical" href="{origin}.html">', parser))
+        savehtml(html, f'{i}.html')
 
 log('Фильтация ссылок на самого себя и упаковка кода')
 # ==============================================================================
@@ -358,4 +436,15 @@ for i in Path('.').glob('*.html'):
     # Финальная упаковка
     Path(fname).write_text(htmlmin.minify(html_compact), enc)
 
-log('complete', '\n')
+log('.htaccess, robots.txt и sitemap.xml')
+# ==============================================================================
+
+host = 'k155.su'
+Path('.htaccess').write_text('AddDefaultCharset utf-8\nErrorDocument 404 /404.html\n', 'utf-8')
+Path('robots.txt').write_text('User-agent: *\n' + ''.join([f'Disallow: https://{host}/{i}.html\n' for i in canonical.values()]) + f'Sitemap: https://{host}/sitemap.xml\n', 'utf-8')
+sitemap = Sitemap(Path('..').joinpath('sitemap.xml'))
+sitemap.extend([str(i) for i in Path('').glob('*.html')])
+[sitemap.remove(f'{i}.html') for i in canonical.values()]
+sitemap.save('sitemap.xml', host)
+
+log('complete\n')
