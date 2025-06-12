@@ -200,17 +200,27 @@ def scrap(url: str, alt_name):
     print(f'File "{alt_name}" writed')
 
 if __name__ == '__main__':
-    for file in Path('.').glob('*.html'):
+    for file in [i for i in Path('.').glob('*.html') if str(i) != 'index.html']:
         htm = file.read_text(encoding = enc)
         htm = htm.replace('--&gt;', '&#8594;')
         soup = BeautifulSoup(htm, parser)
-        if str(file) != 'index.html':
-            # добавляем информацию об источниках
-            soup.footer.p.extract()
-            url = f'{base_url}ttlh{str(int(str(file)[0:3])).zfill(2)}.htm'
-            soup.footer.append(BeautifulSoup(f'<p>Scrapped from <a href="{url}" title="Справочник по стандартным цифровым ТТЛ микросхемам. Козак Виктор Романович, Новосибирск, 11-июня-2014 г.: {soup.h1.text.strip()}">{url}</a></p>', parser))
-            # дополняем <title>
-            soup.title.string = 'К155' + soup.h1.text.strip()
+        # добавляем информацию об источниках
+        soup.footer.p.extract()
+        url = f'{base_url}ttlh{str(int(str(file)[0:3])).zfill(2)}.htm'
+        soup.footer.append(BeautifulSoup(f'<p>Scrapped from <a href="{url}" title="Справочник по стандартным цифровым ТТЛ микросхемам. Козак Виктор Романович, Новосибирск, 11-июня-2014 г.: {soup.h1.text.strip()}">{url}</a></p>', parser))
+        # удаляем лишние тире в параметрах
+        for table in [i for i in soup.find_all('table') if i.find('th') and 'Параметр' in i.th.text.strip('\r\n\ ')]:
+            for td in table.find_all('td'):
+                td.string = td.text.strip('\r\n ').lstrip('-')
+            if not table.find('caption'):
+                table.insert(0, BeautifulSoup('<caption>Электрические параметры</caption>', parser))
+        # Добавляем описание к рисунку
+        if len(soup.find_all('img')) == 1 and soup.img.get('alt', '') == '':
+            soup.img['alt'] = soup.h1.text.strip('\r\n ') + '. Условное графическое обозначение'
+            soup.figcaption.string = soup.img['alt']
+        # дополняем <title>
+        soup.title.string = 'К155' + soup.h1.text.strip()
+        # сохраняем результат
         soup.smooth()
         file.write_text(soup.prettify(), enc)
         print(f'File "{str(file)}" writed')
