@@ -338,16 +338,76 @@
      ИМ3 = (83) - четырехразрядный полный сумматор. Условное графическое обозначение
     </figcaption>
    </figure>
+   <table>
+    <caption>
+     Назначение выводов
+    </caption>
+    <tr>
+     <td>
+      A, B
+     </td>
+     <td>
+      входное число
+     </td>
+    </tr>
+    <tr>
+     <td>
+      C0
+     </td>
+     <td>
+      вход переноса
+     </td>
+    </tr>
+    <tr>
+     <td>
+      S
+     </td>
+     <td>
+      выход суммы
+     </td>
+    </tr>
+    <tr>
+     <td>
+      C4
+     </td>
+     <td>
+      выход переноса
+     </td>
+    </tr>
+   </table>
    <table cols="3">
+    <caption>Таблица функционирования</caption>
     <tr>
      <th>
-      ВходыA1 B1 A2 B2 A3 B3 A4 B4
+      Входы
      </th>
      <th>
-      Если C0=L S1 S2 C2 S3 S4 C4
+      Выходы, если C0 = L
      </th>
      <th>
-      Если C0=H S1 S2 C2 S3 S4 C4
+      Выходы, если C0 = H
+     </th>
+    </tr>
+    <tr class="split">
+     <th>
+      A1 B1 A2 B2
+     </th>
+     <th>
+      S1 S2 C2
+     </th>
+     <th>
+      S1 S2 C2
+     </th>
+    </tr>
+    <tr>
+     <th>
+      A3 B3 A4 B4
+     </th>
+     <th>
+      S3 S4 C4
+     </th>
+     <th>
+      S3 S4 C4
      </th>
     </tr>
     <tr>
@@ -524,43 +584,6 @@
      </td>
      <td>
       H H H
-     </td>
-    </tr>
-   </table>
-   <table>
-    <caption>
-     Назначение выводов
-    </caption>
-    <tr>
-     <td>
-      A,B
-     </td>
-     <td>
-      входное число
-     </td>
-    </tr>
-    <tr>
-     <td>
-      C0
-     </td>
-     <td>
-      вход переноса
-     </td>
-    </tr>
-    <tr>
-     <td>
-      S
-     </td>
-     <td>
-      выход суммы
-     </td>
-    </tr>
-    <tr>
-     <td>
-      C4
-     </td>
-     <td>
-      выход переноса
      </td>
     </tr>
    </table>

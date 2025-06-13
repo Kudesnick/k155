@@ -342,6 +342,7 @@
     ИЕ8 представляет из себя схему, пропускающую из 64-х входных импульсов на выход столько, сколько указано кодом на входах A-F. Fout=Fin*(32*F+16*E+8*D+4*C+2*B+A)/64. Микросхемы можно каскадировать для получения делителя большей разрядности.
    </p>
    <table>
+    <caption>Назначение выводов</caption>    
     <tr>
      <th>
       Вывод
@@ -408,7 +409,9 @@
     </tr>
    </table>
    <table cols="9">
-    <tr>
+    <caption>Таблица функционирования</caption>
+    <tr><th colspan="6">Входы</th><th colspan="3">Выходы</th></tr>
+    <tr class="split">
      <th>
       Cl
      </th>
@@ -419,7 +422,7 @@
       Str
      </th>
      <th>
-      F-A
+      F E D C B A
      </th>
      <th>
       Cк
@@ -448,7 +451,7 @@
       H
      </td>
      <td>
-      X
+      X X X X X X
      </td>
      <td>
       X
@@ -477,7 +480,7 @@
       L
      </td>
      <td>
-      LLLLLL
+      L L L L L L
      </td>
      <td>
       64
@@ -506,7 +509,7 @@
       L
      </td>
      <td>
-      LHLLLL
+      L H L L L L
      </td>
      <td>
       64
@@ -535,7 +538,7 @@
       L
      </td>
      <td>
-      HHHHHH
+      H H H H H H
      </td>
      <td>
       64
@@ -564,7 +567,7 @@
       L
      </td>
      <td>
-      HHHHHH
+      H H H H H H
      </td>
      <td>
       64
@@ -593,7 +596,7 @@
       L
      </td>
      <td>
-      HLHLLL
+      H L H L L L
      </td>
      <td>
       64
@@ -611,7 +614,7 @@
       1
      </td>
     </tr>
-    <tr>
+    <tr class="nosplit">
      <td colspan="9">
       В таблице число означает количество импульсов
      </td>

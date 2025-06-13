@@ -342,10 +342,16 @@
     Счетчик ИЕ2 состоит из делителя на 2 и делителя на 5 с общим сбросом. Для получения делителя на 10 необходимо соединить "Qa" и "B".
    </p>
    <table cols="2">
+    <caption>Таблица функционирования в режиме счета</caption>
     <tr>
-     <th>
+     <th rowspan="2">
       Такт
      </th>
+     <th>
+      Выходы
+     </th>
+    </tr>
+    <tr class="split">
      <th>
       Qd Qc Qb Qa
      </th>
@@ -432,12 +438,14 @@
     </tr>
    </table>
    <table cols="2">
-    <tr>
+    <caption>Таблица разрешения счета</caption>
+    <tr><th colspan="">Входы</th><th colspan="">Выходы</th></tr>
+    <tr class="split">
      <th>
       R0a R0b R9a R9b
      </th>
      <th>
-      Q
+      Qd Qc Qb Qa
      </th>
     </tr>
     <tr>
@@ -445,7 +453,7 @@
       H H L X
      </td>
      <td>
-      L
+      L L L L
      </td>
     </tr>
     <tr>
@@ -453,7 +461,7 @@
       H H X L
      </td>
      <td>
-      L
+      L L L L
      </td>
     </tr>
     <tr>
@@ -461,14 +469,14 @@
       X X H H
      </td>
      <td>
-      HLLH
+      H L L H
      </td>
     </tr>
     <tr>
      <td>
       X L X L
      </td>
-     <td>
+     <td class="nosplit">
       Счет
      </td>
     </tr>
@@ -476,7 +484,7 @@
      <td>
       L X L X
      </td>
-     <td>
+     <td class="nosplit">
       Счет
      </td>
     </tr>
@@ -492,7 +500,7 @@
      <td>
       X L L X
      </td>
-     <td>
+     <td class="nosplit">
       Счет
      </td>
     </tr>

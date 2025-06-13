@@ -339,6 +339,7 @@
     </figcaption>
    </figure>
    <table>
+    <caption>Назначение выводов</caption>
     <tr>
      <td>
       Cк
@@ -392,18 +393,9 @@
     Регистр может осуществлять функции параллельной загрузки, сдвига вправо (от Qa к Qh) и сдвига влево (от Qh к Qa) и хранения.
    </p>
    <table>
-    <tr>
-     <th colspan="7">
-      В Х О Д Ы
-     </th>
-     <th>
-      В Ы Х О Д Ы
-     </th>
-     <th>
-      Комментарии
-     </th>
-    </tr>
-    <tr>
+    <caption>Таблица функционирования</caption>
+    <tr><th colspan="7">Входы</th><th colspan="">Выходы</th><th>Комментарии</th></tr>
+    <tr class="split">
      <th>
       Cl
      </th>
@@ -423,13 +415,12 @@
       Rx
      </th>
      <th>
-      A...H
+      A … H
      </th>
      <th>
-      Qa Qb Qg Qh
+      Qa Qb … Qg Qh
      </th>
      <th>
-      -
      </th>
     </tr>
     <tr>
@@ -452,12 +443,12 @@
       X
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      L L ... L L
+      L L … L L
      </td>
-     <td>
+     <td class="nosplit">
       Сброс
      </td>
     </tr>
@@ -481,13 +472,12 @@
       X
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      Qa0 Qb0...Qg0 Qh0
+      Qa0 Qb0 … Qg0 Qh0
      </td>
      <td>
-      -
      </td>
     </tr>
     <tr>
@@ -510,12 +500,12 @@
       X
      </td>
      <td>
-      A...H
+      A … H
      </td>
      <td>
-      A B ... G H
+      A B … G H
      </td>
-     <td>
+     <td class="nosplit">
       Загрузка
      </td>
     </tr>
@@ -539,12 +529,12 @@
       H
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      H Qa0...Qf0 Qg0
+      H Qa0 … Qf0 Qg0
      </td>
-     <td>
+     <td class="nosplit">
       Сдвиг вправо
      </td>
     </tr>
@@ -568,12 +558,12 @@
       L
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      L Qa0...Qf0 Qg0
+      L Qa0 … Qf0 Qg0
      </td>
-     <td>
+     <td class="nosplit">
       Сдвиг вправо
      </td>
     </tr>
@@ -597,12 +587,12 @@
       X
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      Qb0 Qc0...Qh0 H
+      Qb0 Qc0 … Qh0 H
      </td>
-     <td>
+     <td class="nosplit">
       Сдвиг влево
      </td>
     </tr>
@@ -626,12 +616,12 @@
       X
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      Qb0 Qc0...Qh0 L
+      Qb0 Qc0 … Qh0 L
      </td>
-     <td>
+     <td  class="nosplit">
       Сдвиг влево
      </td>
     </tr>
@@ -655,12 +645,12 @@
       X
      </td>
      <td>
-      X...X
+      X … X
      </td>
      <td>
-      Qa0 Qb0...Qg0 Qh0
+      Qa0 Qb0 … Qg0 Qh0
      </td>
-     <td>
+     <td class="nosplit">
       Хранение
      </td>
     </tr>

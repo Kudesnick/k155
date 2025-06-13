@@ -400,7 +400,7 @@
     </tr>
     <tr>
      <td>
-      -P,-G
+      <span class="q">P</span>, <span class="q">G</span>
      </td>
      <td>
       выходы для стыковки со схемой ускоренного переноса
@@ -411,6 +411,7 @@
     Выход A=B - с открытым коллектором.
    </p>
    <table cols="9">
+    <caption>Значение сигналов</caption>
     <tr>
      <th>
       Номер вывода
@@ -445,16 +446,16 @@
       Отрицательная логика
      </td>
      <td>
-      -A0
+      <span class="q">A0</span>
      </td>
      <td>
-      -B0
+      <span class="q">B0</span>
      </td>
      <td>
-      -F0
+      <span class="q">F0</span>
      </td>
      <td>
-      -F3
+      <span class="q">F3</span>
      </td>
      <td>
       Cn
@@ -463,10 +464,10 @@
       Cn+4
      </td>
      <td>
-      -P
+      <span class="q">P</span>
      </td>
      <td>
-      -G
+      <span class="q">G</span>
      </td>
     </tr>
     <tr>
@@ -486,10 +487,10 @@
       F3
      </td>
      <td>
-      -Cn
+      <span class="q">Cn</span>
      </td>
      <td>
-      -Cn+4
+      <span class="q">Cn+4</span>
      </td>
      <td>
       P
@@ -531,10 +532,10 @@
       H
      </td>
      <td>
-      "A" больше/равно "B"
+      "A" &#8805; "B"
      </td>
      <td>
-      "A" меньше/равно "B"
+      "A" &#8804; "B"
      </td>
     </tr>
     <tr>
@@ -545,10 +546,10 @@
       L
      </td>
      <td>
-      "A" меньше "B"
+      "A" &lt; "B"
      </td>
      <td>
-      "A" больше "B"
+      "A" &gt; "B"
      </td>
     </tr>
     <tr>
@@ -559,10 +560,10 @@
       H
      </td>
      <td>
-      "A" больше "B"
+      "A" &gt; "B"
      </td>
      <td>
-      "A" меньше "B"
+      "A" &lt; "B"
      </td>
     </tr>
     <tr>
@@ -573,13 +574,565 @@
       L
      </td>
      <td>
-      "A" меньше/равно "B"
+      "A" &#8804; "B"
      </td>
      <td>
-      "A" больше/равно "B"
+      "A" &#8805; "B"
      </td>
     </tr>
    </table>
+   <table cols="4">
+    <caption>
+     Отрицательная логика
+    </caption>
+    <tr>
+     <th>
+      Выбор
+     </th>
+     <th>
+      M=H
+     </th>
+     <th colspan="2">
+      M = L; Арифметические операции
+     </th>
+    </tr>
+    <tr>
+     <th class="split">
+      S3 S2 S1 S0
+     </th>
+     <th>
+      Лог.функция
+     </th>
+     <th>
+      Cn = L; без переноса
+     </th>
+     <th>
+      Cn = H; с переносом
+     </th>
+    </tr>
+    <tr>
+     <td class="split">
+      L L L L
+     </td>
+     <td>
+      F = <span class="q">A</span>
+     </td>
+     <td>
+      F = A - 1
+     </td>
+     <td>
+      F = A
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L L L H
+     </td>
+     <td>
+      F = <span class="q">A &#8743; B</span>
+     </td>
+     <td>
+      F = A &#8743; B - 1
+     </td>
+     <td>
+      F = A &#8743; B
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L L H L
+     </td>
+     <td>
+      F = <span class="q">A</span> + B
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span> - 1
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span>
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L L H H
+     </td>
+     <td>
+      F = 1
+     </td>
+     <td>
+      F = -1
+     </td>
+     <td>
+      F = 0
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H L L
+     </td>
+     <td>
+      F = <span class="q">A &#8744; B</span>
+     </td>
+     <td>
+      F = A + A &#8744; <span class="q">B</span>
+     </td>
+     <td>
+      F = A  + A &#8744; <span class="q">B</span> + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H L H
+     </td>
+     <td>
+      F = <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8743; B + A &#8744; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8743; B + A &#8744; <span class="q">B</span> + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H H L
+     </td>
+     <td>
+      F = <span class="q">A &#8853; B</span>
+     </td>
+     <td>
+      F = A - B - 1
+     </td>
+     <td>
+      F = A - B
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H H H
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span> + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L L L
+     </td>
+     <td>
+      F = <span class="q">A</span> &#8743; B
+     </td>
+     <td>
+      F = A + A &#8744; B
+     </td>
+     <td>
+      F = A + (A &#8744; B) + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L L H
+     </td>
+     <td>
+      F = A &#8853; B
+     </td>
+     <td>
+      F = A + B
+     </td>
+     <td>
+      F = A + B + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L H L
+     </td>
+     <td>
+      F = B
+     </td>
+     <td>
+      F= A &#8743; <span class="q">B</span> + A &#8744; B
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span> + (A &#8744; B) + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L H H
+     </td>
+     <td>
+      F = A &#8744; B
+     </td>
+     <td>
+      F = A &#8744; B
+     </td>
+     <td>
+      F = A &#8744; B + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H L L
+     </td>
+     <td>
+      F = 0
+     </td>
+     <td>
+      F = A + (A &lt;&lt; 1)
+     </td>
+     <td>
+      F = A + A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H L H
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8743; B + A
+     </td>
+     <td>
+      F = A &#8743; B + A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H H L
+     </td>
+     <td>
+      F = A &#8743; B
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span> + A
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span> + A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H H H
+     </td>
+     <td>
+      F = A
+     </td>
+     <td>
+      F = A
+     </td>
+     <td>
+      F = A + 1
+     </td>
+    </tr>
+   </table>
+   <table cols="4">
+    <caption>
+     Положительная логика
+    </caption>
+    <tr>
+     <th>
+      Выбор
+     </th>
+     <th>
+      M = H
+     </th>
+     <th colspan="2">
+      M = L; Арифметические операции
+     </th>
+    </tr>
+    <tr>
+     <th class="split">
+      S3 S2 S1 S0
+     </th>
+     <th>
+      Лог. функция
+     </th>
+     <th>
+      <span class="q">Cn</span> = H; без переноса
+     </th>
+     <th>
+      <span class="q">Cn</span> = L; с переносом
+     </th>
+    </tr>
+    <tr>
+     <td class="split">
+      L L L L
+     </td>
+     <td>
+      F = <span class="q">A</span>
+     </td>
+     <td>
+      F = A
+     </td>
+     <td>
+      F = A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L L L H
+     </td>
+     <td>
+      F = <span class="q">A &#8744; B</span>
+     </td>
+     <td>
+      F = A &#8744; B
+     </td>
+     <td>
+      F = A &#8744; B + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L L H L
+     </td>
+     <td>
+      F = <span class="q">A</span> &#8743; B
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span> + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L L H H
+     </td>
+     <td>
+      F = 0
+     </td>
+     <td>
+      F = -1
+     </td>
+     <td>
+      F = 0
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H L L
+     </td>
+     <td>
+      F = <span class="q">A &#8743; B</span>
+     </td>
+     <td>
+      F = A + A &#8743; <span class="q">B</span>
+     </td>
+     <td>
+      F = A + A &#8743; <span class="q">B</span> + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H L H
+     </td>
+     <td>
+      F = <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8744; B + A &#8743; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8744; B + A &#8743; <span class="q">B</span> + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H H L
+     </td>
+     <td>
+      F = A &#8853; B
+     </td>
+     <td>
+      F = A - B - 1
+     </td>
+     <td>
+      F = A - B
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      L H H H
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8743; <span class="q">B</span> - 1
+     </td>
+     <td>
+      F = A &#8743; <span class="q"></span>
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L L L
+     </td>
+     <td>
+      F = <span class="q">A</span> &#8744; B
+     </td>
+     <td>
+      F = A + (A &#8743; B)
+     </td>
+     <td>
+      F = A + (A &#8743; B) + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L L H
+     </td>
+     <td>
+      F = <span class="q">A &#8853; B</span>
+     </td>
+     <td>
+      F = A + B
+     </td>
+     <td>
+      F = A + B + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L H L
+     </td>
+     <td>
+      F = B
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span> + (A &#8743; B)
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span> + (A &#8743; B) + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H L H H
+     </td>
+     <td>
+      F = A &#8743; B
+     </td>
+     <td>
+      F = A &#8743; B - 1
+     </td>
+     <td>
+      F = A &#8743; B
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H L L
+     </td>
+     <td>
+      F = 1
+     </td>
+     <td>
+      F = A + (A &lt;&lt; 1)
+     </td>
+     <td>
+      F = A + A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H L H
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span>
+     </td>
+     <td>
+      F = A &#8744; B + A
+     </td>
+     <td>
+      F = A &#8744; B + A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H H L
+     </td>
+     <td>
+      F = A &#8744; B
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span> + A
+     </td>
+     <td>
+      F = A &#8744; <span class="q">B</span> + A + 1
+     </td>
+    </tr>
+    <tr>
+     <td class="split">
+      H H H H
+     </td>
+     <td>
+      F = A
+     </td>
+     <td>
+      F = A - 1
+     </td>
+     <td>
+      F = A
+     </td>
+    </tr>
+   </table>
+   <dl>
+    <dt>
+     +
+    </dt>
+    <dd>
+     арифметическое сложение
+    </dd>
+    <dt>
+     -
+    </dt>
+    <dd>
+     арифметическое вычитание
+    </dd>
+    <dt>
+     <span class="q">x</span>
+    </dt>
+    <dd>
+     логическрое отрицание
+    </dd>
+    <dt>
+     &#8853;
+    </dt>
+    <dd>
+     исключающее ИЛИ
+    </dd>
+    <dt>
+     &#8743;
+    </dt>
+    <dd>
+     И
+    </dd>
+    <dt>
+     &#8744;
+    </dt>
+    <dd>
+     ИЛИ
+    </dd>
+    <dt>
+     &lt;&lt; 1
+    </dt>
+    <dd>
+     сдвиг влево на 1 бит
+    </dd>
+   </dl>
    <table cols="6">
     <caption>
      Электрические параметры
@@ -1100,558 +1653,6 @@
      </td>
     </tr>
    </table>
-   <table cols="4">
-    <caption>
-     Отрицательная логика
-    </caption>
-    <tr>
-     <th>
-      Выбор
-     </th>
-     <th>
-      M=H
-     </th>
-     <th colspan="2">
-      M=L; Арифметические операции
-     </th>
-    </tr>
-    <tr>
-     <th>
-      S3 S2 S1 S0
-     </th>
-     <th>
-      Лог.функция
-     </th>
-     <th>
-      Cn=L; без переноса
-     </th>
-     <th>
-      Cn=H; с переносом
-     </th>
-    </tr>
-    <tr>
-     <td>
-      L L L L
-     </td>
-     <td>
-      F=-A
-     </td>
-     <td>
-      F=A "-" 1
-     </td>
-     <td>
-      F=A
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L L L H
-     </td>
-     <td>
-      F=-(A&amp;B)
-     </td>
-     <td>
-      F=A&amp;B "-" 1
-     </td>
-     <td>
-      F=A&amp;B
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L L H L
-     </td>
-     <td>
-      F=-A+B
-     </td>
-     <td>
-      F=A&amp;(-B) "-" 1
-     </td>
-     <td>
-      F=A&amp;(-B)
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L L H H
-     </td>
-     <td>
-      F=1
-     </td>
-     <td>
-      F= "-" 1
-     </td>
-     <td>
-      F=0
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H L L
-     </td>
-     <td>
-      F=-(A$B)
-     </td>
-     <td>
-      F=A "+" A$(-B)
-     </td>
-     <td>
-      F=A "+"A$(-B) "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H L H
-     </td>
-     <td>
-      F=-B
-     </td>
-     <td>
-      F=A&amp;B "+" A$(-B)
-     </td>
-     <td>
-      F=A&amp;B "+" A$(-B) "+"1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H H L
-     </td>
-     <td>
-      F=-(A!B)
-     </td>
-     <td>
-      F=A "-" B "-" 1
-     </td>
-     <td>
-      F=A "-" B
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H H H
-     </td>
-     <td>
-      F=A$(-B)
-     </td>
-     <td>
-      F=A$(-B)
-     </td>
-     <td>
-      F=A$(-B) "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L L L
-     </td>
-     <td>
-      F=(-A)&amp;B
-     </td>
-     <td>
-      F=A "+" (A$B)
-     </td>
-     <td>
-      F=A "+" (A$B) "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L L H
-     </td>
-     <td>
-      F=A!B
-     </td>
-     <td>
-      F=A "+" B
-     </td>
-     <td>
-      F=A "+" B "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L H L
-     </td>
-     <td>
-      F=B
-     </td>
-     <td>
-      F=A&amp;(-B) "+" (A$B)
-     </td>
-     <td>
-      F=A&amp;(-B) "+"(A$B)"+"1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L H H
-     </td>
-     <td>
-      F=A$B
-     </td>
-     <td>
-      F=A$B
-     </td>
-     <td>
-      F=A$B "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H L L
-     </td>
-     <td>
-      F=0
-     </td>
-     <td>
-      F=A "+" (A&lt;1)
-     </td>
-     <td>
-      F=A "+"A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H L H
-     </td>
-     <td>
-      F=A&amp;(-B)
-     </td>
-     <td>
-      F=A&amp;B "+" A
-     </td>
-     <td>
-      F=A&amp;B "+" A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H H L
-     </td>
-     <td>
-      F=A&amp;B
-     </td>
-     <td>
-      F=A&amp;(-B) "+" A
-     </td>
-     <td>
-      F=A&amp;(-B) "+" A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H H H
-     </td>
-     <td>
-      F=A
-     </td>
-     <td>
-      F=A
-     </td>
-     <td>
-      F=A "+" 1
-     </td>
-    </tr>
-   </table>
-   <table cols="4">
-    <caption>
-     Положительная логика
-    </caption>
-    <tr>
-     <th>
-      Выбор
-     </th>
-     <th>
-      M=H
-     </th>
-     <th colspan="2">
-      M=L; Арифметические операции
-     </th>
-    </tr>
-    <tr>
-     <th>
-      S3 S2 S1 S0
-     </th>
-     <th>
-      Лог.функция
-     </th>
-     <th>
-      -Cn=H; без переноса
-     </th>
-     <th>
-      -Cn=L; с переносом
-     </th>
-    </tr>
-    <tr>
-     <td>
-      L L L L
-     </td>
-     <td>
-      F=-A
-     </td>
-     <td>
-      F=A
-     </td>
-     <td>
-      F=A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L L L H
-     </td>
-     <td>
-      F=-(A$B)
-     </td>
-     <td>
-      F=A$B
-     </td>
-     <td>
-      F=A$B "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L L H L
-     </td>
-     <td>
-      F=(-A)&amp;B
-     </td>
-     <td>
-      F=A$(-B)
-     </td>
-     <td>
-      F=A$(-B) "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L L H H
-     </td>
-     <td>
-      F=0
-     </td>
-     <td>
-      F= "-" 1
-     </td>
-     <td>
-      F=0
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H L L
-     </td>
-     <td>
-      F=-(A&amp;B)
-     </td>
-     <td>
-      F=A "+" A&amp;(-B)
-     </td>
-     <td>
-      F=A "+"A&amp;(-B) "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H L H
-     </td>
-     <td>
-      F=-B
-     </td>
-     <td>
-      F=A$B "+" A&amp;(-B)
-     </td>
-     <td>
-      F=A$B "+" A&amp;(-B) "+"1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H H L
-     </td>
-     <td>
-      F=A!B
-     </td>
-     <td>
-      F=A "-" B "-" 1
-     </td>
-     <td>
-      F=A "-" B
-     </td>
-    </tr>
-    <tr>
-     <td>
-      L H H H
-     </td>
-     <td>
-      F=A&amp;(-B)
-     </td>
-     <td>
-      F=A&amp;(-B) "-" 1
-     </td>
-     <td>
-      F=A&amp;(-B)
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L L L
-     </td>
-     <td>
-      F=(-A)$B
-     </td>
-     <td>
-      F=A "+" (A&amp;B)
-     </td>
-     <td>
-      F=A "+" (A&amp;B) "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L L H
-     </td>
-     <td>
-      F=-(A!B)
-     </td>
-     <td>
-      F=A "+" B
-     </td>
-     <td>
-      F=A "+" B "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L H L
-     </td>
-     <td>
-      F=B
-     </td>
-     <td>
-      F=A$(-B) "+" (A&amp;B)
-     </td>
-     <td>
-      F=A$(-B) "+"(A&amp;B)"+"1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H L H H
-     </td>
-     <td>
-      F=A&amp;B
-     </td>
-     <td>
-      F=A&amp;B "-" 1
-     </td>
-     <td>
-      F=A&amp;B
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H L L
-     </td>
-     <td>
-      F=1
-     </td>
-     <td>
-      F=A "+" (A&lt;1)
-     </td>
-     <td>
-      F=A "+"A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H L H
-     </td>
-     <td>
-      F=A$(-B)
-     </td>
-     <td>
-      F=A$B "+" A
-     </td>
-     <td>
-      F=A$B "+" A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H H L
-     </td>
-     <td>
-      F=A$B
-     </td>
-     <td>
-      F=A$(-B) "+" A
-     </td>
-     <td>
-      F=A$(-B) "+" A "+" 1
-     </td>
-    </tr>
-    <tr>
-     <td>
-      H H H H
-     </td>
-     <td>
-      F=A
-     </td>
-     <td>
-      F=A "-" 1
-     </td>
-     <td>
-      F=A
-     </td>
-    </tr>
-   </table>
-   <dl>
-    <dt>
-     "+"
-    </dt>
-    <dd>
-     арифметическое сложение
-    </dd>
-    <dt>
-     "-"
-    </dt>
-    <dd>
-     арифметическое вычитание
-    </dd>
-    <dt>
-     -
-    </dt>
-    <dd>
-     логическрое отрицание
-    </dd>
-    <dt>
-     !
-    </dt>
-    <dd>
-     исключающее ИЛИ
-    </dd>
-    <dt>
-     &amp;
-    </dt>
-    <dd>
-     И
-    </dd>
-    <dt>
-     $
-    </dt>
-    <dd>
-     ИЛИ
-    </dd>
-    <dt>
-     &lt;1
-    </dt>
-    <dd>
-     сдвиг влево на 1 бит
-    </dd>
-   </dl>
   </div>
   <footer>
    <p>

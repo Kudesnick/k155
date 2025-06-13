@@ -342,10 +342,16 @@
     Счетчик ИЕ4 состоит из делителя на 2 и делителя на 6 с общим сбросом. Для получения делителя на 12 необходимо соединить "Qa" и "B".
    </p>
    <table cols="2">
+    <caption>Таблица функционирования в режиме счета</caption>
     <tr>
-     <th>
+     <th rowspan="2">
       Такт
      </th>
+     <th>
+      Выходы
+     </th>
+    </tr>
+    <tr class="split">
      <th>
       Qd Qc Qb Qa
      </th>
@@ -448,12 +454,14 @@
     </tr>
    </table>
    <table cols="2">
-    <tr>
+    <caption>Таблица разрешения счета</caption>
+    <tr><th colspan="">Входы</th><th colspan="">Выходы</th></tr>
+    <tr class="split">
      <th>
       Ra Rb
      </th>
      <th>
-      Q
+      Qd Qc Qb Qa
      </th>
     </tr>
     <tr>
@@ -461,14 +469,14 @@
       H H
      </td>
      <td>
-      L
+      L L L L
      </td>
     </tr>
     <tr>
      <td>
       L X
      </td>
-     <td>
+     <td class="nosplit">
       Счет
      </td>
     </tr>
@@ -476,7 +484,7 @@
      <td>
       X L
      </td>
-     <td>
+     <td class="nosplit">
       Счет
      </td>
     </tr>
