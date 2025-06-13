@@ -244,6 +244,9 @@ if __name__ == '__main__':
                             td.insert_after(new_td)
             for i in [i for i in table.find_all(['tr', 'td', 'th']) if i.get('class', False)]:
                 del i.attrs['class']
+        # удаляем устаревший атрибут cols
+        for table in [i for i in soup.find_all('table') if i.get('cols', False)]:
+            del table.attrs['cols']
         # сохраняем результат
         soup.smooth()
         file.write_text(soup.prettify(), enc)
