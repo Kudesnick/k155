@@ -400,7 +400,13 @@
     </tr>
     <tr>
      <td>
-      <span class="q">P</span>, <span class="q">G</span>
+      <span class="q">
+       P
+      </span>
+      ,
+      <span class="q">
+       G
+      </span>
      </td>
      <td>
       выходы для стыковки со схемой ускоренного переноса
@@ -411,7 +417,9 @@
     Выход A=B - с открытым коллектором.
    </p>
    <table cols="9">
-    <caption>Значение сигналов</caption>
+    <caption>
+     Значение сигналов
+    </caption>
     <tr>
      <th>
       Номер вывода
@@ -446,16 +454,24 @@
       Отрицательная логика
      </td>
      <td>
-      <span class="q">A0</span>
+      <span class="q">
+       A0
+      </span>
      </td>
      <td>
-      <span class="q">B0</span>
+      <span class="q">
+       B0
+      </span>
      </td>
      <td>
-      <span class="q">F0</span>
+      <span class="q">
+       F0
+      </span>
      </td>
      <td>
-      <span class="q">F3</span>
+      <span class="q">
+       F3
+      </span>
      </td>
      <td>
       Cn
@@ -464,10 +480,14 @@
       Cn+4
      </td>
      <td>
-      <span class="q">P</span>
+      <span class="q">
+       P
+      </span>
      </td>
      <td>
-      <span class="q">G</span>
+      <span class="q">
+       G
+      </span>
      </td>
     </tr>
     <tr>
@@ -487,10 +507,14 @@
       F3
      </td>
      <td>
-      <span class="q">Cn</span>
+      <span class="q">
+       Cn
+      </span>
      </td>
      <td>
-      <span class="q">Cn+4</span>
+      <span class="q">
+       Cn+4
+      </span>
      </td>
      <td>
       P
@@ -532,10 +556,10 @@
       H
      </td>
      <td>
-      "A" &#8805; "B"
+      "A" ≥ "B"
      </td>
      <td>
-      "A" &#8804; "B"
+      "A" ≤ "B"
      </td>
     </tr>
     <tr>
@@ -574,10 +598,10 @@
       L
      </td>
      <td>
-      "A" &#8804; "B"
+      "A" ≤ "B"
      </td>
      <td>
-      "A" &#8805; "B"
+      "A" ≥ "B"
      </td>
     </tr>
    </table>
@@ -597,8 +621,17 @@
      </th>
     </tr>
     <tr>
-     <th class="split">
-      S3 S2 S1 S0
+     <th>
+      S3
+     </th>
+     <th>
+      S2
+     </th>
+     <th>
+      S1
+     </th>
+     <th>
+      S0
      </th>
      <th>
       Лог.функция
@@ -611,11 +644,23 @@
      </th>
     </tr>
     <tr>
-     <td class="split">
-      L L L L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A</span>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A
+      </span>
      </td>
      <td>
       F = A - 1
@@ -625,36 +670,77 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L L L H
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A &#8743; B</span>
+      L
      </td>
      <td>
-      F = A &#8743; B - 1
+      L
      </td>
      <td>
-      F = A &#8743; B
+      H
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A ∧ B
+      </span>
+     </td>
+     <td>
+      F = A ∧ B - 1
+     </td>
+     <td>
+      F = A ∧ B
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L L H L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A</span> + B
+      L
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span> - 1
+      H
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span>
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A
+      </span>
+      + B
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+      - 1
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L L H H
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
      </td>
      <td>
       F = 1
@@ -667,39 +753,89 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H L L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A &#8744; B</span>
+      H
      </td>
      <td>
-      F = A + A &#8744; <span class="q">B</span>
+      L
      </td>
      <td>
-      F = A  + A &#8744; <span class="q">B</span> + 1
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A ∨ B
+      </span>
+     </td>
+     <td>
+      F = A + A ∨
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A  + A ∨
+      <span class="q">
+       B
+      </span>
+      + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H L H
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8743; B + A &#8744; <span class="q">B</span>
+      L
      </td>
      <td>
-      F = A &#8743; B + A &#8744; <span class="q">B</span> + 1
+      H
+     </td>
+     <td>
+      F =
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∧ B + A ∨
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∧ B + A ∨
+      <span class="q">
+       B
+      </span>
+      + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H H L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A &#8853; B</span>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A ⊕ B
+      </span>
      </td>
      <td>
       F = A - B - 1
@@ -709,39 +845,80 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H H H
+     <td>
+      L
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span> + 1
+      H
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+      + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L L L
+     <td>
+      H
      </td>
      <td>
-      F = <span class="q">A</span> &#8743; B
+      L
      </td>
      <td>
-      F = A + A &#8744; B
+      L
      </td>
      <td>
-      F = A + (A &#8744; B) + 1
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A
+      </span>
+      ∧ B
+     </td>
+     <td>
+      F = A + A ∨ B
+     </td>
+     <td>
+      F = A + (A ∨ B) + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L L H
+     <td>
+      H
      </td>
      <td>
-      F = A &#8853; B
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      F = A ⊕ B
      </td>
      <td>
       F = A + B
@@ -751,36 +928,71 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L H L
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
      </td>
      <td>
       F = B
      </td>
      <td>
-      F= A &#8743; <span class="q">B</span> + A &#8744; B
+      F= A ∧
+      <span class="q">
+       B
+      </span>
+      + A ∨ B
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span> + (A &#8744; B) + 1
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+      + (A ∨ B) + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L H H
+     <td>
+      H
      </td>
      <td>
-      F = A &#8744; B
+      L
      </td>
      <td>
-      F = A &#8744; B
+      H
      </td>
      <td>
-      F = A &#8744; B + 1
+      H
+     </td>
+     <td>
+      F = A ∨ B
+     </td>
+     <td>
+      F = A ∨ B
+     </td>
+     <td>
+      F = A ∨ B + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H L L
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
      <td>
       F = 0
@@ -793,36 +1005,74 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H L H
+     <td>
+      H
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8743; B + A
+      L
      </td>
      <td>
-      F = A &#8743; B + A + 1
+      H
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∧ B + A
+     </td>
+     <td>
+      F = A ∧ B + A + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H H L
+     <td>
+      H
      </td>
      <td>
-      F = A &#8743; B
+      H
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span> + A
+      H
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span> + A + 1
+      L
+     </td>
+     <td>
+      F = A ∧ B
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+      + A
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+      + A + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H H H
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
      </td>
      <td>
       F = A
@@ -851,25 +1101,52 @@
      </th>
     </tr>
     <tr>
-     <th class="split">
-      S3 S2 S1 S0
+     <th>
+      S3
+     </th>
+     <th>
+      S2
+     </th>
+     <th>
+      S1
+     </th>
+     <th>
+      S0
      </th>
      <th>
       Лог. функция
      </th>
      <th>
-      <span class="q">Cn</span> = H; без переноса
+      <span class="q">
+       Cn
+      </span>
+      = H; без переноса
      </th>
      <th>
-      <span class="q">Cn</span> = L; с переносом
+      <span class="q">
+       Cn
+      </span>
+      = L; с переносом
      </th>
     </tr>
     <tr>
-     <td class="split">
-      L L L L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A</span>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A
+      </span>
      </td>
      <td>
       F = A
@@ -879,36 +1156,77 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L L L H
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A &#8744; B</span>
+      L
      </td>
      <td>
-      F = A &#8744; B
+      L
      </td>
      <td>
-      F = A &#8744; B + 1
+      H
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A ∨ B
+      </span>
+     </td>
+     <td>
+      F = A ∨ B
+     </td>
+     <td>
+      F = A ∨ B + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L L H L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A</span> &#8743; B
+      L
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span> + 1
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A
+      </span>
+      ∧ B
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+      + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L L H H
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
      </td>
      <td>
       F = 0
@@ -921,39 +1239,86 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H L L
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">A &#8743; B</span>
+      H
      </td>
      <td>
-      F = A + A &#8743; <span class="q">B</span>
+      L
      </td>
      <td>
-      F = A + A &#8743; <span class="q">B</span> + 1
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A ∧ B
+      </span>
+     </td>
+     <td>
+      F = A + A ∧
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A + A ∧
+      <span class="q">
+       B
+      </span>
+      + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H L H
+     <td>
+      L
      </td>
      <td>
-      F = <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8744; B + A &#8743; <span class="q">B</span>
+      L
      </td>
      <td>
-      F = A &#8744; B + A &#8743; <span class="q">B</span> + 1
+      H
+     </td>
+     <td>
+      F =
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∨ B + A ∧
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∨ B + A ∧
+      <span class="q">
+       B
+      </span>
+      + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H H L
+     <td>
+      L
      </td>
      <td>
-      F = A &#8853; B
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      F = A ⊕ B
      </td>
      <td>
       F = A - B - 1
@@ -963,39 +1328,82 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      L H H H
+     <td>
+      L
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8743; <span class="q">B</span> - 1
+      H
      </td>
      <td>
-      F = A &#8743; <span class="q"></span>
+      H
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+       B
+      </span>
+      - 1
+     </td>
+     <td>
+      F = A ∧
+      <span class="q">
+      </span>
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L L L
+     <td>
+      H
      </td>
      <td>
-      F = <span class="q">A</span> &#8744; B
+      L
      </td>
      <td>
-      F = A + (A &#8743; B)
+      L
      </td>
      <td>
-      F = A + (A &#8743; B) + 1
+      L
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A
+      </span>
+      ∨ B
+     </td>
+     <td>
+      F = A + (A ∧ B)
+     </td>
+     <td>
+      F = A + (A ∧ B) + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L L H
+     <td>
+      H
      </td>
      <td>
-      F = <span class="q">A &#8853; B</span>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      F =
+      <span class="q">
+       A ⊕ B
+      </span>
      </td>
      <td>
       F = A + B
@@ -1005,36 +1413,71 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L H L
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
      </td>
      <td>
       F = B
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span> + (A &#8743; B)
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+      + (A ∧ B)
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span> + (A &#8743; B) + 1
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+      + (A ∧ B) + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H L H H
+     <td>
+      H
      </td>
      <td>
-      F = A &#8743; B
+      L
      </td>
      <td>
-      F = A &#8743; B - 1
+      H
      </td>
      <td>
-      F = A &#8743; B
+      H
+     </td>
+     <td>
+      F = A ∧ B
+     </td>
+     <td>
+      F = A ∧ B - 1
+     </td>
+     <td>
+      F = A ∧ B
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H L L
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
      <td>
       F = 1
@@ -1047,36 +1490,74 @@
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H L H
+     <td>
+      H
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span>
+      H
      </td>
      <td>
-      F = A &#8744; B + A
+      L
      </td>
      <td>
-      F = A &#8744; B + A + 1
+      H
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+     </td>
+     <td>
+      F = A ∨ B + A
+     </td>
+     <td>
+      F = A ∨ B + A + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H H L
+     <td>
+      H
      </td>
      <td>
-      F = A &#8744; B
+      H
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span> + A
+      H
      </td>
      <td>
-      F = A &#8744; <span class="q">B</span> + A + 1
+      L
+     </td>
+     <td>
+      F = A ∨ B
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+      + A
+     </td>
+     <td>
+      F = A ∨
+      <span class="q">
+       B
+      </span>
+      + A + 1
      </td>
     </tr>
     <tr>
-     <td class="split">
-      H H H H
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
      </td>
      <td>
       F = A
@@ -1103,25 +1584,27 @@
      арифметическое вычитание
     </dd>
     <dt>
-     <span class="q">x</span>
+     <span class="q">
+      x
+     </span>
     </dt>
     <dd>
      логическрое отрицание
     </dd>
     <dt>
-     &#8853;
+     ⊕
     </dt>
     <dd>
      исключающее ИЛИ
     </dd>
     <dt>
-     &#8743;
+     ∧
     </dt>
     <dd>
      И
     </dd>
     <dt>
-     &#8744;
+     ∨
     </dt>
     <dd>
      ИЛИ

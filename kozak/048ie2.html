@@ -342,7 +342,9 @@
     Счетчик ИЕ2 состоит из делителя на 2 и делителя на 5 с общим сбросом. Для получения делителя на 10 необходимо соединить "Qa" и "B".
    </p>
    <table cols="2">
-    <caption>Таблица функционирования в режиме счета</caption>
+    <caption>
+     Таблица функционирования в режиме счета
+    </caption>
     <tr>
      <th rowspan="2">
       Такт
@@ -351,9 +353,18 @@
       Выходы
      </th>
     </tr>
-    <tr class="split">
+    <tr>
      <th>
-      Qd Qc Qb Qa
+      Qd
+     </th>
+     <th>
+      Qc
+     </th>
+     <th>
+      Qb
+     </th>
+     <th>
+      Qa
      </th>
     </tr>
     <tr>
@@ -361,7 +372,16 @@
       0
      </td>
      <td>
-      L L L L
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
@@ -369,7 +389,16 @@
       1
      </td>
      <td>
-      L L L H
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
      </td>
     </tr>
     <tr>
@@ -377,7 +406,16 @@
       2
      </td>
      <td>
-      L L H L
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
@@ -385,7 +423,16 @@
       3
      </td>
      <td>
-      L L H H
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
      </td>
     </tr>
     <tr>
@@ -393,7 +440,16 @@
       4
      </td>
      <td>
-      L H L L
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
@@ -401,7 +457,16 @@
       5
      </td>
      <td>
-      L H L H
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
      </td>
     </tr>
     <tr>
@@ -409,7 +474,16 @@
       6
      </td>
      <td>
-      L H H L
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
@@ -417,7 +491,16 @@
       7
      </td>
      <td>
-      L H H H
+      L
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
      </td>
     </tr>
     <tr>
@@ -425,7 +508,16 @@
       8
      </td>
      <td>
-      H L L L
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
@@ -433,64 +525,181 @@
       9
      </td>
      <td>
-      H L L H
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
      </td>
     </tr>
    </table>
    <table cols="2">
-    <caption>Таблица разрешения счета</caption>
-    <tr><th colspan="">Входы</th><th colspan="">Выходы</th></tr>
-    <tr class="split">
+    <caption>
+     Таблица разрешения счета
+    </caption>
+    <tr>
+     <th colspan="">
+      Входы
+     </th>
+     <th colspan="">
+      Выходы
+     </th>
+    </tr>
+    <tr>
      <th>
-      R0a R0b R9a R9b
+      R0a
      </th>
      <th>
-      Qd Qc Qb Qa
+      R0b
+     </th>
+     <th>
+      R9a
+     </th>
+     <th>
+      R9b
+     </th>
+     <th>
+      Qd
+     </th>
+     <th>
+      Qc
+     </th>
+     <th>
+      Qb
+     </th>
+     <th>
+      Qa
      </th>
     </tr>
     <tr>
      <td>
-      H H L X
+      H
      </td>
      <td>
-      L L L L
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      X
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
      <td>
-      H H X L
+      H
      </td>
      <td>
-      L L L L
+      H
+     </td>
+     <td>
+      X
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
      </td>
     </tr>
     <tr>
      <td>
-      X X H H
+      X
      </td>
      <td>
-      H L L H
+      X
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      H
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      H
      </td>
     </tr>
     <tr>
      <td>
-      X L X L
+      X
      </td>
-     <td class="nosplit">
+     <td>
+      L
+     </td>
+     <td>
+      X
+     </td>
+     <td>
+      L
+     </td>
+     <td>
       Счет
      </td>
     </tr>
     <tr>
      <td>
-      L X L X
+      L
      </td>
-     <td class="nosplit">
+     <td>
+      X
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      X
+     </td>
+     <td>
       Счет
      </td>
     </tr>
     <tr>
      <td>
-      L X X L
+      L
+     </td>
+     <td>
+      X
+     </td>
+     <td>
+      X
+     </td>
+     <td>
+      L
      </td>
      <td>
       Счет
@@ -498,9 +707,18 @@
     </tr>
     <tr>
      <td>
-      X L L X
+      X
      </td>
-     <td class="nosplit">
+     <td>
+      L
+     </td>
+     <td>
+      L
+     </td>
+     <td>
+      X
+     </td>
+     <td>
       Счет
      </td>
     </tr>
@@ -634,10 +852,10 @@
       Выходное напряжение лог.1 (I=Iмаx), В
      </td>
      <td>
-      2.4-3.4-
+      2.4-3.4
      </td>
      <td>
-      2.5-3.4-
+      2.5-3.4
      </td>
     </tr>
     <tr>
@@ -819,10 +1037,10 @@
       Длительность импульса "A", нс
      </td>
      <td>
-      15-
+      15
      </td>
      <td>
-      15-
+      15
      </td>
     </tr>
     <tr>
@@ -830,10 +1048,10 @@
       Длительность импульса "B", нс
      </td>
      <td>
-      30-
+      30
      </td>
      <td>
-      30-
+      30
      </td>
     </tr>
     <tr>
@@ -841,10 +1059,10 @@
       Длительность импульса "R", нс
      </td>
      <td>
-      15-
+      15
      </td>
      <td>
-      15-
+      15
      </td>
     </tr>
     <tr>
@@ -852,10 +1070,10 @@
       Время предустановки "R" в неактивном состоянии, нс
      </td>
      <td>
-      25-
+      25
      </td>
      <td>
-      25-
+      25
      </td>
     </tr>
     <tr>
@@ -872,10 +1090,10 @@
       по входу "A", МГц
      </td>
      <td>
-      32-42-
+      32-42
      </td>
      <td>
-      32-42-
+      32-42
      </td>
     </tr>
     <tr>
@@ -883,10 +1101,10 @@
       по входу "B", МГц
      </td>
      <td>
-      16-
+      16
      </td>
      <td>
-      16-
+      16
      </td>
     </tr>
    </table>

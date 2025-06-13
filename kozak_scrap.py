@@ -208,10 +208,11 @@ if __name__ == '__main__':
         soup.footer.p.extract()
         url = f'{base_url}ttlh{str(int(str(file)[0:3])).zfill(2)}.htm'
         soup.footer.append(BeautifulSoup(f'<p>Scrapped from <a href="{url}" title="Справочник по стандартным цифровым ТТЛ микросхемам. Козак Виктор Романович, Новосибирск, 11-июня-2014 г.: {soup.h1.text.strip()}">{url}</a></p>', parser))
+        if soup.div.find('aside'): soup.div.aside.extract()
         # удаляем лишние тире в параметрах
-        for table in [i for i in soup.find_all('table') if i.find('th') and 'Параметр' in i.th.text.strip('\r\n\ ')]:
+        for table in [i for i in soup.find_all('table') if (i.find('th') and ('Параметр' in i.th.text)) or ('Задержки распространения (нс)' in i.caption.text)]:
             for td in table.find_all('td'):
-                td.string = td.text.strip('\r\n ').lstrip('-')
+                td.string = td.text.strip('\r\n -')
             if not table.find('caption'):
                 table.insert(0, BeautifulSoup('<caption>Электрические параметры</caption>', parser))
         # Добавляем описание к рисунку
@@ -220,11 +221,33 @@ if __name__ == '__main__':
             soup.figcaption.string = soup.img['alt']
         # дополняем <title>
         soup.title.string = 'К155' + soup.h1.text.strip()
+        # Разделяем столбцы, согласно ручной разметке
+        for table in soup.find_all('table'):
+            split = False
+            for tr in table.find_all('tr'):
+                if tr.get('class', [''])[0] == 'split':
+                    split = True
+                elif tr.get('class', [''])[0] == 'nosplit':
+                    split - False
+                for td in tr.find_all(['td', 'th']):
+                    curr_split = split
+                    if td.get('class', [''])[0] == 'split':
+                        curr_split = True
+                    elif td.get('class', [''])[0] == 'nosplit':
+                        curr_split - False
+                    items = td.text.strip('\r\n ').split() if curr_split else []
+                    if len(items) > 1:
+                        td.string = items[0]
+                        for i in reversed(items[1:]):
+                            new_td = BeautifulSoup().new_tag(td.name)
+                            new_td.string = i
+                            td.insert_after(new_td)
+            for i in [i for i in table.find_all(['tr', 'td', 'th']) if i.get('class', False)]:
+                del i.attrs['class']
         # сохраняем результат
         soup.smooth()
         file.write_text(soup.prettify(), enc)
         print(f'File "{str(file)}" writed')
-
 
     print('complete')
     exit(0)
