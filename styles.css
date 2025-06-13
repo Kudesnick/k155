@@ -164,7 +164,7 @@ section {
 }
 
 figure>img {
-    max-width: 50em;
+    max-width: 100%;
 }
 
 figure {
@@ -172,9 +172,10 @@ figure {
     padding: 1em;
 }
 figure:not([class]) {
-    width: min-content;
     float: left;
     clear: both;
+    max-width: 100%;
+    text-align: center;
 }
 
 figcaption {
@@ -308,4 +309,8 @@ a[href$='.jpg']:hover::after {
     #map > ul, #map > ul > * {
         transition-duration: .5s;
     }
+}
+
+@media print {
+    #map, .breadcrumb { display: none; }
 }
