@@ -84,8 +84,6 @@ for i in Path('libqrz').glob('*.jpg'):
 for i in Path('libqrz').glob('*.html'):
     shutil.copy(str(i), str(release))
 
-shutil.copy('k155.djvu', str(release))
-shutil.copy('k155.pdf', str(release))
 shutil.copy('styles.css', str(release))
 
 log('Совмещение навигации')
@@ -359,6 +357,23 @@ for i in Path('.').glob('*.html'):
         del scn_brd.attrs['id']
         html.div.insert_after(scn_brd)
         savehtml(html, str(i))
+
+log('Копируем pdf и djvu')
+# ==============================================================================
+
+def convert_bytes(num):
+    for x in ['байт', 'кБ', 'МБ', 'ГБ', 'ТБ']:
+        if num < 1024.0:
+            return "%3.1f %s" % (num, x)
+        num /= 1024.0
+
+html = readhtml('index.html')
+for a in html.find('nav', {'id': 'download'}).find_all('a'):
+    href = a['href']
+    shutil.copy(Path('..').joinpath(href), href)
+    a['title'] = f'{href} ({convert_bytes(Path(href).stat().st_size)})'
+
+savehtml(html, 'index.html')
 
 log('Генерация страницы 404')
 # ==============================================================================
