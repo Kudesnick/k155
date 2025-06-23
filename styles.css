@@ -103,7 +103,7 @@ nav ul {
     padding-inline: 0;
 }
 
-#content nav ul li a::before {
+#content nav ul li a:first-child::before, #content nav ul li:not(:has(a))::before {
     content: '\21D2';
     margin-right: var(--thin-size);
     display: inline-block;

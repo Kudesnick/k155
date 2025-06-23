@@ -368,7 +368,7 @@ def convert_bytes(num):
         num /= 1024.0
 
 html = readhtml('index.html')
-for a in html.find('nav', {'id': 'download'}).find_all('a'):
+for a in [i for i in html.find('nav', {'id': 'download'}).find_all('a') if '.html' not in i['href']]:
     href = a['href']
     shutil.copy(Path('..').joinpath(href), href)
     a['title'] = f'{href} ({convert_bytes(Path(href).stat().st_size)})'
@@ -443,6 +443,7 @@ for i in Path('.').glob('*.html'):
     html_compact = html_compact.replace('133 интегральных элементов', '33 интегральных элемента')
     html_compact = html_compact.replace('Микросхемы представляет', 'Микросхема представляет')
     html_compact = html_compact.replace('МикросхемаК155ИЕ8', 'Микросхема К155ИЕ8')
+    html_compact = html_compact.replace('К 155', 'К155')
     html_compact = html_compact.replace('77 интегральный элемент', '77 интегральных элементов')
     html_compact = html_compact.replace('для арифметико-логическое устройсво', 'для арифметико-логического устройства')
     if (fname == 'k155ir13.html'): html_compact = html_compact.replace('четырехразрядный', 'восьмиразрядный')

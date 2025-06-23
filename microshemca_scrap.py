@@ -152,6 +152,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
                 ('(АО — А2)', '(А0 — А2)'),
                 # LD1
                 ('</p>.', '.</p>'),
+                ('комплимент', 'комплемент'),
                 ]
     # забытые аналоги
     patterns.extend([
@@ -170,6 +171,9 @@ def scrap(url: str, alt_name = None, hor_menu = None):
         patterns.append(('<table', '</p><table'))
         patterns.append(('<br />', ' '))
         patterns.append(('<br />', ' '))
+    if url == 'IE8':
+        patterns.append(('уравнению: <br/>', 'уравнению: </p><p>'))
+        patterns.append(('). <br/>Здесь', ')</p><p>Здесь'))
     if url == 'IP4':    
         patterns.append(('Микросхема ', '<p>Микросхема '))
         patterns.append(('<br/>', ' '))
@@ -295,7 +299,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     # удаляем лишнее форматирование из таблиц
     for capt in soup.find_all('caption'):
         if capt.find('h4'): capt.h4.unwrap()
-        [br.decompose() for br in capt.find_all('br')]
+        [br.unwrap() for br in capt.find_all('br')]
     del_attr(soup.find_all(['table', 'caption', 'tbody', 'tr', 'th', 'td', 'ul', 'ol']),
                            ['align', 'border', 'cellpadding', 'cellspacing', 'width', 'tupe', 'compact', 'type', 'start'])
 
@@ -381,6 +385,10 @@ def scrap(url: str, alt_name = None, hor_menu = None):
             for tr in tbl.find_all('tr'):
                 cols = set_cols(tr, cols)
 
+    if url == 'LP10': # Исправление заголовка таблицы истинности
+        tr = soup.table.find_all('tr')[1]
+        tr.insert(3, tr.th)
+
     for a in soup.find_all('a'):
         if a.get('target'): del a.attrs['target']
         # пустые ссылки
@@ -414,7 +422,7 @@ def scrap(url: str, alt_name = None, hor_menu = None):
     soup.unwrap()
 
     # удаляем <br>
-    [i.replace_with(' ') for i in template.find_all('br')]
+    [br.unwrap() for br in template.find_all('br')]
 
     # глобальная навигация
     chip_ul = template.find(id = 'map').ul
