@@ -3,7 +3,6 @@
 from bs4 import BeautifulSoup
 from pathlib import Path
 import shutil
-import subprocess
 
 enc = 'utf-8'
 parser = 'html.parser'
@@ -372,6 +371,9 @@ for a in [i for i in html.find('nav', {'id': 'download'}).find_all('a') if '.htm
     href = a['href']
     shutil.copy(Path('..').joinpath(href), href)
     a['title'] = f'{href} ({convert_bytes(Path(href).stat().st_size)})'
+
+from datetime import datetime
+html.footer.append(BeautifulSoup(f'<p>Последнее обновление: {datetime.now().strftime("%d.%m.%Y")}</p>', parser))
 
 savehtml(html, 'index.html')
 
