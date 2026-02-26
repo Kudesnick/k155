@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /404.html
+Disallow: /74170rp1.html
+Disallow: /037id24.html
+Disallow: /114kp7.html
+Disallow: /126pr7.html
+Disallow: /144tm7.html
+Sitemap: https://k155.su/sitemap.xml
